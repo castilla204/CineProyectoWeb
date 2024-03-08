@@ -1,76 +1,62 @@
 <template>
-  <div class="general" v-if="pelicula">
-    <div id="movieDetails" class="movieDetails">
-        <div class="pelicula-info">
-            <h1 id="tituloPelicula">{{ pelicula.titulo }}</h1>
-            <p id="descripcionPelicula">{{ pelicula.descripcion }}</p>
-            <SesionesDisponibles/>
-        </div>
-        <div class="imagenpelicula">
-            <img v-if="pelicula.imagen" :src="`/multimedia/${pelicula.imagen}`" class="imagen" :alt="pelicula.titulo">
-        </div>
+  <div class="general">
+    <div class="contenido">
+      <TituloDescripcionPelicula />
+      <SesionesDisponibles />
     </div>
+    <ImagenPelicula />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
+import { useSesionesStore } from '../store/SesionStore';
+import TituloDescripcionPelicula from './TituloDescripcionPelicula.vue';
+import ImagenPelicula from './ImagenPelicula.vue';
 import SesionesDisponibles from './SesionesDisponibles.vue';
-import { SesionesStore } from '../store/SesionStore';
 
-
-const pelicula = ref(null);
-const isLoading = ref(false);
 const router = useRouter();
-const almacenSesiones = SesionesStore();
+const sesionesStore = useSesionesStore();
 
-const cargaPelicula = async () => {
-  isLoading.value = true;
-  try {
-    const movieId = router.currentRoute.value.params.movieId;//coger el parametro de la ruta
-    if (!movieId) {
-      throw new Error('Parametro de la url no se consigue obtener');
-    }
-    const response = await fetch(`http://localhost:8001/Pelicula/${movieId}`);
-    pelicula.value = await response.json();
-    await almacenSesiones.ObtenerSesionesPelicula(movieId); //llamar al sesionstore de la libreria pinia a la funcion fetch 
-  } catch (error) {
-    console.error(error);
-  } finally {
-    isLoading.value = false;
+onMounted(() => {
+  cargarPelicula();
+});
+
+watch(() => router.currentRoute.value.params.movieId, (newMovieId) => {
+  if (newMovieId) {
+    cargarPelicula();
   }
-};
-onMounted(cargaPelicula);
+}, { immediate: true });
+
+function cargarPelicula() {
+  const movieId = parseInt(router.currentRoute.value.params.movieId);
+  if (movieId) {
+    sesionesStore.ObtenerSesionesPelicula(movieId);
+  }
+}
 </script>
 
 
 <style scoped>
-.general{
+.general {
+  position: relative;
+  display: flex; 
+  flex-direction: column; 
   height: 100vh;
-  background: black;
+  z-index: 10; 
 }
 
-.imagen{
-  height:97vh;
+
+.contenido {
+  width: 70%; 
+  padding-right: 0;
+  z-index: 2;
 }
 
-.movieDetails{
-  display: flex;
-}
-
-.pelicula-info{
-  color: white;
-}
-
-.boton{
-  height:30%;
-}
-
-#tituloPelicula{
-  font-family: 'Helvetica';
-}
-#titulosesiones{
-  font-family: 'Helvetica';
+@media (max-width: 768px) {
+  .contenido{
+    width: 90%;
+  }
 }
 </style>

@@ -20,7 +20,7 @@ import Cartelera from './Cartelera.vue';
 export default {
   name: 'PresentacionCine',
   components: {
-    Cartelera //registro eCartelera en el componente homepage
+    Cartelera 
   },
   
   methods: {

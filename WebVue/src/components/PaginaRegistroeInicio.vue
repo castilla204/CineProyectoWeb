@@ -1,25 +1,24 @@
 <template>
-  <div class="general">
-    <div class="formulario">
-      <h2>Iniciar sesión</h2>
-      <form @submit.prevent="IniciodeSesion">
+  <div class="contenedor">
+    <div class="formulario-inicio">
+      <h2 class="titulo">Iniciar sesión</h2>
+      <form @submit.prevent="IniciodeSesion" class="formulario">
         <input type="text" v-model="datosLogin.usuario" placeholder="Usuario" required>
         <input type="password" v-model="datosLogin.contrasena" placeholder="Contraseña" required>
-        <button type="submit">Iniciar sesión</button>
+        <button type="submit" class="boton-enviar">Iniciar sesión</button>
       </form>
     </div>
-    <div v-if="logueado" class="formulario">
+    <div v-if="logueado" class="formulario-bienvenida">
       <p>Bienvenido, {{ currentUser.nombre }}</p>
       <button @click="logout">Cerrar sesión</button>
     </div>
-    <div class="formulario">
-      <h2>Registrarse</h2>
-      <form @submit.prevent="Registro">
+    <div class="formulario-registro">
+      <h2 class="titulo">Registrarse</h2>
+      <form @submit.prevent="Registro" class="formulario">
         <input type="text" v-model="datosRegistro.nombre" placeholder="Usuario" required>
         <input type="email" v-model="datosRegistro.correoElectronico" placeholder="Correo electrónico" required>
         <input type="password" v-model="datosRegistro.contrasena" placeholder="Contraseña" required>
-        <input type="number" v-model="datosRegistro.rol" placeholder="Rol" required>
-        <button type="submit">Registrarse</button>
+        <button type="submit" class="boton-enviar">Registrarse</button>
       </form>
     </div>
   </div>
@@ -51,7 +50,7 @@ const IniciodeSesion = async () => {
     await login(datosLogin.value);
     router.push('/');
   } catch (error) {
-    alert('Error al iniciar sesion: ' + error.message);
+    alert('Error al iniciar sesión: ' + error.message);
   }
 };
 
@@ -65,48 +64,61 @@ const Registro = async () => {
 </script>
 
 <style scoped>
-
-.general {
+.contenedor {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  padding: 2rem;
 }
 
-.formulario {
+.formulario-inicio, .formulario-registro, .formulario-bienvenida {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 2rem;
   border-radius: 10px;
-  background-color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9;
+  width: 100%;
+  max-width: 400px;
 }
 
 .formulario h2 {
+  margin-bottom: 1.5rem;
+}
+.titulo{
   margin-bottom: 20px;
 }
-
 .formulario input[type="text"],
 .formulario input[type="email"],
 .formulario input[type="password"],
 .formulario input[type="number"] {
   width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.formulario button {
+.boton-enviar {
   width: 100%;
-  padding: 10px;
-  background-color: #007bff;
+  padding: 0.8rem;
+  background-color: #af4c4c;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.formulario button:hover {
-  background-color: #0056b3;
+.boton-enviar:hover {
+  background-color: #57a045;
+}
+
+@media (max-width: 768px) {
+  .contenedor {
+    flex-direction: column;
+  }
 }
 </style>
