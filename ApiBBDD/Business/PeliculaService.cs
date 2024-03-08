@@ -48,7 +48,7 @@ public void ActualizarPelicula(int id, PeliculaDTO peliculaDTO)
 {
         {
         var pelicula = new Pelicula{
-            Id=id,
+            PeliculaID=id,
             Imagen=peliculaDTO.Imagen,
             Titulo=peliculaDTO.Titulo,
             Director=peliculaDTO.Director,
