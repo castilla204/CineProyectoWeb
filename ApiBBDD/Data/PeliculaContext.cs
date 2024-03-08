@@ -122,7 +122,7 @@ namespace ApiPeliculas.Data
                     NombreSala="Sala 2"
                 }
             );
-            
+
             modelBuilder.Entity<Butaca>().HasData(
                 new Butaca{
                     ButacaID=1,
@@ -150,6 +150,25 @@ namespace ApiPeliculas.Data
                     Contrasena="1234",
                     Rol=RolAlumno.Administrador
                 }
+
+            
+            );
+            
+            modelBuilder.Entity<Reserva>().HasData(
+            new Reserva {
+                ReservaID = 1,
+                SesionID = 1,
+                ButacaID = 1,
+                UsuarioID = 1
+           
+            },
+            new Reserva {
+                ReservaID = 2,
+                SesionID = 2,
+                ButacaID = 2,
+                UsuarioID = 1
+          
+            }
             );
 
         //Relacciones
@@ -177,7 +196,7 @@ namespace ApiPeliculas.Data
             // Relación: Una Sala puede tener muchas Sesiones
             modelBuilder.Entity<Sala>()
                 .HasMany(s => s.Sesiones)              // Una Sala puede tener muchas Sesiones
-                .WithOne(se => se.Sala)                // Cada Sesión pertenece a una Sala
+                .WithOne(se => se.Sala)                // Cada Sesion pertenece a una Sala
                 .HasForeignKey(se => se.SalaID);      // La clave foránea en la tabla de Sesiones es SalaID
 
             // Relación: Una Sala puede tener muchas Butacas

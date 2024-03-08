@@ -9,4 +9,5 @@ public class PeliculaDTO
 
     public string Actores { get; set; }
     public string Descripcion {get; set;}
+
 }}
