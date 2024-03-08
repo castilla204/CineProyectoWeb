@@ -32,24 +32,44 @@ const redirigirReserva = (sesionID) => {
 
 <style scoped>
 .sesiones-container {
+  display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 20px;
 }
-#titulosesiones{
-  font-family: 'Helvetica';
+
+#titulosesiones {
+  font-family: 'Helvetica', sans-serif;
+  color: #ffffff; 
+  margin-bottom: 40px; 
+  font-size: 28px; 
 }
+
 .sesion {
-  cursor: pointer; /* Cambia el cursor al pasar sobre las sesiones para indicar que son clicables */
+  cursor: pointer;
   margin-bottom: 20px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  width: 300px;
-  font-family: 'HelveticaThin';
+  border-radius: 15px; 
+  border: none; 
+  padding: 20px;
+  width: 80%; 
+  max-width: 600px; 
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+  font-family: 'Helvetica', sans-serif;
+  background-color: #fff; 
+  transition: transform 0.2s;
+}
+
+.sesion:hover {
+  transform: scale(1.05);
 }
 
 .sesion-info {
   display: flex;
   justify-content: space-between;
+  font-size: 18px; 
+}
+
+.sesion p {
+  margin: 5px 0; 
+  color: #333; 
 }
 </style>

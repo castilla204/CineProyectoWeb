@@ -8,5 +8,6 @@ public interface IUsuarioService{
         public UsuarioDTO ObtenerUsuario(int id);
 
         public void CrearUsuario(UsuarioCrearDTO usuarioDTO);
+        public UsuarioDTO Login(string usuario, string passwordHasheada);
     
 }}

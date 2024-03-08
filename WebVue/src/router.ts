@@ -27,7 +27,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/pagina-pago',
     name: 'PaginaPago',
     component: PaginaPago
-  }
+  },
+
 
 ];
 

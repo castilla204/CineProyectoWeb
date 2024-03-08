@@ -1,7 +1,6 @@
 <template>
-<body>
+
     <div class="izq">
-        <!-- Formulario con 3 campos -->
         <form>
             <p class="subtitulo">Datos del Usuario</p>
             
@@ -18,7 +17,6 @@
 
     <div class="drc">
         <p class="subtitulo">Metodo de pago</p>
-        <!-- Divs con checkboxes -->
         <div>
             <input type="radio" id="checkbox1" name="checkbox">
             <label for="checkbox1">Tarjeta de credito</label>
@@ -42,9 +40,9 @@
     <a href="index.html"><button id="boton"> Comprar</button></a>
     
 
-</body>
 </template>
-<style>
+<style scoped>
+
 
 body {
   font-family: "Helvetica", sans-serif;
@@ -57,7 +55,7 @@ body {
   background-color: #e4e4e4;
 }
 
-/* Estilos del encabezado */
+
 .header {
   position: fixed;
   top: 0;
@@ -92,7 +90,7 @@ body {
   margin: 20px 40px;
 }
 
-/* Estilo para la sección izquierda */
+
 .izq {
   height: 35%;
   width: 350px;
@@ -125,7 +123,7 @@ body {
   margin-top: 10px;
 }
 
-/* Estilo para la sección derecha */
+
 .drc {
   height: 35%;
   width: 350px;
@@ -157,7 +155,7 @@ body {
   width: 30px;
 }
 
-/* Ajustes adicionales según tu preferencia */
+
 .subtitulo {
   font-size: 24px;
   font-weight: bold;

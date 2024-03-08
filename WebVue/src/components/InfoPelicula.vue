@@ -5,6 +5,7 @@
             <h1 id="tituloPelicula">{{ pelicula.titulo }}</h1>
             <p id="descripcionPelicula">{{ pelicula.descripcion }}</p>
             <SesionesDisponibles/>
+            <PaginaRegistroeInicio></PaginaRegistroeInicio>
         </div>
         <div class="imagenpelicula">
             <img v-if="pelicula.imagen" :src="`/multimedia/${pelicula.imagen}`" class="imagen" :alt="pelicula.titulo">
@@ -18,6 +19,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import SesionesDisponibles from './SesionesDisponibles.vue';
 import { SesionesStore } from '../store/SesionStore';
+import PaginaRegistroeInicio from './PaginaRegistroeInicio.vue'
 
 
 const pelicula = ref(null);

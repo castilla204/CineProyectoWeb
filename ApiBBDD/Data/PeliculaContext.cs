@@ -124,7 +124,9 @@ namespace ApiPeliculas.Data
             var salas = new List<Sala>
             {
                 new Sala { SalaID = 1, NombreSala = "Sala 1" },
-                new Sala { SalaID = 2, NombreSala = "Sala 2" }
+                new Sala { SalaID = 2, NombreSala = "Sala 2" },
+                new Sala { SalaID = 3, NombreSala = "Sala 3" },
+                new Sala { SalaID = 4, NombreSala = "Sala 4" }
             };
 
             modelBuilder.Entity<Sala>().HasData(salas);

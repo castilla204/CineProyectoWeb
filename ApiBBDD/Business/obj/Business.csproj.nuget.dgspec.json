@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Business\\Business.csproj": {}
+    "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Business\\Business.csproj": {}
   },
   "projects": {
-    "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Business\\Business.csproj": {
+    "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Business\\Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Business\\Business.csproj",
+        "projectUniqueName": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Business\\Business.csproj",
         "projectName": "Business",
-        "projectPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Business\\Business.csproj",
+        "projectPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Business\\Business.csproj",
         "packagesPath": "C:\\Users\\S2-PC00\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Business\\obj\\",
+        "outputPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,11 +32,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Data\\Data.csproj": {
-                "projectPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Data\\Data.csproj"
+              "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Data\\Data.csproj": {
+                "projectPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Data\\Data.csproj"
               },
-              "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj": {
-                "projectPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj"
+              "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj": {
+                "projectPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj"
               }
             }
           }
@@ -76,14 +76,14 @@
         }
       }
     },
-    "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Data\\Data.csproj": {
+    "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Data\\Data.csproj",
+        "projectUniqueName": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Data\\Data.csproj",
+        "projectPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Data\\Data.csproj",
         "packagesPath": "C:\\Users\\S2-PC00\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Data\\obj\\",
+        "outputPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -104,8 +104,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj": {
-                "projectPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj"
+              "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj": {
+                "projectPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj"
               }
             }
           }
@@ -175,14 +175,14 @@
         }
       }
     },
-    "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj": {
+    "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj",
+        "projectUniqueName": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj",
         "projectName": "Modelos",
-        "projectPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj",
+        "projectPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj",
         "packagesPath": "C:\\Users\\S2-PC00\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2adiadehoy\\Cinev2\\ApiBBDD\\Modelos\\obj\\",
+        "outputPath": "C:\\Users\\S2-PC00\\Desktop\\Cinev2\\ApiBBDD\\Modelos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

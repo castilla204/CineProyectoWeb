@@ -25,7 +25,19 @@ return _usuarioService.ObtenerUsuario(id);
 public IActionResult CrearSesion([FromBody]UsuarioCrearDTO usuarioDTO){
 _usuarioService.CrearUsuario(usuarioDTO);
 return Ok("UsuarioCreado");
-
 }
 
-}
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] UsuarioLoginDTO loginDTO)
+        {
+            var user = _usuarioService.Login(loginDTO.Usuario, loginDTO.PasswordHasheada);
+            if (user != null)
+            {
+                return Ok(user); 
+            }
+            else
+            {
+                return BadRequest("Credenciales inválidas");
+            }
+        }
+    }

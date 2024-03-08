@@ -1,40 +1,50 @@
 <template>
-    <div id="ticketForm">
-      <h1 class="titulocartelera">CARTELERA</h1>
-      <p class="subtitulo1cartelera">CINE PARA TODA LA FAMILIA</p>
-      <div class="linearoja"></div>
-      <div class="contenedorpeliculas" id="contenedorpeliculas">
-        <!-- Cargar las primeras 5 películas -->
-        <div class="pelicula-group">
-          <img v-for="(pelicula, index) in primeraFila" :key="pelicula.peliculaID" :src="'multimedia/' + pelicula.imagen" :alt="pelicula.titulo" @click="RedirigirInfopeli(pelicula.peliculaID)" class="pelicula-image rounded-image">
-        </div>
-
-
-        <!-- Mostrar el subtitulo si hay mas de 5 peliculas -->
-        <div v-if="CargarSubtitulo" class="subtitulo-group">
-          <p class="subtitulo1cartelera">NUEVAS PELÍCULAS</p>
-          <div class="linearoja"></div>
-        </div>
-        <!-- Cargar la segunda fila -->
-        <div class="pelicula-group">
-          <img v-for="(pelicula, index) in segundaFila" :key="pelicula.peliculaID" :src="'multimedia/' + pelicula.imagen" :alt="pelicula.titulo" @click="RedirigirInfopeli(pelicula.peliculaID)" class="pelicula-image rounded-image">
-        </div>
+  <div id="ticketForm">
+    <h1 class="titulocartelera">CARTELERA</h1>
+    <p class="subtitulo1cartelera">CINE PARA TODA LA FAMILIA</p>
+    <div class="linearoja"></div>
+    <div class="contenedorpeliculas">
+      <!-- Cargar las primeras 5 películas -->
+      <div class="pelicula-group">
+        <Pelicula
+          v-for="(pelicula, index) in primeraFila"
+          :key="pelicula.peliculaID"
+          :pelicula="pelicula"
+        />
+      </div>
+      <!-- Mostrar el subtitulo si hay más de 5 películas -->
+      <div v-if="CargarSubtitulo" class="subtitulo-group">
+        <p class="subtitulo1cartelera">NUEVAS PELÍCULAS</p>
+        <div class="linearoja"></div>
+      </div>
+      <!-- Cargar la segunda fila -->
+      <div class="pelicula-group">
+        <Pelicula
+          v-for="(pelicula, index) in segundaFila"
+          :key="pelicula.peliculaID"
+          :pelicula="pelicula"
+        />
       </div>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, computed } from 'vue';
-import { PeliculasStore } from '../store/PeliculaStore'; 
+import { usePeliculasStore } from '../store/PeliculaStore';
 import { useRouter } from 'vue-router';
+import Pelicula from './Pelicula.vue';
 
 export default defineComponent({
+  components: {
+    Pelicula
+  },
   setup() {
     const router = useRouter();
-    const almacenPeliculas = PeliculasStore();
+    const almacenPeliculas = usePeliculasStore();
 
-    onMounted(() => {
-      almacenPeliculas.ObtenerPeliculas();
+    onMounted(async () => {
+      await almacenPeliculas.obtenerPeliculas();
     });
 
     const CargarSubtitulo = computed(() => {
@@ -44,59 +54,70 @@ export default defineComponent({
     return {
       primeraFila: computed(() => almacenPeliculas.peliculas.slice(0, 5)),
       segundaFila: computed(() => almacenPeliculas.peliculas.slice(5)),
-      isLoading: computed(() => almacenPeliculas.isLoading),
-      CargarSubtitulo,
-      RedirigirInfopeli: (movieId: number) => {
-      router.push({ name: 'InfoPelicula', params: { movieId: movieId.toString() } });
-},
+      CargarSubtitulo
     };
   },
 });
 </script>
 
+
 <style scoped>
-.cartelera {
+.pelicula-group {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  justify-content: space-around;
-  margin: 80px;
+  gap: 20px;
 }
 
-.titulocartelera {
-  font-size: 20px;
-  margin-left: 10%;
-  color: white;
-  font-family: 'Helvetica';
-  text-align: left;
+.contenedorpeliculas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.subtitulo1cartelera {
-  font-family: 'HelveticaThin';
-  margin-left: 10%;
-  color: white;
-  text-align: left;
-  font-size: 20px; 
-  margin-bottom: 0%;
+.subtitulo-group {
+  width: 100%; 
+  margin-top: 40px; 
 }
 
 .linearoja {
-  margin-left: 10%;
-  width: 80%;
-  height: 6px;
+  width: 80%; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.subtitulo1cartelera {
+  font-size: 20px;
+  color: white;
+  font-family: 'HelveticaThin';
+
+  margin-bottom: 20px; 
+}
+
+.linearoja {
   background-color: darkred;
-}
-
-.contenedorpeliculas img {
-  width: 13%;
-  margin: 30px;
-}
-
-.rounded-image {
-  border-radius: 10px;
+  height: 6px;
+  margin-bottom: 20px;
 }
 
 #ticketForm {
   width: 100%;
   text-align: center;
 }
-</style>../store/PeliculaStore
+
+.pelicula {
+  width: calc(15% - 20px); 
+  margin: 10px; 
+}
+
+.pelicula img {
+  width: 100%; 
+  border-radius: 10px; 
+  display: block; 
+}
+@media screen and (max-width: 768px) {
+  .pelicula{
+    width: 40%;
+  }
+}
+</style>

@@ -14,14 +14,6 @@ namespace ApiPeliculas.Business.Services
             _usuarioData = usuarioData;
         }
 
-        private string HashearSHA256(string password)
-        {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));//Hashear la password
-                return Convert.ToBase64String(hashedBytes); // Convertir hash a base64
-            }
-        }
 
         public List<UsuarioDTO> ObtenerUsuarios()
         {
@@ -38,11 +30,17 @@ namespace ApiPeliculas.Business.Services
             var nuevoUsuario = new Usuario
             {
                 Nombre = usuarioDTO.Nombre,
-                Contrasena = HashearSHA256(usuarioDTO.Contrasena), 
+                Contrasena = usuarioDTO.Contrasena,
                 CorreoElectronico = usuarioDTO.CorreoElectronico,
                 Rol = usuarioDTO.Rol
             };
             _usuarioData.CrearUsuario(nuevoUsuario);
         }
+
+       public UsuarioDTO Login(string usuario, string passwordHasheada)
+        {
+            return _usuarioData.Login(usuario, passwordHasheada);
+        }
+    
     }
 }
