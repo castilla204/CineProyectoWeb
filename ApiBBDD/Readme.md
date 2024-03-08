@@ -5,41 +5,105 @@ dotnet ef database update -p ./Data/Data.csproj -s ./Api/Api.csproj
 
 
 
-Tabla Usuarios
-    UsuarioID (Clave primaria)
-    Nombre
-    CorreoElectronico
-    Rol (Puede ser 'Usuario' o 'Administrador')
 
-Tabla Salas
-    SalaID (Clave primaria)
-    NombreSala
-    Capacidad
 
-Tabla Butacas
-    ButacaID (Clave primaria)
-    SalaID (Clave foránea que referencia a Salas.SalaID)
-    Estado (Puede ser 'Disponible' o 'Ocupada')
-    NumeroButaca
+los modelos utilizados
+namespace ApiPeliculas.Modelos
+{
+    public class Pelicula
+    {
+        public int PeliculaID { get; set; }
+        public string Imagen { get; set; }
+        public string Titulo { get; set; }
+        public string Director { get; set; }
+        public string Actores { get; set; }
+        public string Descripcion { get; set; }
+        
+        // Propiedad de navegación: Una Película puede tener muchas Sesiones
+        public ICollection<Sesion> Sesiones { get; set; }
+    }
 
-Tabla Películas
-    PeliculaID (Clave primaria)
-    Imagen
-    Titulo
-    Director
-    Actores
-    Descripcion
+    public class Sala
+    {
+        public int SalaID { get; set; }
+        public string NombreSala { get; set; }
 
-Tabla Sesiones (Reemplaza a la tabla Funciones)
-    SesionID (Clave primaria)
-    PeliculaID (Clave foránea que referencia a Películas.PeliculaID)
-    SalaID (Clave foránea que referencia a Salas.SalaID)
-    FechaHora (Fecha y hora de la sesión)
-Relaciones:
-Salas - Butacas: Cada Sala puede tener muchas Butacas (relación 1 a muchos). La clave foránea SalaID en la tabla Butacas establece esta relación.
+        // Propiedad de navegación: Una Sala puede tener muchas Sesiones
+        public ICollection<Sesion> Sesiones { get; set; }
 
-Salas - Sesiones: Cada Sala puede tener varias Sesiones programadas para diferentes películas y horarios (relación 1 a muchos). La clave foránea SalaID en la tabla Sesiones establece esta relación.
+        // Propiedad de navegación: Una Sala puede tener muchas Butacas
+        public ICollection<Butaca> Butacas { get; set; }
+    }
 
-Películas - Sesiones: Cada Película puede ser proyectada en varias Sesiones a través de diferentes salas y en distintos horarios (relación 1 a muchos). La clave foránea PeliculaID en la tabla Sesiones establece esta relación.
+    public class Sesion
+    {
+        public int SesionID { get; set; }
+        public DateTime FechaHora { get; set; }
 
-Esta estructura permite una gestión completa y flexible de un cine, facilitando la administración de usuarios, el seguimiento del estado de las butacas, la gestión de las películas, y la organización de las sesiones donde se proyectan estas películas en las salas, todo ello manteniendo una clara relación entre las entidades involucradas.
+        // Claves foráneas
+        public int PeliculaID { get; set; }
+        public int SalaID { get; set; }
+
+        // Propiedades de navegación
+        public Pelicula Pelicula { get; set; }
+        public Sala Sala { get; set; }
+
+        // Propiedad de navegación: Una Sesión puede tener muchas Reservas
+        public ICollection<Reserva> Reservas { get; set; }
+    }
+
+    public class Butaca
+    {
+        public int ButacaID { get; set; }
+        public EstadoButaca Estado { get; set; }
+
+        // Clave foránea
+        public int SalaID { get; set; }
+
+        // Propiedad de navegación: Una Butaca puede tener muchas Reservas
+        public ICollection<Reserva> Reservas { get; set; }
+
+        // Propiedad de navegación inversa: Una Butaca pertenece a una Sala
+        public Sala Sala { get; set; }
+    }
+
+    public class Usuario
+    {
+        public int UsuarioID { get; set; }
+        public string Nombre { get; set; }
+        public string CorreoElectronico { get; set; }
+        public string Contrasena { get; set; }
+        public RolAlumno Rol { get; set; }
+
+        // Propiedad de navegación: Un Usuario puede tener muchas Reservas
+        public ICollection<Reserva> Reservas { get; set; }
+    }
+
+    public class Reserva
+    {
+        public int ReservaID { get; set; }
+
+        // Claves foráneas
+        public int SesionID { get; set; }
+        public int ButacaID { get; set; }
+        public int UsuarioID { get; set; }
+
+        // Propiedades de navegación
+        public Sesion Sesion { get; set; }
+        public Butaca Butaca { get; set; }
+        public Usuario Usuario { get; set; }
+    }
+
+    public enum EstadoButaca
+    {
+        Disponible,
+        Reservada,
+        Ocupada
+    }
+
+    public enum RolAlumno
+    {
+        Administrador,
+        Usuario
+    }
+}
