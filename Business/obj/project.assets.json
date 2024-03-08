@@ -7270,11 +7270,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\Cinev2\\ApiBBDD\\Business\\Business.csproj",
+      "projectUniqueName": "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\CineProyectoWeb\\Business\\Business.csproj",
       "projectName": "Business",
-      "projectPath": "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\Cinev2\\ApiBBDD\\Business\\Business.csproj",
+      "projectPath": "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\CineProyectoWeb\\Business\\Business.csproj",
       "packagesPath": "C:\\Users\\Diego\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\Cinev2\\ApiBBDD\\Business\\obj\\",
+      "outputPath": "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\CineProyectoWeb\\Business\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Diego\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -7289,11 +7289,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\Cinev2\\ApiBBDD\\Data\\Data.csproj": {
-              "projectPath": "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\Cinev2\\ApiBBDD\\Data\\Data.csproj"
+            "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\CineProyectoWeb\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\CineProyectoWeb\\Data\\Data.csproj"
             },
-            "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj": {
-              "projectPath": "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\Cinev2\\ApiBBDD\\Modelos\\Modelos.csproj"
+            "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\CineProyectoWeb\\Modelos\\Modelos.csproj": {
+              "projectPath": "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\CineProyectoWeb\\Modelos\\Modelos.csproj"
             }
           }
         }
