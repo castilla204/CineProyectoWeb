@@ -11,18 +11,80 @@
         <button class="botonhome" @click="AccionScrollDown">COMPRAR</button>
       </div>
     </div>
+    <canvas ref="animacionCanvas" class="animacion-canvas"></canvas>
   </div>
 </template>
 
 <script setup lang="ts">
-import Cartelera from './Cartelera.vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const AccionScrollDown = () => {
   window.scrollBy({ top: 1000, behavior: 'smooth' });
 };
+
+const animacionCanvas = ref<HTMLCanvasElement | null>(null);
+let idFrameAnimacion: number;
+
+// lo que dibuja la animaciomn
+const dibujarAnimacion = (ctx: CanvasRenderingContext2D, contadorFrames: number, desplazamientoX: number) => {
+  const canvas = ctx.canvas;
+
+  // la resolucion del canvas
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = canvas.clientWidth * dpr;
+  canvas.height = canvas.clientHeight * dpr;
+
+  // limpiar el canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // dibjuar la animacion con degradado
+  const gradiente = ctx.createLinearGradient(0, 0, canvas.width, 0);
+  gradiente.addColorStop(0, '#FF1461');
+  gradiente.addColorStop(0.5, '#18FF92');
+  gradiente.addColorStop(1, '#5A87FF');
+  ctx.strokeStyle = gradiente;
+  ctx.lineWidth = Math.abs(Math.sin(contadorFrames * 0.05) * 3) + 1; // Cambio de grosor
+  ctx.beginPath();
+  for (let i = 0; i < canvas.width; i++) {
+    const y = 20 * Math.sin(0.01 * (i + desplazamientoX) + contadorFrames * 0.05);
+    ctx.lineTo(i, canvas.height / 2 + y);
+  }
+  ctx.stroke();
+};
+
+onMounted(() => {
+  if (!animacionCanvas.value) return;
+
+  const canvas = animacionCanvas.value;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  let contadorFrames = 0;
+  const bucle = () => {
+    contadorFrames++;
+    dibujarAnimacion(ctx, contadorFrames, 0);
+    idFrameAnimacion = requestAnimationFrame(bucle);
+  };
+
+  bucle();
+});
+
+onUnmounted(() => {
+  cancelAnimationFrame(idFrameAnimacion);
+});
 </script>
 
 <style scoped>
+
+.animacion-canvas {
+  position: absolute;
+  bottom: 120px; 
+  left: 0;
+  width: 100%;
+  height: 20px; 
+}
+
+
 .home {
   display: flex;
   justify-content: space-between;
@@ -129,5 +191,9 @@ body {
     margin-top: 20px;
     margin-left: 0;
   }
+  .animacion-canvas{
+  display: none;
 }
+}
+
 </style>

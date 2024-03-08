@@ -42,6 +42,6 @@
 
 body {
   min-height: initial; 
-  background: pink;/* Anula la altura mínima del cuerpo */
+  background: rgb(0, 0, 0);/* Anula la altura mínima del cuerpo */
 /* Anula el color de fondo del cuerpo */
 }

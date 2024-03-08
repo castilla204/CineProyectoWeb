@@ -2,7 +2,7 @@
   <header>
     <nav class="header">
       <div class="left">
-        <img src="/multimedia/logosinletra.svg" class="logocine">
+        <img src="/multimedia/logo.svg" class="logocine">
       </div>
       <button @click="DesplegarMenu" class="menu-button">
         <img src="/multimedia/menu.png" alt="Menú" />
