@@ -1,6 +1,6 @@
 namespace ApiPeliculas.Modelos
 {
-    public enum EstadoButaca
+       public enum EstadoButaca
     {
         Disponible,
         Reservada,

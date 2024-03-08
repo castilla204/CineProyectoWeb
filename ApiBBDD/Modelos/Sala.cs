@@ -3,5 +3,4 @@ public class Sala
 {
     public int SalaID { get; set; }
     public string NombreSala { get; set; }
-    public int Capacidad { get; set; }
 }}
