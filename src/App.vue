@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import Cabecera from './components/Cabecera.vue'
+import Cabecera from './components/Cabecera.vue';
+import { defineComponent } from 'vue';
+import Fuentes from './components/Fuentes.vue';//marca error pero cumple la función
+import PaginaPago from './components/PaginaPago.vue';
+import InfoPelicula from './components/InfoPelicula.vue';
+
 </script>
-
 <template>
-<body>
+    <Cabecera></Cabecera>
 
-<Cabecera>ji</Cabecera>
+    <PaginaPago></PaginaPago>
+    <Fuentes></Fuentes>
+  </template>
+  
 
+  
+  <style scoped>
 
-</body>
-</template>
-
-<style >
-
-</style>
+  </style>
