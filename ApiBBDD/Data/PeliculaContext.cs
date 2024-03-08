@@ -18,109 +18,272 @@ namespace ApiPeliculas.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Pelicula>().HasData(
-                new Pelicula{
-                    PeliculaID = 1,
-                    Imagen = "1.jpg",
-                    Titulo = "THE MEG 2",
-                    Director = "Jon Turtle",
-                    Actores = "Philipe Marcus",
-                    Descripcion = "Es una película de acción y ciencia ficción dirigida por Jon Turteltaub y estrenada en 2018. La trama gira en torno a un grupo de científicos que deben detener a un megalodón."
-                },
-                new Pelicula{
-                    PeliculaID = 2,
-                    Imagen = "2.png",
-                    Titulo = "EL HOYO",
-                    Director = "Galder Gaztelu-Urrutia",
-                    Actores = "Martin Scorsese",
-                    Descripcion = "Es una película de ciencia ficción española dirigida por Galder Gaztelu-Urrutia, lanzada en 2019. La película se centra en un centro de reclusión vertical donde los prisioneros están dispuestos en celdas apiladas, y una plataforma de comida desciende a través de los niveles, dejando a los prisioneros de los niveles superiores con menos comida."
-                },
-                new Pelicula{
-                    PeliculaID = 3,
-                    Imagen = "3.png",
-                    Titulo = "SUPER MARIO BROS",
-                    Director = "Martin Scorsese",
-                    Actores = "Leonardo DiCaprio",
-                    Descripcion = "En el colorido Reino Champiñón, Mario y Luigi disfrutan de una vida tranquila como fontaneros hasta que un día, Bowser, el rey de los Koopas, lanza un malévolo plan para robar todos los champiñones mágicos del reino."
-                },
-                new Pelicula{
-                    PeliculaID = 4,
-                    Imagen = "4.png",
-                    Titulo = "GRAN TURISMO",
-                    Director = "Quentin Tarantino",
-                    Actores = "Meryl Streep",
-                    Descripcion = "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'."
-                },
-                new Pelicula{
-                    PeliculaID = 5,
-                    Imagen = "5.jpg",
-                    Titulo = "THE MEG 2",
-                    Director = "Alfred Hitchcock",
-                    Actores = "Philipe Marcus",
-                    Descripcion = "Es una película de acción y ciencia ficción dirigida por Jon Turteltaub y estrenada en 2018. La trama gira en torno a un grupo de científicos que deben detener a un megalodón."
-                },
-                new Pelicula{
-                    PeliculaID = 6,
-                    Imagen = "6.png",
-                    Titulo = "EL HOYO",
-                    Director = "Ben Wheatley",
-                    Actores = "Julia Roberts",
-                    Descripcion = "Es una película de ciencia ficción española dirigida por Galder Gaztelu-Urrutia, lanzada en 2019. La película se centra en un centro de reclusión vertical donde los prisioneros están dispuestos en celdas apiladas, y una plataforma de comida desciende a través de los niveles, dejando a los prisioneros de los niveles superiores con menos comida."
-                },
-                new Pelicula{
-                    PeliculaID = 7,
-                    Imagen = "7.png",
-                    Titulo = "SUPER MARIO BROS",
-                    Director = "Alfred Hitchcock",
-                    Actores = "Leonardo DiCaprio",
-                    Descripcion = "En el colorido Reino Champiñón, Mario y Luigi disfrutan de una vida tranquila como fontaneros hasta que un día, Bowser, el rey de los Koopas, lanza un malévolo plan para robar todos los champiñones mágicos del reino."
-                },
-                new Pelicula{
-                    PeliculaID = 8,
-                    Imagen = "8.png",
-                    Titulo = "GRAN TURISMO",
-                    Director = "Quentin Tarantino",
-                    Actores = "Meryl Streep",
-                    Descripcion = "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'."
-                },
-                new Pelicula{
-                    PeliculaID = 9,
-                    Imagen = "9.png",
-                    Titulo = "SUPERMARIO BROS",
-                    Director = "Ben Wheatley",
-                    Actores = "Leonardo DiCaprio",
-                    Descripcion = "En el colorido Reino Champiñón, Mario y Luigi disfrutan de una vida tranquila como fontaneros hasta que un día, Bowser, el rey de los Koopas, lanza un malévolo plan para robar todos los champiñones mágicos del reino."
-                },
-                new Pelicula{
-                    PeliculaID = 10,
-                    Imagen = "10.png",
-                    Titulo = "GRAN TURISMO",
-                    Director = "Quentin Tarantino",
-                    Actores = "Meryl Streep",
-                    Descripcion = "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'."
-                }
-
+                modelBuilder.Entity<Pelicula>().HasData(
+                 new Pelicula{
+            PeliculaID = 1,
+            Imagen = "1.jpg",
+            Titulo = "THE MEG 2: THE TRENCH",
+            Director = "John Smith",
+            Actores = "Jason Statham, Li Bingbing",
+            Descripcion = "En esta emocionante secuela, Jason Statham regresa como el experto buceador Jonas Taylor, enfrentándose una vez más al megalodón, el gigantesco tiburón prehistórico. La historia lleva a los personajes a nuevas y aterradoras profundidades en una trinchera inexplorada del océano, donde los secretos oscuros y peligros mortales aguardan en las sombrías aguas."
+        },
+        new Pelicula{
+            PeliculaID = 2,
+            Imagen = "2.png",
+            Titulo = "EL HOYO",
+            Director = "Galder Gaztelu-Urrutia",
+            Actores = "Iván Massagué, Antonia San Juan",
+            Descripcion = "En un futuro distópico, 'El Hoyo' presenta una sociedad encerrada en una estructura vertical, donde los niveles determinan tu supervivencia. Los residentes luchan por su subsistencia mientras la comida desciende de los niveles superiores, dejando a los de abajo con menos y menos. La película explora temas de clase, sociedad y humanidad en un entorno inquietantemente claustrofóbico."
+        },
+        new Pelicula{
+            PeliculaID = 3,
+            Imagen = "3.png",
+            Titulo = "GRAN TURISMO",
+            Director = "Carlos Ruiz",
+            Actores = "Antonio Banderas, Penélope Cruz",
+            Descripcion = "Basada en el emblemático videojuego, 'Gran Turismo' narra la historia de un joven y talentoso piloto que pasa de las carreras virtuales a las competiciones reales. Bajo la tutela de un veterano piloto, interpretado por Antonio Banderas, el protagonista enfrentará desafíos tanto en la pista como en su vida personal, en una historia llena de velocidad, pasión y superación."
+        },
+        new Pelicula{
+            PeliculaID = 4,
+            Imagen = "4.png",
+            Titulo = "1917",
+            Director = "Sam Mendes",
+            Actores = "George MacKay, Dean-Charles Chapman",
+            Descripcion = "Ambientada en el apogeo de la Primera Guerra Mundial, '1917' sigue a dos soldados británicos en una misión aparentemente imposible que podría salvar miles de vidas. Dirigida con un estilo visual impresionante que simula una toma continua, la película sumerge a los espectadores en la intensidad y desesperación del frente de batalla, destacando el heroísmo, la amistad y la humanidad en tiempos de guerra."
+        },
+        new Pelicula{
+            PeliculaID = 5,
+            Imagen = "5.jpg",
+            Titulo = "DUNE",
+            Director = "Denis Villeneuve",
+            Actores = "Timothée Chalamet, Zendaya",
+            Descripcion = "En un futuro lejano donde los planetas son gobernados por casas nobiliarias, 'Dune' sigue a Paul Atreides, cuya familia asume el control del planeta desértico Arrakis, fuente del recurso más valioso del universo. Entre conflictos políticos, religiosos y culturales, Paul debe navegar por un terreno peligroso para asegurar el futuro de su familia y su pueblo."
+        },
+        new Pelicula{
+            PeliculaID = 6,
+            Imagen = "6.png",
+            Titulo = "PARÁSITOS",
+            Director = "Bong Joon Ho",
+            Actores = "Song Kang-ho, Choi Woo-shik",
+            Descripcion = "'Parásitos' es una incisiva crítica social disfrazada de comedia negra, donde dos familias de distintas clases sociales en Corea del Sur se entrelazan en un complejo juego de engaños y ambición. La película analiza la disparidad económica y las pretensiones sociales con una narrativa ingeniosa y giros inesperados, llevando a los espectadores a cuestionar las verdaderas intenciones de cada personaje."
+        },
+         new Pelicula{
+            PeliculaID = 7,
+            Imagen = "7.png",
+            Titulo = "SUPER MARIO BROS",
+            Director = "Roberto Gómez",
+            Actores = "Chris Pratt, Jack Black",
+            Descripcion = "La clásica franquicia de videojuegos cobra vida en 'Super Mario Bros', una aventura cinematográfica que sigue a Mario y Luigi en su misión para salvar al Reino Champiñón de la tiranía de Bowser. A través de mundos vibrantes y llenos de desafíos, los hermanos plomeros enfrentarán obstáculos y resolverán acertijos, demostrando el poder de la amistad y el coraje. Un homenaje lleno de acción y humor a la icónica serie de juegos."
+        },
+        new Pelicula{
+            PeliculaID = 8,
+            Imagen = "8.png",
+            Titulo = "EL IRLANDÉS",
+            Director = "Martin Scorsese",
+            Actores = "Robert De Niro, Al Pacino",
+            Descripcion = "Esta épica del crimen organizado, dirigida por el legendario Martin Scorsese, narra la vida de Frank Sheeran, un veterano de guerra que se convierte en sicario de la mafia. 'El Irlandés' explora los oscuros recovecos del crimen organizado en el siglo XX, las conexiones políticas y la desaparición del sindicalista Jimmy Hoffa. Un profundo estudio de personajes y un viaje a través de la historia americana, contado con la maestría narrativa de Scorsese."
+        },
+        new Pelicula{
+            PeliculaID = 9,
+            Imagen = "9.png",
+            Titulo = "JOKER",
+            Director = "Todd Phillips",
+            Actores = "Joaquin Phoenix, Robert De Niro",
+            Descripcion = "'Joker' ofrece una nueva mirada al icónico villano de Gotham, explorando su origen y su transformación de Arthur Fleck, un hombre ignorado por la sociedad, en el maestro del caos. La película se sumerge en la psicología de su personaje, retratando una sociedad fracturada que ignora a los marginados y crea sus propios monstruos. Un poderoso drama psicológico que desafía las convenciones del género de superhéroes."
+        },
+        new Pelicula{
+            PeliculaID = 10,
+            Imagen = "10.png",
+            Titulo = "SIN TIEMPO PARA MORIR",
+            Director = "Cary Joji Fukunaga",
+            Actores = "Daniel Craig, Rami Malek",
+            Descripcion = "Daniel Craig regresa como James Bond en 'Sin Tiempo Para Morir', donde el espía se enfrenta a uno de sus desafíos más peligrosos. Retirado del servicio activo, Bond es arrastrado de vuelta al mundo del espionaje cuando un científico es secuestrado, llevándolo al rastro de un misterioso villano armado con una nueva y peligrosa tecnología. La película promete ser un emocionante capítulo final para el icónico personaje, lleno de acción, traición y revelaciones."
+        }
                 
             );
 
             modelBuilder.Entity<Sesion>().HasData(
-                new Sesion{
-                    SesionID=1,
-                    PeliculaID=1,
-                    SalaID=1,
-                    FechaHora=new DateTime(2024, 2, 29, 21, 30, 0)
-                },
-                new Sesion{
-                    SesionID=2,
-                    PeliculaID=2,
-                    SalaID=2,
-                    FechaHora=new DateTime(2024, 2, 28, 19, 0, 0)
-                }
-            );
+               new Sesion{
+        SesionID=1,
+        PeliculaID=1,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 2, 29, 21, 30, 0)
+    },
+    new Sesion{
+        SesionID=2,
+        PeliculaID=1,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 1, 15, 0, 0)
+    },
+    new Sesion{
+        SesionID=3,
+        PeliculaID=1,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 2, 18, 0, 0)
+    },
+    new Sesion{
+        SesionID=4,
+        PeliculaID=2,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 1, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=5,
+        PeliculaID=2,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 2, 16, 0, 0)
+    },
+    new Sesion{
+        SesionID=6,
+        PeliculaID=3,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 1, 19, 0, 0)
+    },
+    new Sesion{
+        SesionID=7,
+        PeliculaID=3,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 1, 22, 0, 0)
+    },
+    new Sesion{
+        SesionID=8,
+        PeliculaID=3,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 2, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=9,
+        PeliculaID=3,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 3, 17, 0, 0)
+    },
+  
+    new Sesion{
+        SesionID=10,
+        PeliculaID=4,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 2, 19, 0, 0)
+    },
+    new Sesion{
+        SesionID=11,
+        PeliculaID=4,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 3, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=12,
+        PeliculaID=5,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 2, 21, 0, 0)
+    },
+    new Sesion{
+        SesionID=13,
+        PeliculaID=5,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 3, 18, 0, 0)
+    },
+    new Sesion{
+        SesionID=14,
+        PeliculaID=6,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 1, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=15,
+        PeliculaID=6,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 2, 17, 0, 0)
+    },
+    new Sesion{
+        SesionID=16,
+        PeliculaID=7,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 1, 17, 0, 0)
+    },
+    new Sesion{
+        SesionID=17,
+        PeliculaID=7,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 2, 19, 0, 0)
+    },
+    
+    new Sesion{
+        SesionID=18,
+        PeliculaID=8,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 1, 18, 0, 0)
+    },
+    new Sesion{
+        SesionID=19,
+        PeliculaID=8,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 2, 19, 0, 0)
+    },
+    new Sesion{
+        SesionID=20,
+        PeliculaID=8,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 3, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=21,
+        PeliculaID=8,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 4, 17, 0, 0)
+    },
+    new Sesion{
+        SesionID=22,
+        PeliculaID=9,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 2, 18, 0, 0)
+    },
+    new Sesion{
+        SesionID=23,
+        PeliculaID=9,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 3, 19, 0, 0)
+    },
+    new Sesion{
+        SesionID=24,
+        PeliculaID=9,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 4, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=25,
+        PeliculaID=9,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 5, 17, 0, 0)
+    },
+    new Sesion{
+        SesionID=26,
+        PeliculaID=10,
+        SalaID=1,
+        FechaHora=new DateTime(2024, 3, 3, 18, 0, 0)
+    },
+    new Sesion{
+        SesionID=27,
+        PeliculaID=10,
+        SalaID=2,
+        FechaHora=new DateTime(2024, 3, 4, 19, 0, 0)
+    },
+    new Sesion{
+        SesionID=28,
+        PeliculaID=10,
+        SalaID=3,
+        FechaHora=new DateTime(2024, 3, 5, 20, 0, 0)
+    },
+    new Sesion{
+        SesionID=29,
+        PeliculaID=10,
+        SalaID=4,
+        FechaHora=new DateTime(2024, 3, 6, 17, 0, 0)
+    }
+    );
         
 
 
-            //Creacion de salas y sus correspondientes butacas estas creadas automaticamente para las salas por defecto.
+            
             var salas = new List<Sala>
             {
                 new Sala { SalaID = 1, NombreSala = "Sala 1" },
@@ -159,6 +322,13 @@ namespace ApiPeliculas.Data
                     Nombre="Juan",
                     CorreoElectronico="Alonsoalvira@gmail.com",
                     Contrasena="1234",
+                    Rol=RolAlumno.Administrador
+                },
+                    new Usuario{
+                    UsuarioID=2,
+                    Nombre="admin",
+                    CorreoElectronico="admin@gmail.com",
+                    Contrasena="admin",
                     Rol=RolAlumno.Administrador
                 }
 

@@ -4,6 +4,7 @@ using ApiPeliculas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(PeliculaContext))]
-    partial class PeliculaContextModelSnapshot : ModelSnapshot
+    [Migration("20240301162851_MigracionconDatosDefecto")]
+    partial class MigracionconDatosDefecto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1278,17 +1280,17 @@ namespace Data.Migrations
                         new
                         {
                             PeliculaID = 1,
-                            Actores = "Jason Statham, Li Bingbing",
-                            Descripcion = "En esta emocionante secuela, Jason Statham regresa como el experto buceador Jonas Taylor, enfrentándose una vez más al megalodón, el gigantesco tiburón prehistórico. La historia lleva a los personajes a nuevas y aterradoras profundidades en una trinchera inexplorada del océano, donde los secretos oscuros y peligros mortales aguardan en las sombrías aguas.",
-                            Director = "John Smith",
+                            Actores = "Philipe Marcus",
+                            Descripcion = "Es una película de acción y ciencia ficción dirigida por Jon Turteltaub y estrenada en 2018. La trama gira en torno a un grupo de científicos que deben detener a un megalodón.",
+                            Director = "Jon Turtle",
                             Imagen = "1.jpg",
-                            Titulo = "THE MEG 2: THE TRENCH"
+                            Titulo = "THE MEG 2"
                         },
                         new
                         {
                             PeliculaID = 2,
-                            Actores = "Iván Massagué, Antonia San Juan",
-                            Descripcion = "En un futuro distópico, 'El Hoyo' presenta una sociedad encerrada en una estructura vertical, donde los niveles determinan tu supervivencia. Los residentes luchan por su subsistencia mientras la comida desciende de los niveles superiores, dejando a los de abajo con menos y menos. La película explora temas de clase, sociedad y humanidad en un entorno inquietantemente claustrofóbico.",
+                            Actores = "Martin Scorsese",
+                            Descripcion = "Es una película de ciencia ficción española dirigida por Galder Gaztelu-Urrutia, lanzada en 2019. La película se centra en un centro de reclusión vertical donde los prisioneros están dispuestos en celdas apiladas, y una plataforma de comida desciende a través de los niveles, dejando a los prisioneros de los niveles superiores con menos comida.",
                             Director = "Galder Gaztelu-Urrutia",
                             Imagen = "2.png",
                             Titulo = "EL HOYO"
@@ -1296,74 +1298,74 @@ namespace Data.Migrations
                         new
                         {
                             PeliculaID = 3,
-                            Actores = "Antonio Banderas, Penélope Cruz",
-                            Descripcion = "Basada en el emblemático videojuego, 'Gran Turismo' narra la historia de un joven y talentoso piloto que pasa de las carreras virtuales a las competiciones reales. Bajo la tutela de un veterano piloto, interpretado por Antonio Banderas, el protagonista enfrentará desafíos tanto en la pista como en su vida personal, en una historia llena de velocidad, pasión y superación.",
-                            Director = "Carlos Ruiz",
+                            Actores = "Leonardo DiCaprio",
+                            Descripcion = "En el colorido Reino Champiñón, Mario y Luigi disfrutan de una vida tranquila como fontaneros hasta que un día, Bowser, el rey de los Koopas, lanza un malévolo plan para robar todos los champiñones mágicos del reino.",
+                            Director = "Martin Scorsese",
                             Imagen = "3.png",
-                            Titulo = "GRAN TURISMO"
+                            Titulo = "SUPER MARIO BROS"
                         },
                         new
                         {
                             PeliculaID = 4,
-                            Actores = "George MacKay, Dean-Charles Chapman",
-                            Descripcion = "Ambientada en el apogeo de la Primera Guerra Mundial, '1917' sigue a dos soldados británicos en una misión aparentemente imposible que podría salvar miles de vidas. Dirigida con un estilo visual impresionante que simula una toma continua, la película sumerge a los espectadores en la intensidad y desesperación del frente de batalla, destacando el heroísmo, la amistad y la humanidad en tiempos de guerra.",
-                            Director = "Sam Mendes",
+                            Actores = "Meryl Streep",
+                            Descripcion = "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'.",
+                            Director = "Quentin Tarantino",
                             Imagen = "4.png",
-                            Titulo = "1917"
+                            Titulo = "GRAN TURISMO"
                         },
                         new
                         {
                             PeliculaID = 5,
-                            Actores = "Timothée Chalamet, Zendaya",
-                            Descripcion = "En un futuro lejano donde los planetas son gobernados por casas nobiliarias, 'Dune' sigue a Paul Atreides, cuya familia asume el control del planeta desértico Arrakis, fuente del recurso más valioso del universo. Entre conflictos políticos, religiosos y culturales, Paul debe navegar por un terreno peligroso para asegurar el futuro de su familia y su pueblo.",
-                            Director = "Denis Villeneuve",
+                            Actores = "Philipe Marcus",
+                            Descripcion = "Es una película de acción y ciencia ficción dirigida por Jon Turteltaub y estrenada en 2018. La trama gira en torno a un grupo de científicos que deben detener a un megalodón.",
+                            Director = "Alfred Hitchcock",
                             Imagen = "5.jpg",
-                            Titulo = "DUNE"
+                            Titulo = "THE MEG 2"
                         },
                         new
                         {
                             PeliculaID = 6,
-                            Actores = "Song Kang-ho, Choi Woo-shik",
-                            Descripcion = "'Parásitos' es una incisiva crítica social disfrazada de comedia negra, donde dos familias de distintas clases sociales en Corea del Sur se entrelazan en un complejo juego de engaños y ambición. La película analiza la disparidad económica y las pretensiones sociales con una narrativa ingeniosa y giros inesperados, llevando a los espectadores a cuestionar las verdaderas intenciones de cada personaje.",
-                            Director = "Bong Joon Ho",
+                            Actores = "Julia Roberts",
+                            Descripcion = "Es una película de ciencia ficción española dirigida por Galder Gaztelu-Urrutia, lanzada en 2019. La película se centra en un centro de reclusión vertical donde los prisioneros están dispuestos en celdas apiladas, y una plataforma de comida desciende a través de los niveles, dejando a los prisioneros de los niveles superiores con menos comida.",
+                            Director = "Ben Wheatley",
                             Imagen = "6.png",
-                            Titulo = "PARÁSITOS"
+                            Titulo = "EL HOYO"
                         },
                         new
                         {
                             PeliculaID = 7,
-                            Actores = "Chris Pratt, Jack Black",
-                            Descripcion = "La clásica franquicia de videojuegos cobra vida en 'Super Mario Bros', una aventura cinematográfica que sigue a Mario y Luigi en su misión para salvar al Reino Champiñón de la tiranía de Bowser. A través de mundos vibrantes y llenos de desafíos, los hermanos plomeros enfrentarán obstáculos y resolverán acertijos, demostrando el poder de la amistad y el coraje. Un homenaje lleno de acción y humor a la icónica serie de juegos.",
-                            Director = "Roberto Gómez",
+                            Actores = "Leonardo DiCaprio",
+                            Descripcion = "En el colorido Reino Champiñón, Mario y Luigi disfrutan de una vida tranquila como fontaneros hasta que un día, Bowser, el rey de los Koopas, lanza un malévolo plan para robar todos los champiñones mágicos del reino.",
+                            Director = "Alfred Hitchcock",
                             Imagen = "7.png",
                             Titulo = "SUPER MARIO BROS"
                         },
                         new
                         {
                             PeliculaID = 8,
-                            Actores = "Robert De Niro, Al Pacino",
-                            Descripcion = "Esta épica del crimen organizado, dirigida por el legendario Martin Scorsese, narra la vida de Frank Sheeran, un veterano de guerra que se convierte en sicario de la mafia. 'El Irlandés' explora los oscuros recovecos del crimen organizado en el siglo XX, las conexiones políticas y la desaparición del sindicalista Jimmy Hoffa. Un profundo estudio de personajes y un viaje a través de la historia americana, contado con la maestría narrativa de Scorsese.",
-                            Director = "Martin Scorsese",
+                            Actores = "Meryl Streep",
+                            Descripcion = "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'.",
+                            Director = "Quentin Tarantino",
                             Imagen = "8.png",
-                            Titulo = "EL IRLANDÉS"
+                            Titulo = "GRAN TURISMO"
                         },
                         new
                         {
                             PeliculaID = 9,
-                            Actores = "Joaquin Phoenix, Robert De Niro",
-                            Descripcion = "'Joker' ofrece una nueva mirada al icónico villano de Gotham, explorando su origen y su transformación de Arthur Fleck, un hombre ignorado por la sociedad, en el maestro del caos. La película se sumerge en la psicología de su personaje, retratando una sociedad fracturada que ignora a los marginados y crea sus propios monstruos. Un poderoso drama psicológico que desafía las convenciones del género de superhéroes.",
-                            Director = "Todd Phillips",
+                            Actores = "Leonardo DiCaprio",
+                            Descripcion = "En el colorido Reino Champiñón, Mario y Luigi disfrutan de una vida tranquila como fontaneros hasta que un día, Bowser, el rey de los Koopas, lanza un malévolo plan para robar todos los champiñones mágicos del reino.",
+                            Director = "Ben Wheatley",
                             Imagen = "9.png",
-                            Titulo = "JOKER"
+                            Titulo = "SUPERMARIO BROS"
                         },
                         new
                         {
                             PeliculaID = 10,
-                            Actores = "Daniel Craig, Rami Malek",
-                            Descripcion = "Daniel Craig regresa como James Bond en 'Sin Tiempo Para Morir', donde el espía se enfrenta a uno de sus desafíos más peligrosos. Retirado del servicio activo, Bond es arrastrado de vuelta al mundo del espionaje cuando un científico es secuestrado, llevándolo al rastro de un misterioso villano armado con una nueva y peligrosa tecnología. La película promete ser un emocionante capítulo final para el icónico personaje, lleno de acción, traición y revelaciones.",
-                            Director = "Cary Joji Fukunaga",
+                            Actores = "Meryl Streep",
+                            Descripcion = "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'.",
+                            Director = "Quentin Tarantino",
                             Imagen = "10.png",
-                            Titulo = "SIN TIEMPO PARA MORIR"
+                            Titulo = "GRAN TURISMO"
                         });
                 });
 

@@ -4,84 +4,116 @@
       <div class="left">
         <img src="../../multimedia/logosinletra.svg" class="logocine">
       </div>
-      <ul class="right">
-        <li><a href="index.html" class="promo">Promos</a></li>
-        <li><a href="index.html" class="pelis">Películas</a></li>
-        <li><a href="index.html" class="billetes">Boletos</a></li>
-        <li v-if="!loggedIn"><a href="login.html" class="login">Iniciar sesión</a></li>
-        <li v-if="loggedIn"><a href="#" class="user">Bienvenido, {{ currentUser.nombre }}</a></li>
-        <li v-if="loggedIn"><a href="#" @click="performLogout" class="logout">Cerrar sesión</a></li>
+      <button @click="DesplegarMenu" class="menu-button">
+        <img src="../../public/multimedia/menu.png" alt="Menú" /> 
+      </button>
+      <ul :class="{'right': true, 'show': menuAbierto}">
+        <li><router-link to="/" class="promo">Promos</router-link></li>
+        <li><router-link to="/" class="pelis">Películas</router-link></li>
+        <li><router-link to="/" class="billetes">Boletos</router-link></li>
+        <li v-if="!usuariologueado"><router-link to="/Auth" class="login">Iniciar sesión</router-link></li>
+        <li v-if="usuariologueado" class="usuarioencabecera"><span class="user">Bienvenido, {{ currentUser.nombre }}</span></li>
+        <li v-if="usuariologueado"><button @click.prevent="Logout" class="logout" title="Cerrar sesión"><img src="../../public/multimedia/cerrar-sesion.png" alt="Cerrar sesión" /></button></li>
       </ul>
     </nav>
   </header>
 </template>
 
 <script setup>
-import { useUsuariosStore } from '../store/UsuarioStore'; 
+import { ref, computed } from 'vue';
+import { useUsuariosStore } from '../store/UsuarioStore';
+import { useRouter } from 'vue-router';
 
-const { loggedIn, currentUser, logout } = useUsuariosStore();
+const store = useUsuariosStore();
+const router = useRouter();
+const menuAbierto = ref(false);
 
-const performLogout = () => {
-  logout();
+const usuariologueado = computed(() => store.logueado);
+const currentUser = computed(() => store.currentUser);
+
+const Logout = async () => {
+  store.logout();
+  await router.push({ name: 'HomePage' });
+};
+
+const DesplegarMenu = () => {
+  menuAbierto.value = !menuAbierto.value;
 };
 </script>
 
 <style>
 .header {
   background-color: rgb(196, 0, 0);
-  height: auto;
   display: flex;
-  flex-wrap: wrap; 
   justify-content: space-between;
   align-items: center;
-  font-family: 'Helvetica';
+  font-family: 'Helvetica', sans-serif;
+  padding: 10px 20px;
 }
 
 .logocine {
-  height: 60px; 
+  height: 50px;
 }
 
 .right {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  align-items: center;
   list-style: none;
-  font-size: 20px;
-  flex-wrap: wrap;
-  margin: 0;
+  transition: transform 0.3s ease;
 }
 
-.right a {
+.right.show {
+  display: flex;
+}
+
+.menu-button {
+  display: none;
+  background: none;
+  border: none;
+}
+
+.right a, .right button {
   color: white;
-  text-decoration: none; 
+  text-decoration: none;
+  margin: 0 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-.promo,
-.pelis,
-.billetes,
-.login,
-.user,
-.logout {
-  margin: 10px; 
+.logout img, .menu-button img {
+  height: 25px;
+  width: auto;
 }
 
-.left,
-.right {
-  margin: 20px;
-}
 
 @media (max-width: 768px) {
-  .header {
-    justify-content: center; 
-  }
-
   .right {
-    justify-content: center;
-    font-size: 14px; 
+    position: absolute;
+    right: 0;
+    top: 60px;
+    flex-direction: column;
+    background-color: rgb(196, 0, 0);
+    width: 100%;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    display: none;
   }
 
-  .promo, .pelis, .billetes, .login, .user, .logout {
-    margin: 0 10px; 
+  .right.show {
+    transform: translateY(0);
+    display: flex;
+  }
+
+  .menu-button {
+    display: block;
+    cursor: pointer;
+  }
+
+  .right a, .right button {
+    text-align: center;
+    margin: 10px 0;
   }
 }
 </style>

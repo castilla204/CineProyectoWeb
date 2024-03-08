@@ -3,22 +3,22 @@
     <div class="formulario">
       <h2>Iniciar sesión</h2>
       <form @submit.prevent="IniciodeSesion">
-        <input type="text" v-model="loginData.usuario" placeholder="Usuario" required>
-        <input type="password" v-model="loginData.contrasena" placeholder="Contraseña" required>
+        <input type="text" v-model="datosLogin.usuario" placeholder="Usuario" required>
+        <input type="password" v-model="datosLogin.contrasena" placeholder="Contraseña" required>
         <button type="submit">Iniciar sesión</button>
       </form>
     </div>
-    <div v-if="loggedIn" class="formulario">
+    <div v-if="logueado" class="formulario">
       <p>Bienvenido, {{ currentUser.nombre }}</p>
       <button @click="logout">Cerrar sesión</button>
     </div>
     <div class="formulario">
       <h2>Registrarse</h2>
       <form @submit.prevent="Registro">
-        <input type="text" v-model="registerData.nombre" placeholder="Nombre" required>
-        <input type="email" v-model="registerData.correoElectronico" placeholder="Correo electrónico" required>
-        <input type="password" v-model="registerData.contrasena" placeholder="Contraseña" required>
-        <input type="number" v-model="registerData.rol" placeholder="Rol" required>
+        <input type="text" v-model="datosRegistro.nombre" placeholder="Usuario" required>
+        <input type="email" v-model="datosRegistro.correoElectronico" placeholder="Correo electrónico" required>
+        <input type="password" v-model="datosRegistro.contrasena" placeholder="Contraseña" required>
+        <input type="number" v-model="datosRegistro.rol" placeholder="Rol" required>
         <button type="submit">Registrarse</button>
       </form>
     </div>
@@ -31,15 +31,15 @@ import { useRouter } from 'vue-router';
 import { useUsuariosStore } from '../store/UsuarioStore';
 
 const usuariosStore = useUsuariosStore();
-const { loggedIn, currentUser, login, register, logout } = usuariosStore;
+const { logueado, currentUser, login, register, logout } = usuariosStore;
 const router = useRouter();
 
-const loginData = ref({
+const datosLogin = ref({
   usuario: '',
   contrasena: ''
 });
 
-const registerData = ref({
+const datosRegistro = ref({
   nombre: '',
   correoElectronico: '',
   contrasena: '',
@@ -48,8 +48,8 @@ const registerData = ref({
 
 const IniciodeSesion = async () => {
   try {
-    await login(loginData.value);
-    router.push('/perfil');
+    await login(datosLogin.value);
+    router.push('/');
   } catch (error) {
     alert('Error al iniciar sesion: ' + error.message);
   }
@@ -57,7 +57,7 @@ const IniciodeSesion = async () => {
 
 const Registro = async () => {
   try {
-    await register(registerData.value);
+    await register(datosRegistro.value);
   } catch (error) {
     alert('Error al registrar: ' + error.message);
   }

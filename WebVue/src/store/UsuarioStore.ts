@@ -4,13 +4,13 @@ import sha256 from 'crypto-js/sha256';
 export const useUsuariosStore = defineStore({
   id: 'usuarios',
   state: () => ({
-    loggedIn: false,
-    currentUser: null,
+    logueado: localStorage.getItem('logueado') === 'true',
+    currentUser: JSON.parse(localStorage.getItem('currentUser') || 'null'),
   }),
   actions: {
-    async login(credenciales) {
+    async login(usuarioLogueandose) {
       try {
-        const ContraHasheada = sha256(credenciales.contrasena).toString();
+        const ContraHasheada = sha256(usuarioLogueandose.contrasena).toString();
         const ContraHasheadaBase64 = btoa(ContraHasheada);
 
         const response = await fetch('http://localhost:8001/Usuario/login', {
@@ -19,25 +19,31 @@ export const useUsuariosStore = defineStore({
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            usuario: credenciales.usuario,
+            usuario: usuarioLogueandose.usuario,
             passwordHasheada: ContraHasheadaBase64,
           }),
         });
 
         if (response.ok) {
           const userData = await response.json();
-          this.loggedIn = true;
+          this.logueado = true;
           this.currentUser = userData;
+          localStorage.setItem('logueado', 'true');
+          localStorage.setItem('currentUser', JSON.stringify(userData));
         } else {
-          console.error('Error al iniciar sesion:', response.statusText);
-          this.loggedIn = false;
+          console.error('Error al iniciar sesión:', response.statusText);
+          this.logueado = false;
           this.currentUser = null;
+          localStorage.removeItem('logueado');
+          localStorage.removeItem('currentUser');
           throw new Error('Error al iniciar sesión: ' + response.statusText);
         }
       } catch (error) {
         console.error('Error al iniciar sesión:', error);
-        this.loggedIn = false;
+        this.logueado = false;
         this.currentUser = null;
+        localStorage.removeItem('logueado');
+        localStorage.removeItem('currentUser');
         throw error;
       }
     },
@@ -70,8 +76,10 @@ export const useUsuariosStore = defineStore({
       }
     },
     logout() {
-      this.loggedIn = false;
+      this.logueado = false;
       this.currentUser = null;
+      localStorage.removeItem('logueado');
+      localStorage.removeItem('currentUser');
     },
   },
 });

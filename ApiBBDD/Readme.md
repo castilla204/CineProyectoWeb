@@ -1,6 +1,6 @@
 dotnet tool install --global dotnet-ef --version 6.0.0
 docker-compose up --build
-dotnet ef migrations add 20240226202918_ReservaButacaMuchosAMuchos -p ./Data/Data.csproj -s ./Api/Api.csproj
+dotnet ef migrations add 20240301162851_MigracionconDatosDefecto -p ./Data/Data.csproj -s ./Api/Api.csproj
 dotnet ef database update -p ./Data/Data.csproj -s ./Api/Api.csproj
 
 
