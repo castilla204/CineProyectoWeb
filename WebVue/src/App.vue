@@ -14,8 +14,3 @@ import InfoPelicula from './components/InfoPelicula.vue';
     <Fuentes></Fuentes>
   </template>
   
-
-  
-  <style scoped>
-
-  </style>

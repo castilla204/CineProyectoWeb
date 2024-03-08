@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="general">
     <div class="home">
       <div class="izquierda">
         <img :src="'multimedia/fotopalomitas.png'" alt="Palomitas de maíz">
@@ -98,28 +98,14 @@ export default defineComponent({
 
 
 <style scoped>
-.movie-group {
-  display: flex;
-  justify-content: space-around;
+.template{
+    background: rgb(0, 0, 0);
+}
+.general{
+  height: 100%;
 }
 
-.subtitulo-group {
-  text-align: center;
-  margin-bottom: 10px; 
-}
-body {
-  padding: 0;
-  margin: 0;
-  background: linear-gradient(rgb(0, 0, 0), rgb(48, 48, 48));
-  font-family: 'Helvetica';
-}
 
-.principal {
-  height: calc(100vh - 90px);
-  overflow-y: hidden;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent), url('multimedia/cinefondodegradado.png') center/cover no-repeat;
-  background-position: right center;
-}
 
 .home {
   display: flex;
@@ -149,6 +135,13 @@ body {
   font-family: 'HelveticaBold';
   font-size: 110px;
   margin: 0;
+}
+body {
+  padding: 0;
+  margin: 0;
+  background: black;
+  /*background: linear-gradient(rgb(0, 0, 0), rgb(48, 48, 48));*/
+  font-family: 'Helvetica';
 }
 
 .f3 {

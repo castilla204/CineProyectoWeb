@@ -41,6 +41,7 @@
 }
 
 body {
-  min-height: initial; /* Anula la altura mínima del cuerpo */
-  background: transparent; /* Anula el color de fondo del cuerpo */
+  min-height: initial; 
+  background: pink;/* Anula la altura mínima del cuerpo */
+/* Anula el color de fondo del cuerpo */
 }
