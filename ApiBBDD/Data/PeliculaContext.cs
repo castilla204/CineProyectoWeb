@@ -101,13 +101,13 @@ namespace ApiPeliculas.Data
                     SesionID=1,
                     PeliculaID=1,
                     SalaID=1,
-                    FechaHora=new DateTime(2024, 2, 30, 21, 30, 0)
+                    FechaHora=new DateTime(2024, 2, 29, 21, 30, 0)
                 },
                 new Sesion{
                     SesionID=2,
                     PeliculaID=2,
                     SalaID=2,
-                    FechaHora=new DateTime(2024, 2, 31, 19, 0, 0)
+                    FechaHora=new DateTime(2024, 2, 28, 19, 0, 0)
                 }
             );
         
@@ -193,42 +193,47 @@ namespace ApiPeliculas.Data
 
             // Definiendo relaciones entre las entidades
 
-            // Relación: Una Sala puede tener muchas Sesiones
+             // Sala -> Sesiones
             modelBuilder.Entity<Sala>()
-                .HasMany(s => s.Sesiones)              // Una Sala puede tener muchas Sesiones
-                .WithOne(se => se.Sala)                // Cada Sesion pertenece a una Sala
-                .HasForeignKey(se => se.SalaID);      // La clave foránea en la tabla de Sesiones es SalaID
+                .HasMany(s => s.Sesiones)
+                .WithOne(se => se.Sala)
+                .HasForeignKey(se => se.SalaID)
+                .OnDelete(DeleteBehavior.Restrict); // Prevenir ciclos en cascada
 
-            // Relación: Una Sala puede tener muchas Butacas
+            // Sala -> Butacas
             modelBuilder.Entity<Sala>()
-                .HasMany(s => s.Butacas)               // Una Sala puede tener muchas Butacas
-                .WithOne(b => b.Sala)                  // Cada Butaca pertenece a una Sala
-                .HasForeignKey(b => b.SalaID);        // La clave foránea en la tabla de Butacas es SalaID
+                .HasMany(s => s.Butacas)
+                .WithOne(b => b.Sala)
+                .HasForeignKey(b => b.SalaID)
+                .OnDelete(DeleteBehavior.Restrict); // Prevenit ciclos en cascada
 
-            // Relación: Una Película puede tener muchas Sesiones
+            // Película -> Sesiones
             modelBuilder.Entity<Pelicula>()
-                .HasMany(p => p.Sesiones)              // Una Película puede tener muchas Sesiones
-                .WithOne(se => se.Pelicula)            // Cada Sesión pertenece a una Película
-                .HasForeignKey(se => se.PeliculaID);  // La clave foránea en la tabla de Sesiones es PeliculaID
+                .HasMany(p => p.Sesiones)
+                .WithOne(se => se.Pelicula)
+                .HasForeignKey(se => se.PeliculaID)
+                .OnDelete(DeleteBehavior.Restrict); // Prevenir ciclos en cascada
 
-            // Relación: Una Sesión puede tener muchas Reservas
+            // Sesión -> Reservas
             modelBuilder.Entity<Sesion>()
-                .HasMany(se => se.Reservas)            // Una Sesión puede tener muchas Reservas
-                .WithOne(r => r.Sesion)                // Cada Reserva pertenece a una Sesión
-                .HasForeignKey(r => r.SesionID);      // La clave foránea en la tabla de Reservas es SesionID
+                .HasMany(se => se.Reservas)
+                .WithOne(r => r.Sesion)
+                .HasForeignKey(r => r.SesionID)
+                .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminación en cascada de reservas
 
-            // Relación: Una Butaca puede tener muchas Reservas
+            // Butaca -> Reservas
             modelBuilder.Entity<Butaca>()
-                .HasMany(b => b.Reservas)              // Una Butaca puede tener muchas Reservas
-                .WithOne(r => r.Butaca)                // Cada Reserva pertenece a una Butaca
-                .HasForeignKey(r => r.ButacaID);      // La clave foránea en la tabla de Reservas es ButacaID
+                .HasMany(b => b.Reservas)
+                .WithOne(r => r.Butaca)
+                .HasForeignKey(r => r.ButacaID)
+                .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminación en cascada de reservas
 
-            // Relación: Un Usuario puede tener muchas Reservas
+            // Usuario -> Reservas
             modelBuilder.Entity<Usuario>()
-                .HasMany(u => u.Reservas)              // Un Usuario puede tener muchas Reservas
-                .WithOne(r => r.Usuario)               // Cada Reserva pertenece a un Usuario
-                .HasForeignKey(r => r.UsuarioID);     // La clave foránea en la tabla de Reservas es UsuarioID
-
+                .HasMany(u => u.Reservas)
+                .WithOne(r => r.Usuario)
+                .HasForeignKey(r => r.UsuarioID)
+                .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminación en cascada de reservas
 
 
             base.OnModelCreating(modelBuilder);

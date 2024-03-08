@@ -17,11 +17,11 @@ public ButacaController(IButacaService butacaService){
 _butacaService=butacaService;
 }
 
-[HttpGet("/Butacas")]
+[HttpGet()]
 public ActionResult<List<Butaca>> ObtenerButacas(){
     return _butacaService.ObtenerButacas();
 }
-[HttpGet("Butacas/Ocupadas")]
+[HttpGet("/Ocupadas")]
 public ActionResult<List<Butaca>> ObtenerButacasOcupadas(){
     return _butacaService.ObtenerButacasOcupadas();
 }
