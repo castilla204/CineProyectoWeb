@@ -47,7 +47,7 @@ export default defineComponent({
       isLoading: computed(() => almacenPeliculas.isLoading),
       CargarSubtitulo,
       RedirigirInfopeli: (movieId: number) => {
-  router.push({ name: 'InfoPelicula', params: { movieId: movieId.toString() } });
+      router.push({ name: 'InfoPelicula', params: { movieId: movieId.toString() } });
 },
     };
   },
@@ -66,6 +66,7 @@ export default defineComponent({
   font-size: 20px;
   margin-left: 10%;
   color: white;
+  font-family: 'Helvetica';
   text-align: left;
 }
 

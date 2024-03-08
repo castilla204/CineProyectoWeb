@@ -1,26 +1,27 @@
 <template>
-    <header>
-        <nav class="header">
-                <div class="left">
-                    <img src="../../multimedia/logosinletra.svg" class="logocine">
-                </div>
-                <ul class="right">
-                    <a href="index.html"><li class="promo">Promos</li></a>
-                    <a href="index.html"><li class="pelis">Películas</li></a>
-                    <a href="index.html"><li class="billetes">Boletos</li></a>
-                </ul>
-            </nav>
-    </header>
-  </template>
-  
-  <style>
-  /* Header */
-  .header {
+  <header>
+      <nav class="header">
+          <div class="left">
+              <img src="../../multimedia/logosinletra.svg" class="logocine">
+          </div>
+          <ul class="right">
+              <li><a href="index.html" class="promo">Promos</a></li>
+              <li><a href="index.html" class="pelis">Películas</a></li>
+              <li><a href="index.html" class="billetes">Boletos</a></li>
+          </ul>
+      </nav>
+  </header>
+</template>
+
+<style>
+/* Header */
+.header {
   background-color: rgb(196, 0, 0);
   height: 90px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: 'Helvetica';
 }
 
 .logocine {
@@ -31,8 +32,12 @@
   display: flex;
   justify-content: space-between;
   list-style: none;
-  color: white;
   font-size: 20px;
+}
+
+.right a {
+  color: white;
+  text-decoration: none; /* Elimina el subrayado */
 }
 
 .promo,
@@ -46,5 +51,5 @@
 .right {
   margin: 20px 40px;
 }
-  /* Header */
-  </style>
+/* Header */
+</style>

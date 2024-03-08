@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import type { RouteRecordRaw } from 'vue-router';
 import HomePage from './components/Homepage.vue';
+import reservaButacas from './components/PaginaReserva.vue'
+import PaginaPago from './components/PaginaPago.vue';
 import InfoPelicula from './components/InfoPelicula.vue';
-import Butacas from './components/Butacas.vue';
+import PaginaReserva from './components/PaginaReserva.vue';
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -12,15 +14,20 @@ const routes: Array<RouteRecordRaw> = [
     component: HomePage
   },
   {
-    path: '/infopeli:movieId',
+    path: '/infopeli/:movieId',
     name: 'InfoPelicula',
     component: InfoPelicula,
   },
   { 
-    path:'/Butacas',
-    name: 'Butacas',
-    component:Butacas,
+    path:'/PaginaReserva/:sesionID',
+    name: 'PaginaReserva',
+    component:PaginaReserva,
   },
+  {
+    path: '/pagina-pago',
+    name: 'PaginaPago',
+    component: PaginaPago
+  }
 
 ];
 

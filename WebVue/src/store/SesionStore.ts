@@ -1,34 +1,36 @@
 import { defineStore } from 'pinia';
 
 export const SesionesStore = defineStore({
-  id: 'session',
+  id: 'sesion',
   state: () => ({
-    sessions: [],
+    sesiones: [],
   }),
   actions: {
     async ObtenerSesionesPelicula(movieId: number) {
       try {
         if (!movieId) {
-          throw new Error('Invalid movieId');
+          throw new Error('Id de la pelicula invalido');
         }
         const response = await fetch(`http://localhost:8001/Sesion/Pelicula/${movieId}`);
         if (!response.ok) {
-          throw new Error('Invalid data returned');
+          throw new Error('La respuesta es nula');
         }
         const sesionesData = await response.json();
 
-        const sessions = sesionesData.map((session: any) => ({
-          sesionID: session.sesionID,
-          fechaHora: CambiarFormatoFechaHora(session.fechaHora), 
-          tituloPelicula: session.tituloPelicula,
-          nombreSala: session.nombreSala,
-          imagenPelicula: session.imagenPelicula,
-          butacasOcupadasIds: session.butacasOcupadasIds,
+        const sesiones = sesionesData.map((sesion: any) => ({
+          sesionID: sesion.sesionID,
+          fechaHora: CambiarFormatoFechaHora(sesion.fechaHora), 
+          tituloPelicula: sesion.tituloPelicula,
+          nombreSala: sesion.nombreSala,
+          imagenPelicula: sesion.imagenPelicula,
+          descripcionPelicula: sesion.descripcionPelicula,
+          butacasOcupadasIds: sesion.butacasOcupadasIds,
+
         }));
 
-        this.sessions = sessions;
+        this.sesiones = sesiones;
       } catch (error) {
-        console.error('Error fetching sessions:', error);
+        console.error('error haciendo el fecth', error);
       }
     },
   },
@@ -36,7 +38,7 @@ export const SesionesStore = defineStore({
 
 
 function CambiarFormatoFechaHora(StringdeDateTime: string) {
-  const options = {
+  const opciones = {
     weekday: undefined,
     year: 'numeric',
     month: 'long',
@@ -45,5 +47,5 @@ function CambiarFormatoFechaHora(StringdeDateTime: string) {
     minute: '2-digit',
   };
   const dateTime = new Date(StringdeDateTime);
-  return dateTime.toLocaleString('es-ES', options);
+  return dateTime.toLocaleString('es-ES', opciones);
 }

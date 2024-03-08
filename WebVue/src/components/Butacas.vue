@@ -1,155 +1,106 @@
 <template>
-<div class="all">
-    <div id="movieDetails">
-        <a href="pay.html"><button id="comprarBtnDesktop">Comprar</button></a>
-        <div class="dinero">
-            <div id="precioPorButaca">Precio por butaca: 10€</div>
-            <div id="total">Total: 0€</div>
-        </div>
-    </div>    
-
-    <div id="contenedorButacas">
-    <br>
-    <div class="pantalla"></div>
+  <div class="contenedorButacas">
+    <div v-for="(fila, index) in filas" :key="index" class="fila">
+      <svg
+        v-for="butaca in fila"
+        :key="butaca.id"
+        :id="'butaca-' + butaca.id"
+        class="butaca"
+        @click="comprobarButaca(butaca.id)"
+        :style="{ fill: butaca.ocupada ? 'red' : (butacaSeleccionada.includes(butaca.id) ? 'blue' : 'black') }"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="100"
+        height="100"
+      >
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path fill-rule="evenodd" d="M4 4h16v2H4V4zm16 4v10c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2zM6 18h12V8H6v10zm3-4h6v2H9v-2z"/>
+      </svg>
     </div>
-    
-</div>
-    
-    <div id="movieContainer"></div>
-    <div id="transactionHistory"></div>
-    <button id="comprarBtnMobile" @click="">Comprar</button>
-
-
-
+    <button @click="realizarReserva">Reservar</button>
+  </div>
 </template>
 
+<script lang="ts">
+import { defineComponent, onMounted, computed, ref } from 'vue';
+import { ButacaStore } from '../store/ButacaStore';
+import { useReservaStore } from '../store/ReservaStore';
+import { useRouter } from 'vue-router'; 
 
+export default defineComponent({
+  props: {
+    sesionID: {
+      type: Number,
+      required: true
+    }
+  },
+  setup(props) {
+    const butacaStore = ButacaStore();
+    const reservaStore = useReservaStore();
+    const butacas = computed(() => butacaStore.butacas);
+    const butacaSeleccionada = ref<number[]>([]);
+    const router = useRouter(); 
+
+    const filas = computed(() => {
+      const resultado = [];
+      for (let i = 0; i < butacas.value.length; i += 10) {
+        resultado.push(butacas.value.slice(i, i + 10));
+      }
+      return resultado;
+    });
+
+    onMounted(async () => {
+      await butacaStore.cargarButacas(props.sesionID);
+    });
+
+    const comprobarButaca = (id: number) => {
+      const butaca = butacas.value.find(b => b.id === id);
+      if (butaca && !butaca.ocupada) {
+        const index = butacaSeleccionada.value.indexOf(id);
+        if (index === -1) {
+          butacaSeleccionada.value.push(id);
+        } else {
+          butacaSeleccionada.value.splice(index, 1);
+        }
+      }
+    };
+
+    const realizarReserva = async () => {
+      try {
+        await reservaStore.realizarReserva({
+          sesionID: props.sesionID,
+          usuarioID: 1,
+          butacasIds: butacaSeleccionada.value
+        });
+        router.push({ name: 'PaginaPago' });
+      } catch (error) {
+        console.error('Error al realizar la reserva:', error);
+      }
+    };
+
+    return {
+      filas,
+      comprobarButaca,
+      realizarReserva,
+      butacaSeleccionada
+    };
+  }
+});
+</script>
 
 <style scoped>
-body {
-  font-family: "Helvetica";
-  margin: 0;
-  padding: 0;
-  background-color: #000;
-  color: #fff;
-  height: 100vh;
-  height: calc(100vh - 90px);
-  overflow-y: hidden;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent), url("multimedia/cinefondodegradado.png") center/cover no-repeat;
-  background-position: right center; 
-}
-
-.all {
-  margin-top: 40px;
+.contenedorButacas {
   display: flex;
-}
-
-#moviePoster {
-  max-width: 70%;
-  height: auto;
-  width: 45%;
-  margin-top: 20px;
-}
-
-#contenedorButacas {
-  margin-left: 23%;
-  margin-top: 3%;
-  display: flex;
-  flex-wrap: wrap; 
-  justify-content: space-between; 
+  flex-direction: column;
   align-items: center;
-  background-color: rgba(128, 128, 128, 0.5);
-  border-radius: 20px;
-  padding: 20px;
-  height: 600px;
-  width: 40%;
 }
 
-.bloque {
+.fila {
   display: flex;
-  flex-direction: column; 
-}
-
-.spacer {
-  width: 20px; 
-  height: 100%; 
-}
-
-.butaca.selected {
-  background-color: #008CBA;
-}
-
-.butaca.ocupada {
-  background-color: #FF0000;
-}
-
-.butaca.comprada {
-  background-color: red;
-}
-
-#movieContainer {
-  padding: 10px;
-}
-
-a {
-  text-decoration: none;
-  color: white;
-  transition: transform 0.2s ease-in-out;
-}
-
-a:hover {
-  transform: scale(1.1);
-}
-
-#transactionHistory {
-  padding: 20px;
 }
 
 .butaca {
-  width: 50px;
-  height: 50px;
-  margin: 5px 10px;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 5px;
   cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
-
-.pantalla {
-  background-color: rgb(0, 0, 0);
-  width: 2000px;
-  height: 40px;
-}
-
-.movieDetails, img {
-  max-width: 370px;
-  margin-top: 18%;
-  margin-left: 99%;
-}
-
-.dinero {
-  margin-left: 50px;
-}
-
-#comprarBtnDesktop {
-  font-family: "Helvetica";
-  margin-top: 20px;
-  margin-left: 116%;
-  height: 50px;
-  width: 60%;
-  background-color: #ff0000;
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  display: block;
-  border-radius: 100px;
-}
-
-#comprarBtnDesktop:hover {
-  font-size: 20px;
 }
 </style>

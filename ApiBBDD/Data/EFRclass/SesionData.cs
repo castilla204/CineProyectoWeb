@@ -28,6 +28,7 @@ namespace ApiPeliculas.Data
                     TituloPelicula = s.Pelicula.Titulo,
                     NombreSala = s.Sala.NombreSala,
                     ImagenPelicula = s.Pelicula.Imagen,
+                    DescripcionPelicula= s.Pelicula.Descripcion,
                     ButacasOcupadasIds = s.Reservas
                                           .SelectMany(r => r.ReservaButacas) 
                                           .Select(rb => rb.ButacaID)
@@ -52,6 +53,7 @@ namespace ApiPeliculas.Data
                     TituloPelicula = s.Pelicula.Titulo,
                     NombreSala = s.Sala.NombreSala,
                     ImagenPelicula = s.Pelicula.Imagen,
+                    DescripcionPelicula= s.Pelicula.Descripcion,
                     ButacasOcupadasIds = s.Reservas
                                           .SelectMany(r => r.ReservaButacas) 
                                           .Select(rb => rb.ButacaID)
@@ -73,6 +75,7 @@ namespace ApiPeliculas.Data
                     TituloPelicula = s.Pelicula.Titulo,
                     NombreSala = s.Sala.NombreSala,
                     ImagenPelicula = s.Pelicula.Imagen,
+                    DescripcionPelicula= s.Pelicula.Descripcion,
                     ButacasOcupadasIds = s.Reservas
                                           .SelectMany(r => r.ReservaButacas)
                                           .Select(rb => rb.ButacaID)

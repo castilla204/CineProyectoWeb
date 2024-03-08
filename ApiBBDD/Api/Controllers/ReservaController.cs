@@ -33,13 +33,20 @@ namespace ApiPeliculas.Api.Controllers
             return Ok(reserva);
         }
 
+
         [HttpPost]
         public IActionResult CrearReserva([FromBody] ReservaCrearDTO reservaCrearDTO)
         {
-            _reservaService.CrearReserva(reservaCrearDTO);
-            return Ok("Creada");
-        }
-
+            try
+            {
+                _reservaService.CrearReserva(reservaCrearDTO);
+                return Ok(new { message = "Reserva creada con éxito" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = "No se pudo crear la reserva", details = ex.Message });
+            }
+}
         [HttpPut("{id}")]
         public IActionResult ActualizarReserva(int id, [FromBody] ReservaActualizarDTO reservaActualizarDTO)
         {
