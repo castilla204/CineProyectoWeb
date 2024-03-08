@@ -6,7 +6,7 @@ namespace ApiPeliculas.Modelos{
 public class Pelicula
 {
 
-    public int Id { get; set; }
+    public int PeliculaID { get; set; }
 
     public string Imagen { get; set; }
 
@@ -16,4 +16,7 @@ public class Pelicula
 
     public string Actores { get; set; }
     public string Descripcion {get; set;}
+
+    // Propiedad de navegacion
+    public  ICollection<Sesion> Sesiones { get; set; }=new HashSet<Sesion>();// Una Película puede tener muchas Sesiones
 }}

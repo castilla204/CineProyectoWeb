@@ -1,10 +1,10 @@
 using ApiPeliculas.Modelos;
-
+namespace ApiPeliculas.Business.Services{
 public interface IPeliculaService{
-List<Pelicula>ObtenerPizzas();
-Pelicula ObtenerPizzaPorID(int id);
-void EliminarPizza(int id);
-void CrearPizza(PeliculaDTO peliculaDTO);
-void ActualizarPelicula(int id, PeliculaDTO peliculaDTO);
+List<PeliculaDTO>ObtenerPeliculas();
+PeliculaDTO ObtenerPelicula(int id);
+void EliminarPelicula(int id);
+void CrearPelicula(PeliculaCrearDTO peliculaDTO);
+void ActualizarPelicula(int id, PeliculaCrearDTO peliculaDTO);
 
-}
+}}

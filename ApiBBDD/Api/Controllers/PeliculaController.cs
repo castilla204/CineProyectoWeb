@@ -1,4 +1,5 @@
 using ApiPeliculas.Modelos;
+using ApiPeliculas.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -18,31 +19,31 @@ namespace ApiPeliculas.Api.Controllers
         
 
         [HttpGet]
-        public ActionResult<List<Pelicula>> ObtenerPizzas(){
-            return _peliculaService.ObtenerPizzas();
+        public ActionResult<List<PeliculaDTO>> ObtenerPeliculas(){
+            return _peliculaService.ObtenerPeliculas();
 
         }
       
 
         [HttpGet("{id}")]
-        public ActionResult<Pelicula> ObtenerPizzaPorID(int id)
+        public ActionResult<PeliculaDTO> ObtenerPelicula(int id)
         {
-            return _peliculaService.ObtenerPizzaPorID(id);
+            return _peliculaService.ObtenerPelicula(id);
         }
         
 [HttpPost]
-public IActionResult CrearPizza([FromBody]PeliculaDTO peliculaDTO)//se ha creado el dto porque a pesar de poner el [JsonIgnore] al pasar como paramtero el modelo Pelicula Original requeria las dos listas.
+public IActionResult CrearPelicula([FromBody]PeliculaCrearDTO peliculaDTO)//se ha creado el dto porque a pesar de poner el [JsonIgnore] al pasar como paramtero el modelo Pelicula Original requeria las dos listas.
 {
     if (peliculaDTO == null){
         return BadRequest("Datos de la pelicula no proporcionados");
     }
-    _peliculaService.CrearPizza(peliculaDTO);
+    _peliculaService.CrearPelicula(peliculaDTO);
     
     return Ok("Pelicula añadida");
 }
 
 [HttpPut("{id}")]                                                      //El from body ya he visto que a partir de net3 no seria obligatorio ponerlo pero lo pongo como
-public IActionResult ActualizarPelicula(int id,[FromBody] PeliculaDTO peliculaDTO)  //indicativo de que se cogen los datos del body he visto que es buena practica
+public IActionResult ActualizarPelicula(int id,[FromBody] PeliculaCrearDTO peliculaDTO)  //indicativo de que se cogen los datos del body he visto que es buena practica
 {  
      if (peliculaDTO == null ){
         return BadRequest("Datos de la pelicula o id invalidos");
@@ -54,8 +55,8 @@ public IActionResult ActualizarPelicula(int id,[FromBody] PeliculaDTO peliculaDT
 
 
  [HttpDelete("{id}")]
-public IActionResult EliminarPizza(int id){
-     _peliculaService.EliminarPizza(id);
+public IActionResult EliminarPelicula(int id){
+     _peliculaService.EliminarPelicula(id);
       return Ok($"La pelicula con ID '{id}' ha sido eliminada correctamente");
         }
     

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import Cabecera from './components/Cabecera.vue';
 import { defineComponent } from 'vue';
 import Fuentes from './components/Fuentes.vue';

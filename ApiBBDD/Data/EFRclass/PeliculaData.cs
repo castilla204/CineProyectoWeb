@@ -15,16 +15,38 @@ namespace ApiPeliculas.Data
             _context = context;
         }
 
-        public List<Pelicula> ObtenerPizzas()
+        public List<PeliculaDTO> ObtenerPeliculas()
         {
-            return _context.Peliculas.ToList();
+            var peliculasDTO= _context.Peliculas.
+            Include(p => p.Sesiones)
+            .Select(p => new PeliculaDTO{
+                PeliculaID=p.PeliculaID,
+                Titulo=p.Titulo,
+                Actores=p.Actores,
+                Descripcion=p.Descripcion,
+                Director=p.Director,
+                Imagen=p.Imagen
+            }).ToList();
+
+            return peliculasDTO;
         }
 
-        public Pelicula ObtenerPizzaPorID(int id)
+        public PeliculaDTO ObtenerPelicula(int id)
         {
-            return _context.Peliculas.Find(id);
+            var peliculaDTO= _context.Peliculas.
+            Where(p => p.PeliculaID==id)
+            .Include(p => p.Sesiones)
+            .Select(p => new PeliculaDTO{
+                PeliculaID=p.PeliculaID,
+                Titulo=p.Titulo,
+                Actores=p.Actores,
+                Descripcion=p.Descripcion,
+                Director=p.Director,
+                Imagen=p.Imagen
+            }).FirstOrDefault();
+            return peliculaDTO;
         }
-        public void CrearPizza(Pelicula pelicula)
+        public void CrearPelicula(Pelicula pelicula)
         {
             _context.Peliculas.Add(pelicula);
             _context.SaveChanges();
@@ -35,7 +57,7 @@ namespace ApiPeliculas.Data
             _context.SaveChanges();
         }
 
-        public void EliminarPizza(int id)
+        public void EliminarPelicula(int id)
         {
             var pelicula = _context.Peliculas.Find(id);
             if (pelicula != null)

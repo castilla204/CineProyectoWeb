@@ -4,7 +4,7 @@
         <div class="DatosPelicula">
             <h1 id="movieTitle">{{ pelicula.titulo }}</h1>
             <p id="movieDescription">{{ pelicula.descripcion }}</p>
-            <button class="boton" @click="RedirigirButacas(pelicula.id)">Comprar</button>
+            <SesionesDisponibles :sessions="sessions" />
         </div>
         <div class="imagenpelicula">
             <img v-if="pelicula.imagen" :src="`multimedia/${pelicula.imagen}`" class="imagen" :alt="pelicula.titulo">
@@ -13,58 +13,49 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import SesionesDisponibles from './SesionesDisponibles.vue';
+import { SesionesStore } from '../store/SesionStore';
 
-export default defineComponent({
-  setup() {
-    const pelicula = ref(null);
-    const isLoading = ref(false);
-    const router = useRouter();
+const pelicula = ref(null);
+const isLoading = ref(false);
+const router = useRouter();
+const almacenSesiones = SesionesStore();
 
-    
-    const CargaPelicula = async () => {
-      isLoading.value = true;
-      try {
-        const IdPelicula =  router.currentRoute.value.query.movieId; // Acceder al objeto de la ruta actual a través de router
-        const response = await fetch(`http://localhost:8001/Pelicula/${IdPelicula}`);
-        pelicula.value = await response.json();
-      } catch (error) {
-        console.error(error);
-      } finally {
-        isLoading.value = false;
-      }
-    };
+const cargaPelicula = async () => {
+  isLoading.value = true;
+  try {
+    // Extraer el movieId de la url
+    const movieId = router.currentRoute.value.params.movieId;
+    // Si el MovieId no existe
+    if (!movieId) {
+      throw new Error('Invalid movieId');
+    }
+    const response = await fetch(`http://localhost:8001/Pelicula/${movieId}`);
+    pelicula.value = await response.json();
 
-    const RedirigirButacas = (movieId: string) => {
-      router.push({ name: 'Butacas', query: { movieId: movieId }})};
+    await almacenSesiones.ObtenerSesionesPelicula(movieId); //llamar al sesionstore de la libreria pinia a la funcion fetch 
+  } catch (error) {
+    console.error(error);
+  } finally {
+    isLoading.value = false;
+  }
+};
 
-    onMounted(CargaPelicula);
-    
-
-
-    
-
-    return { pelicula, isLoading, RedirigirButacas };
-  },
-});
+onMounted(cargaPelicula);
 </script>
-
-
-
 <style scoped>
 .general{
   height: 100vh;
   background: black;
 }
 
-/*IMAGEN PELICULA*/
 .imagen{
   height:97vh;
 }
 
-/*TEXTO PELICULA*/
 .movieDetails{
   display: flex;
 }
@@ -72,9 +63,8 @@ export default defineComponent({
 .DatosPelicula{
   color: white;
 }
-/*BOTON*/
+
 .boton{
   height:30%;
 }
-
 </style>

@@ -16,22 +16,22 @@ namespace ApiPeliculas.Business.Services
             _PeliculaData = PeliculaData;
         }
 
-public List<Pelicula> ObtenerPizzas()
+public List<PeliculaDTO> ObtenerPeliculas()
 {
-    return _PeliculaData.ObtenerPizzas();
+    return _PeliculaData.ObtenerPeliculas();
 }
 
 
-public Pelicula ObtenerPizzaPorID(int id){
-   return  _PeliculaData.ObtenerPizzaPorID(id);
+public PeliculaDTO ObtenerPelicula(int id){
+   return  _PeliculaData.ObtenerPelicula(id);
 }
 
-public void EliminarPizza(int id){
-    _PeliculaData.EliminarPizza(id);
+public void EliminarPelicula(int id){
+    _PeliculaData.EliminarPelicula(id);
 }
  
  
-    public void CrearPizza(PeliculaDTO peliculaDTO)
+    public void CrearPelicula(PeliculaCrearDTO peliculaDTO)
     {
         var pelicula = new Pelicula{
             Imagen=peliculaDTO.Imagen,
@@ -41,14 +41,14 @@ public void EliminarPizza(int id){
             Descripcion=peliculaDTO.Descripcion
         };
         
-        _PeliculaData.CrearPizza(pelicula);
+        _PeliculaData.CrearPelicula(pelicula);
     }
 
-public void ActualizarPelicula(int id, PeliculaDTO peliculaDTO)
+public void ActualizarPelicula(int id, PeliculaCrearDTO peliculaDTO)
 {
         {
         var pelicula = new Pelicula{
-            Id=id,
+            PeliculaID=id,
             Imagen=peliculaDTO.Imagen,
             Titulo=peliculaDTO.Titulo,
             Director=peliculaDTO.Director,
