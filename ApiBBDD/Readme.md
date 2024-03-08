@@ -1,6 +1,6 @@
 dotnet tool install --global dotnet-ef --version 6.0.0
 docker-compose up --build
-dotnet ef migrations add 20240222125920_MigracionInicial -p ./Data/Data.csproj -s ./Api/Api.csproj
+dotnet ef migrations add 20240225203032_MigracionOptimizada -p ./Data/Data.csproj -s ./Api/Api.csproj
 dotnet ef database update -p ./Data/Data.csproj -s ./Api/Api.csproj
 
 

@@ -5,7 +5,6 @@ namespace ApiPeliculas.Modelos{
 public class Butaca{
 
         public int ButacaID { get; set; } //Clave Principal
-        public EstadoButaca Estado { get; set; }
         public int SalaID { get; set; } //Clave Foranea
 
 

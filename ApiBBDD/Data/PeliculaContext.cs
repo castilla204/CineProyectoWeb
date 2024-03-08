@@ -12,7 +12,7 @@ namespace ApiPeliculas.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies(false);
+            optionsBuilder.UseLazyLoadingProxies(false);//dejo aqui la carga diferida desactivada, ya se que esta por defecto dejo la linea por si necesito activarla
             // optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); // Limitar la profundidad de carga
         }
 
@@ -118,36 +118,38 @@ namespace ApiPeliculas.Data
                 }
             );
         
-            modelBuilder.Entity<Sala>().HasData(
-                new Sala{
-                    SalaID=1,
-                    NombreSala="Sala 1",
-                   
-                },
-                new Sala{
-                    SalaID=2,
-                    NombreSala="Sala 2"
-                }
-            );
 
-            modelBuilder.Entity<Butaca>().HasData(
-                new Butaca{
-                    ButacaID=1,
-                    SalaID=1,
-                    Estado=EstadoButaca.Disponible
 
-                },
-                    new Butaca{
-                    ButacaID=2,
-                    SalaID=1,
-                    Estado=EstadoButaca.Reservada
-                },
-                    new Butaca{
-                    ButacaID=3,
-                    SalaID=1,
-                    Estado=EstadoButaca.Ocupada
+            //Creacion de salas y sus correspondientes butacas estas creadas automaticamente para las salas por defecto.
+            var salas = new List<Sala>
+            {
+                new Sala { SalaID = 1, NombreSala = "Sala 1" },
+                new Sala { SalaID = 2, NombreSala = "Sala 2" }
+            };
+
+            modelBuilder.Entity<Sala>().HasData(salas);
+
+            var totalButacasPorSala = 60; 
+            var butacas = new List<Butaca>();
+
+            foreach (var sala in salas)
+            {
+                for (int butacaNum = 1; butacaNum <= totalButacasPorSala; butacaNum++)
+                {
+                    butacas.Add(new Butaca
+                    {
+                        ButacaID = ((sala.SalaID - 1) * totalButacasPorSala) + butacaNum,
+                        SalaID = sala.SalaID
+                    });
                 }
-            );
+            }
+            modelBuilder.Entity<Butaca>().HasData(butacas);
+            //
+
+
+
+
+
 
             modelBuilder.Entity<Usuario>().HasData(
                 new Usuario{
@@ -198,7 +200,7 @@ namespace ApiPeliculas.Data
             modelBuilder.Entity<Reserva>()
                 .HasKey(r => r.ReservaID);
 
-            // Definiendo relaciones entre las entidades
+            // Definiendo las relaciones entre las entidades
 
              // Sala -> Sesiones
             modelBuilder.Entity<Sala>()
@@ -242,6 +244,8 @@ namespace ApiPeliculas.Data
                 .HasForeignKey(r => r.UsuarioID)
                 .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminación en cascada de reservas
 
+
+            
 
             base.OnModelCreating(modelBuilder);
         }

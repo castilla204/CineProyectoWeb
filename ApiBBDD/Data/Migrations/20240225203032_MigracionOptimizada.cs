@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class MigracionInicial : Migration
+    public partial class MigracionOptimizada : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,7 +61,6 @@ namespace Data.Migrations
                 {
                     ButacaID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Estado = table.Column<int>(type: "int", nullable: false),
                     SalaID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -168,12 +167,143 @@ namespace Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Butacas",
-                columns: new[] { "ButacaID", "Estado", "SalaID" },
+                columns: new[] { "ButacaID", "SalaID" },
                 values: new object[,]
                 {
-                    { 1, 0, 1 },
-                    { 2, 1, 1 },
-                    { 3, 2, 1 }
+                    { 1, 1 },
+                    { 2, 1 },
+                    { 3, 1 },
+                    { 4, 1 },
+                    { 5, 1 },
+                    { 6, 1 },
+                    { 7, 1 },
+                    { 8, 1 },
+                    { 9, 1 },
+                    { 10, 1 },
+                    { 11, 1 },
+                    { 12, 1 },
+                    { 13, 1 },
+                    { 14, 1 },
+                    { 15, 1 },
+                    { 16, 1 },
+                    { 17, 1 },
+                    { 18, 1 },
+                    { 19, 1 },
+                    { 20, 1 },
+                    { 21, 1 },
+                    { 22, 1 },
+                    { 23, 1 },
+                    { 24, 1 },
+                    { 25, 1 },
+                    { 26, 1 },
+                    { 27, 1 },
+                    { 28, 1 },
+                    { 29, 1 },
+                    { 30, 1 },
+                    { 31, 1 },
+                    { 32, 1 },
+                    { 33, 1 },
+                    { 34, 1 },
+                    { 35, 1 },
+                    { 36, 1 },
+                    { 37, 1 },
+                    { 38, 1 },
+                    { 39, 1 },
+                    { 40, 1 },
+                    { 41, 1 },
+                    { 42, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Butacas",
+                columns: new[] { "ButacaID", "SalaID" },
+                values: new object[,]
+                {
+                    { 43, 1 },
+                    { 44, 1 },
+                    { 45, 1 },
+                    { 46, 1 },
+                    { 47, 1 },
+                    { 48, 1 },
+                    { 49, 1 },
+                    { 50, 1 },
+                    { 51, 1 },
+                    { 52, 1 },
+                    { 53, 1 },
+                    { 54, 1 },
+                    { 55, 1 },
+                    { 56, 1 },
+                    { 57, 1 },
+                    { 58, 1 },
+                    { 59, 1 },
+                    { 60, 1 },
+                    { 61, 2 },
+                    { 62, 2 },
+                    { 63, 2 },
+                    { 64, 2 },
+                    { 65, 2 },
+                    { 66, 2 },
+                    { 67, 2 },
+                    { 68, 2 },
+                    { 69, 2 },
+                    { 70, 2 },
+                    { 71, 2 },
+                    { 72, 2 },
+                    { 73, 2 },
+                    { 74, 2 },
+                    { 75, 2 },
+                    { 76, 2 },
+                    { 77, 2 },
+                    { 78, 2 },
+                    { 79, 2 },
+                    { 80, 2 },
+                    { 81, 2 },
+                    { 82, 2 },
+                    { 83, 2 },
+                    { 84, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Butacas",
+                columns: new[] { "ButacaID", "SalaID" },
+                values: new object[,]
+                {
+                    { 85, 2 },
+                    { 86, 2 },
+                    { 87, 2 },
+                    { 88, 2 },
+                    { 89, 2 },
+                    { 90, 2 },
+                    { 91, 2 },
+                    { 92, 2 },
+                    { 93, 2 },
+                    { 94, 2 },
+                    { 95, 2 },
+                    { 96, 2 },
+                    { 97, 2 },
+                    { 98, 2 },
+                    { 99, 2 },
+                    { 100, 2 },
+                    { 101, 2 },
+                    { 102, 2 },
+                    { 103, 2 },
+                    { 104, 2 },
+                    { 105, 2 },
+                    { 106, 2 },
+                    { 107, 2 },
+                    { 108, 2 },
+                    { 109, 2 },
+                    { 110, 2 },
+                    { 111, 2 },
+                    { 112, 2 },
+                    { 113, 2 },
+                    { 114, 2 },
+                    { 115, 2 },
+                    { 116, 2 },
+                    { 117, 2 },
+                    { 118, 2 },
+                    { 119, 2 },
+                    { 120, 2 }
                 });
 
             migrationBuilder.InsertData(

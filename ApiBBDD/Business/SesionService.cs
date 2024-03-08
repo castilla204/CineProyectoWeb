@@ -10,13 +10,27 @@ _sesionData=sesionData;
 }
 
 
-public List<Sesion> ObtenerSesiones(){
-return _sesionData.ObtenerSesiones();
+public List<SesionDTO> ObtenerSesiones(){
+    return _sesionData.ObtenerSesionesDTO();
+
 
 }
 
-public Sesion ObtenerSesion(int id){
-return _sesionData.ObtenerSesion(id);
+public SesionDTO ObtenerSesion(int id){
+    return _sesionData.ObtenerSesion(id);
+}
+
+public List<SesionDTO> ObtenerSesionesPeli(int IdPelicula){
+    return _sesionData.ObtenerSesionesPeli(IdPelicula);
+}
+
+public void CrearSesion(SesionCrearDTO sesionDTO){
+var nuevaSesion = new Sesion{
+    FechaHora = sesionDTO.FechaHora,
+    PeliculaID = sesionDTO.PeliculaID,
+    SalaID = sesionDTO.SalaID
+    };
+_sesionData.CrearSesion(nuevaSesion);
 }
 }
 

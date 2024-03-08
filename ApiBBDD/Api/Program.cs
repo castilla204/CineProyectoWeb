@@ -13,11 +13,10 @@ var connectionStringKey="ServerDB_Docker";
 connectionStringKey = isRunningInDocker ? "ServerDB_Docker" : "ServerDB_Local";
 var connectionString = builder.Configuration.GetConnectionString(connectionStringKey);
 
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;// Gracias a esta linea las relacciones Circulares no se producen
-    });
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.WriteIndented = true; // Para que se muestren los json mas legibles sin valores como $ o valores que no ineteresan
+});
 
 
 
@@ -46,9 +45,18 @@ options.UseSqlServer(connectionString));
 builder.Services.AddScoped<ISesionData, SesionData>();
 builder.Services.AddScoped<ISesionService, SesionService>();
 
+builder.Services.AddScoped<ISalaData, SalaData>();
+builder.Services.AddScoped<ISalaService, SalaService>();
 
-builder.Services.AddScoped<IButacaData, ButacaData>();
-builder.Services.AddScoped<IButacaService, ButacaService>();
+builder.Services.AddScoped<IUsuarioData, UsuarioData>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
+builder.Services.AddScoped<IReservaData, ReservaData>();
+builder.Services.AddScoped<IReservaService, ReservaService>();
+
+
+//builder.Services.AddScoped<IButacaData, ButacaData>();
+//builder.Services.AddScoped<IButacaService, ButacaService>();
 
 builder.Services.AddScoped<IPeliculaData, PeliculaData>();
 builder.Services.AddScoped<IPeliculaService, PeliculaService>();

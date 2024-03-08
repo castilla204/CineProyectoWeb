@@ -12,13 +12,25 @@ public SesionController(ISesionService sesionService){
 _sesionService= sesionService;
 }
 [HttpGet]
-public ActionResult<List<Sesion>> ObtenerSesiones(){
+public ActionResult<List<SesionDTO>> ObtenerSesiones(){
     return _sesionService.ObtenerSesiones();
 }
 
 [HttpGet("{id}")]
-public ActionResult<Sesion> ObtenerSesion(int id){
+public ActionResult<SesionDTO> ObtenerSesion(int id){
 return _sesionService.ObtenerSesion(id);
+}
+
+[HttpGet("Sesion/{IdPelicula}")]
+public List<SesionDTO> ObtenerSesionesPeli(int IdPelicula){
+    return _sesionService.ObtenerSesionesPeli(IdPelicula);
+}
+
+[HttpPost]
+public IActionResult CrearSesion([FromBody]SesionCrearDTO sesionDTO){
+_sesionService.CrearSesion(sesionDTO);
+return Ok("SesionCreada");
+
 }
 
 }
