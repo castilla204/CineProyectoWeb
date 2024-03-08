@@ -1,7 +1,7 @@
 using ApiPeliculas.Business.Services;
 using ApiPeliculas.Modelos;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using System;
 
 namespace ApiPeliculas.Api.Controllers
 {
@@ -13,32 +13,57 @@ namespace ApiPeliculas.Api.Controllers
 
         public SalaController(ISalaService salaService)
         {
-            _salaService = salaService;
+            _salaService = salaService ?? throw new ArgumentNullException(nameof(salaService));
         }
 
         [HttpGet]
         public ActionResult<List<SalaDTO>> ObtenerSalas()
         {
-            var salas = _salaService.ObtenerSalas();
-            return Ok(salas); 
+            try
+            {
+                var salas = _salaService.ObtenerSalas();
+                return Ok(salas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"error obteniendo las salas {ex.Message}");
+            }
         }
 
         [HttpGet("{id}")]
         public ActionResult<SalaDTO> ObtenerSala(int id)
         {
-            var sala = _salaService.ObtenerSala(id);
-            if (sala == null)
+            try
             {
-                return NotFound(); 
+                var sala = _salaService.ObtenerSala(id);
+                if (sala == null)
+                {
+                    return NotFound();
+                }
+                return Ok(sala);
             }
-            return Ok(sala); 
+            catch (Exception ex)
+            {
+                return BadRequest($"error al obtener sala con id'{id}': {ex.Message}");
+            }
         }
 
         [HttpPost]
         public IActionResult CrearSala([FromBody] SalaCrearDTO salaCrearDTO)
         {
-            _salaService.CrearSala(salaCrearDTO);
-            return Ok("Sala creada correctamente"); 
+            if (salaCrearDTO == null)
+            {
+                return BadRequest("no se han mandado datos");
+            }
+            try
+            {
+                _salaService.CrearSala(salaCrearDTO);
+                return Ok("sala creada ");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"error en la creacion {ex.Message}");
+            }
         }
     }
 }

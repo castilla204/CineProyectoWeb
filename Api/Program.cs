@@ -39,7 +39,7 @@ builder.Services.AddSwaggerGen(c =>
 
 
 
-builder.Services.AddDbContext<PeliculaContext>(options =>
+builder.Services.AddDbContext<Context>(options =>
 options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<ISesionData, SesionData>();

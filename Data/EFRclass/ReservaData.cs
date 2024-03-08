@@ -7,9 +7,9 @@ namespace ApiPeliculas.Data
 
     public class ReservaData : IReservaData
     {
-        private readonly PeliculaContext _context;
+        private readonly Context _context;
 
-        public ReservaData(PeliculaContext context)
+        public ReservaData(Context context)
         {
             _context = context;
         }

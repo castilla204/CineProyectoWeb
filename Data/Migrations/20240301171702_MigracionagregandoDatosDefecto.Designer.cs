@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
-    [DbContext(typeof(PeliculaContext))]
+    [DbContext(typeof(Context))]
     [Migration("20240301171702_MigracionagregandoDatosDefecto")]
     partial class MigracionagregandoDatosDefecto
     {

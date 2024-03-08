@@ -4,8 +4,8 @@ namespace ApiPeliculas.Data{
 
     public class SalaData: ISalaData{
     
-    private readonly PeliculaContext _context;
-    public SalaData(PeliculaContext context){
+    private readonly Context _context;
+    public SalaData(Context context){
         _context=context;
     }
 
