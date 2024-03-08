@@ -13,8 +13,14 @@ var connectionStringKey="ServerDB_Docker";
 connectionStringKey = isRunningInDocker ? "ServerDB_Docker" : "ServerDB_Local";
 var connectionString = builder.Configuration.GetConnectionString(connectionStringKey);
 
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;// Gracias a esta linea las relacciones Circulares no se producen
+    });
 
-builder.Services.AddControllers();
+
+
 //Permite las solicitudes desde la url que pongas
  builder.Services.AddCors(options =>
         {
@@ -32,8 +38,14 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
+
+
 builder.Services.AddDbContext<PeliculaContext>(options =>
-    options.UseSqlServer(connectionString));
+options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<ISesionData, SesionData>();
+builder.Services.AddScoped<ISesionService, SesionService>();
+
 
 builder.Services.AddScoped<IButacaData, ButacaData>();
 builder.Services.AddScoped<IButacaService, ButacaService>();

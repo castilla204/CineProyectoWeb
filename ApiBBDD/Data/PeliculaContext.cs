@@ -2,6 +2,7 @@ using System;
 using ApiPeliculas.Modelos;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace ApiPeliculas.Data
 {
     public class PeliculaContext : DbContext
@@ -9,6 +10,12 @@ namespace ApiPeliculas.Data
         public PeliculaContext(DbContextOptions<PeliculaContext> options) : base(options)
         {
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies(false);
+            // optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); // Limitar la profundidad de carga
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Pelicula>().HasData(
