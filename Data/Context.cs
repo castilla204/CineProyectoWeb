@@ -309,7 +309,7 @@ namespace ApiPeliculas.Data
                 }
             }
             modelBuilder.Entity<Butaca>().HasData(butacas);
-            //
+
 
 
 
@@ -319,16 +319,16 @@ namespace ApiPeliculas.Data
             modelBuilder.Entity<Usuario>().HasData(
                 new Usuario{
                     UsuarioID=1,
-                    Nombre="Juan",
-                    CorreoElectronico="Alonsoalvira@gmail.com",
-                    Contrasena="1234",
+                    Nombre="diego",
+                    CorreoElectronico="a26865@svalero.com",
+                    Contrasena="00e48a815525529ba9d33f8761a167588fe00c47bc82f515cf791c482ed99ecc",
                     Rol=RolAlumno.Administrador
                 },
                     new Usuario{
                     UsuarioID=2,
                     Nombre="admin",
                     CorreoElectronico="admin@gmail.com",
-                    Contrasena="admin",
+                    Contrasena="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
                     Rol=RolAlumno.Administrador
                 }
 
@@ -398,42 +398,42 @@ namespace ApiPeliculas.Data
                 .HasMany(s => s.Sesiones)
                 .WithOne(se => se.Sala)
                 .HasForeignKey(se => se.SalaID)
-                .OnDelete(DeleteBehavior.Restrict); // Prevenir ciclos en cascada
+                .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminacion en cascada.
 
             // Sala -> Butacas
             modelBuilder.Entity<Sala>()
                 .HasMany(s => s.Butacas)
                 .WithOne(b => b.Sala)
                 .HasForeignKey(b => b.SalaID)
-                .OnDelete(DeleteBehavior.Restrict); // Prevenit ciclos en cascada
+                .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminacion en cascada.
 
             // Película -> Sesiones
             modelBuilder.Entity<Pelicula>()
                 .HasMany(p => p.Sesiones)
                 .WithOne(se => se.Pelicula)
                 .HasForeignKey(se => se.PeliculaID)
-                .OnDelete(DeleteBehavior.Restrict); // Prevenir ciclos en cascada
+                .OnDelete(DeleteBehavior.Cascade); // De esta forma tambien eliminamos las sesiones de la pelicula al borrar esta.
 
             // Sesión -> Reservas
             modelBuilder.Entity<Sesion>()
                 .HasMany(se => se.Reservas)
                 .WithOne(r => r.Sesion)
                 .HasForeignKey(r => r.SesionID)
-                .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminación en cascada de reservas
+                .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminacion en cascada de reservas.
 
             // Butaca -> Reservas
             modelBuilder.Entity<Butaca>()
                 .HasMany(b => b.ReservaButacas)
                 .WithOne(r => r.Butaca)
                 .HasForeignKey(r => r.ButacaID)
-                .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminación en cascada de reservas
+                .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminación en cascada de reservas.
 
             // Usuario -> Reservas
             modelBuilder.Entity<Usuario>()
                 .HasMany(u => u.Reservas)
                 .WithOne(r => r.Usuario)
                 .HasForeignKey(r => r.UsuarioID)
-                .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminación en cascada de reservas
+                .OnDelete(DeleteBehavior.Restrict); // Prevenir eliminación en cascada de reservas.
 
 
             //Relaccion muchos a miuchos desde Reserva a Butaca
@@ -442,7 +442,7 @@ namespace ApiPeliculas.Data
                     .WithMany(r => r.ReservaButacas)
                     .HasForeignKey(rb => rb.ReservaID);
 
-            // Relaccion uno a muchos desde Butaca hacia ReservaButaca, 
+            // Relaccion uno a muchos desde Butaca hacia ReservaButaca.
              modelBuilder.Entity<ReservaButaca>()
                     .HasOne(rb => rb.Butaca)
                     .WithMany(b => b.ReservaButacas)

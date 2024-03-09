@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240301172435_MigracionDatosPorDefecto")]
-    partial class MigracionDatosPorDefecto
+    [Migration("20240309165523_MigracionInicial")]
+    partial class MigracionInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1739,15 +1739,15 @@ namespace Data.Migrations
                         new
                         {
                             UsuarioID = 1,
-                            Contrasena = "1234",
-                            CorreoElectronico = "Alonsoalvira@gmail.com",
-                            Nombre = "Juan",
+                            Contrasena = "00e48a815525529ba9d33f8761a167588fe00c47bc82f515cf791c482ed99ecc",
+                            CorreoElectronico = "a26865@svalero.com",
+                            Nombre = "diego",
                             Rol = 1
                         },
                         new
                         {
                             UsuarioID = 2,
-                            Contrasena = "admin",
+                            Contrasena = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
                             CorreoElectronico = "admin@gmail.com",
                             Nombre = "admin",
                             Rol = 1

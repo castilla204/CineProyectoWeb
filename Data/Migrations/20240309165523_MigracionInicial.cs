@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class ReservaButacaMuchosAMuchos : Migration
+    public partial class MigracionInicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -156,16 +156,16 @@ namespace Data.Migrations
                 columns: new[] { "PeliculaID", "Actores", "Descripcion", "Director", "Imagen", "Titulo" },
                 values: new object[,]
                 {
-                    { 1, "Philipe Marcus", "Es una película de acción y ciencia ficción dirigida por Jon Turteltaub y estrenada en 2018. La trama gira en torno a un grupo de científicos que deben detener a un megalodón.", "Jon Turtle", "1.jpg", "THE MEG 2" },
-                    { 2, "Martin Scorsese", "Es una película de ciencia ficción española dirigida por Galder Gaztelu-Urrutia, lanzada en 2019. La película se centra en un centro de reclusión vertical donde los prisioneros están dispuestos en celdas apiladas, y una plataforma de comida desciende a través de los niveles, dejando a los prisioneros de los niveles superiores con menos comida.", "Galder Gaztelu-Urrutia", "2.png", "EL HOYO" },
-                    { 3, "Leonardo DiCaprio", "En el colorido Reino Champiñón, Mario y Luigi disfrutan de una vida tranquila como fontaneros hasta que un día, Bowser, el rey de los Koopas, lanza un malévolo plan para robar todos los champiñones mágicos del reino.", "Martin Scorsese", "3.png", "SUPER MARIO BROS" },
-                    { 4, "Meryl Streep", "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'.", "Quentin Tarantino", "4.png", "GRAN TURISMO" },
-                    { 5, "Philipe Marcus", "Es una película de acción y ciencia ficción dirigida por Jon Turteltaub y estrenada en 2018. La trama gira en torno a un grupo de científicos que deben detener a un megalodón.", "Alfred Hitchcock", "5.jpg", "THE MEG 2" },
-                    { 6, "Julia Roberts", "Es una película de ciencia ficción española dirigida por Galder Gaztelu-Urrutia, lanzada en 2019. La película se centra en un centro de reclusión vertical donde los prisioneros están dispuestos en celdas apiladas, y una plataforma de comida desciende a través de los niveles, dejando a los prisioneros de los niveles superiores con menos comida.", "Ben Wheatley", "6.png", "EL HOYO" },
-                    { 7, "Leonardo DiCaprio", "En el colorido Reino Champiñón, Mario y Luigi disfrutan de una vida tranquila como fontaneros hasta que un día, Bowser, el rey de los Koopas, lanza un malévolo plan para robar todos los champiñones mágicos del reino.", "Alfred Hitchcock", "7.png", "SUPER MARIO BROS" },
-                    { 8, "Meryl Streep", "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'.", "Quentin Tarantino", "8.png", "GRAN TURISMO" },
-                    { 9, "Leonardo DiCaprio", "En el colorido Reino Champiñón, Mario y Luigi disfrutan de una vida tranquila como fontaneros hasta que un día, Bowser, el rey de los Koopas, lanza un malévolo plan para robar todos los champiñones mágicos del reino.", "Ben Wheatley", "9.png", "SUPERMARIO BROS" },
-                    { 10, "Meryl Streep", "Un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'.", "Quentin Tarantino", "10.png", "GRAN TURISMO" }
+                    { 1, "Jason Statham, Li Bingbing", "En esta emocionante secuela, Jason Statham regresa como el experto buceador Jonas Taylor, enfrentándose una vez más al megalodón, el gigantesco tiburón prehistórico. La historia lleva a los personajes a nuevas y aterradoras profundidades en una trinchera inexplorada del océano, donde los secretos oscuros y peligros mortales aguardan en las sombrías aguas.", "John Smith", "1.jpg", "THE MEG 2: THE TRENCH" },
+                    { 2, "Iván Massagué, Antonia San Juan", "En un futuro distópico, 'El Hoyo' presenta una sociedad encerrada en una estructura vertical, donde los niveles determinan tu supervivencia. Los residentes luchan por su subsistencia mientras la comida desciende de los niveles superiores, dejando a los de abajo con menos y menos. La película explora temas de clase, sociedad y humanidad en un entorno inquietantemente claustrofóbico.", "Galder Gaztelu-Urrutia", "2.png", "EL HOYO" },
+                    { 3, "Antonio Banderas, Penélope Cruz", "Basada en el emblemático videojuego, 'Gran Turismo' narra la historia de un joven y talentoso piloto que pasa de las carreras virtuales a las competiciones reales. Bajo la tutela de un veterano piloto, interpretado por Antonio Banderas, el protagonista enfrentará desafíos tanto en la pista como en su vida personal, en una historia llena de velocidad, pasión y superación.", "Carlos Ruiz", "3.png", "GRAN TURISMO" },
+                    { 4, "George MacKay, Dean-Charles Chapman", "Ambientada en el apogeo de la Primera Guerra Mundial, '1917' sigue a dos soldados británicos en una misión aparentemente imposible que podría salvar miles de vidas. Dirigida con un estilo visual impresionante que simula una toma continua, la película sumerge a los espectadores en la intensidad y desesperación del frente de batalla, destacando el heroísmo, la amistad y la humanidad en tiempos de guerra.", "Sam Mendes", "4.png", "1917" },
+                    { 5, "Timothée Chalamet, Zendaya", "En un futuro lejano donde los planetas son gobernados por casas nobiliarias, 'Dune' sigue a Paul Atreides, cuya familia asume el control del planeta desértico Arrakis, fuente del recurso más valioso del universo. Entre conflictos políticos, religiosos y culturales, Paul debe navegar por un terreno peligroso para asegurar el futuro de su familia y su pueblo.", "Denis Villeneuve", "5.jpg", "DUNE" },
+                    { 6, "Song Kang-ho, Choi Woo-shik", "'Parásitos' es una incisiva crítica social disfrazada de comedia negra, donde dos familias de distintas clases sociales en Corea del Sur se entrelazan en un complejo juego de engaños y ambición. La película analiza la disparidad económica y las pretensiones sociales con una narrativa ingeniosa y giros inesperados, llevando a los espectadores a cuestionar las verdaderas intenciones de cada personaje.", "Bong Joon Ho", "6.png", "PARÁSITOS" },
+                    { 7, "Chris Pratt, Jack Black", "La clásica franquicia de videojuegos cobra vida en 'Super Mario Bros', una aventura cinematográfica que sigue a Mario y Luigi en su misión para salvar al Reino Champiñón de la tiranía de Bowser. A través de mundos vibrantes y llenos de desafíos, los hermanos plomeros enfrentarán obstáculos y resolverán acertijos, demostrando el poder de la amistad y el coraje. Un homenaje lleno de acción y humor a la icónica serie de juegos.", "Roberto Gómez", "7.png", "SUPER MARIO BROS" },
+                    { 8, "Robert De Niro, Al Pacino", "Esta épica del crimen organizado, dirigida por el legendario Martin Scorsese, narra la vida de Frank Sheeran, un veterano de guerra que se convierte en sicario de la mafia. 'El Irlandés' explora los oscuros recovecos del crimen organizado en el siglo XX, las conexiones políticas y la desaparición del sindicalista Jimmy Hoffa. Un profundo estudio de personajes y un viaje a través de la historia americana, contado con la maestría narrativa de Scorsese.", "Martin Scorsese", "8.png", "EL IRLANDÉS" },
+                    { 9, "Joaquin Phoenix, Robert De Niro", "'Joker' ofrece una nueva mirada al icónico villano de Gotham, explorando su origen y su transformación de Arthur Fleck, un hombre ignorado por la sociedad, en el maestro del caos. La película se sumerge en la psicología de su personaje, retratando una sociedad fracturada que ignora a los marginados y crea sus propios monstruos. Un poderoso drama psicológico que desafía las convenciones del género de superhéroes.", "Todd Phillips", "9.png", "JOKER" },
+                    { 10, "Daniel Craig, Rami Malek", "Daniel Craig regresa como James Bond en 'Sin Tiempo Para Morir', donde el espía se enfrenta a uno de sus desafíos más peligrosos. Retirado del servicio activo, Bond es arrastrado de vuelta al mundo del espionaje cuando un científico es secuestrado, llevándolo al rastro de un misterioso villano armado con una nueva y peligrosa tecnología. La película promete ser un emocionante capítulo final para el icónico personaje, lleno de acción, traición y revelaciones.", "Cary Joji Fukunaga", "10.png", "SIN TIEMPO PARA MORIR" }
                 });
 
             migrationBuilder.InsertData(
@@ -174,13 +174,19 @@ namespace Data.Migrations
                 values: new object[,]
                 {
                     { 1, "Sala 1" },
-                    { 2, "Sala 2" }
+                    { 2, "Sala 2" },
+                    { 3, "Sala 3" },
+                    { 4, "Sala 4" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
                 columns: new[] { "UsuarioID", "Contrasena", "CorreoElectronico", "Nombre", "Rol" },
-                values: new object[] { 1, "1234", "Alonsoalvira@gmail.com", "Juan", 1 });
+                values: new object[,]
+                {
+                    { 1, "00e48a815525529ba9d33f8761a167588fe00c47bc82f515cf791c482ed99ecc", "a26865@svalero.com", "diego", 1 },
+                    { 2, "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "admin@gmail.com", "admin", 1 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Butacas",
@@ -320,7 +326,148 @@ namespace Data.Migrations
                     { 117, 2 },
                     { 118, 2 },
                     { 119, 2 },
-                    { 120, 2 }
+                    { 120, 2 },
+                    { 121, 3 },
+                    { 122, 3 },
+                    { 123, 3 },
+                    { 124, 3 },
+                    { 125, 3 },
+                    { 126, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Butacas",
+                columns: new[] { "ButacaID", "SalaID" },
+                values: new object[,]
+                {
+                    { 127, 3 },
+                    { 128, 3 },
+                    { 129, 3 },
+                    { 130, 3 },
+                    { 131, 3 },
+                    { 132, 3 },
+                    { 133, 3 },
+                    { 134, 3 },
+                    { 135, 3 },
+                    { 136, 3 },
+                    { 137, 3 },
+                    { 138, 3 },
+                    { 139, 3 },
+                    { 140, 3 },
+                    { 141, 3 },
+                    { 142, 3 },
+                    { 143, 3 },
+                    { 144, 3 },
+                    { 145, 3 },
+                    { 146, 3 },
+                    { 147, 3 },
+                    { 148, 3 },
+                    { 149, 3 },
+                    { 150, 3 },
+                    { 151, 3 },
+                    { 152, 3 },
+                    { 153, 3 },
+                    { 154, 3 },
+                    { 155, 3 },
+                    { 156, 3 },
+                    { 157, 3 },
+                    { 158, 3 },
+                    { 159, 3 },
+                    { 160, 3 },
+                    { 161, 3 },
+                    { 162, 3 },
+                    { 163, 3 },
+                    { 164, 3 },
+                    { 165, 3 },
+                    { 166, 3 },
+                    { 167, 3 },
+                    { 168, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Butacas",
+                columns: new[] { "ButacaID", "SalaID" },
+                values: new object[,]
+                {
+                    { 169, 3 },
+                    { 170, 3 },
+                    { 171, 3 },
+                    { 172, 3 },
+                    { 173, 3 },
+                    { 174, 3 },
+                    { 175, 3 },
+                    { 176, 3 },
+                    { 177, 3 },
+                    { 178, 3 },
+                    { 179, 3 },
+                    { 180, 3 },
+                    { 181, 4 },
+                    { 182, 4 },
+                    { 183, 4 },
+                    { 184, 4 },
+                    { 185, 4 },
+                    { 186, 4 },
+                    { 187, 4 },
+                    { 188, 4 },
+                    { 189, 4 },
+                    { 190, 4 },
+                    { 191, 4 },
+                    { 192, 4 },
+                    { 193, 4 },
+                    { 194, 4 },
+                    { 195, 4 },
+                    { 196, 4 },
+                    { 197, 4 },
+                    { 198, 4 },
+                    { 199, 4 },
+                    { 200, 4 },
+                    { 201, 4 },
+                    { 202, 4 },
+                    { 203, 4 },
+                    { 204, 4 },
+                    { 205, 4 },
+                    { 206, 4 },
+                    { 207, 4 },
+                    { 208, 4 },
+                    { 209, 4 },
+                    { 210, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Butacas",
+                columns: new[] { "ButacaID", "SalaID" },
+                values: new object[,]
+                {
+                    { 211, 4 },
+                    { 212, 4 },
+                    { 213, 4 },
+                    { 214, 4 },
+                    { 215, 4 },
+                    { 216, 4 },
+                    { 217, 4 },
+                    { 218, 4 },
+                    { 219, 4 },
+                    { 220, 4 },
+                    { 221, 4 },
+                    { 222, 4 },
+                    { 223, 4 },
+                    { 224, 4 },
+                    { 225, 4 },
+                    { 226, 4 },
+                    { 227, 4 },
+                    { 228, 4 },
+                    { 229, 4 },
+                    { 230, 4 },
+                    { 231, 4 },
+                    { 232, 4 },
+                    { 233, 4 },
+                    { 234, 4 },
+                    { 235, 4 },
+                    { 236, 4 },
+                    { 237, 4 },
+                    { 238, 4 },
+                    { 239, 4 },
+                    { 240, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -329,7 +476,41 @@ namespace Data.Migrations
                 values: new object[,]
                 {
                     { 1, new DateTime(2024, 2, 29, 21, 30, 0, 0, DateTimeKind.Unspecified), 1, 1 },
-                    { 2, new DateTime(2024, 2, 28, 19, 0, 0, 0, DateTimeKind.Unspecified), 2, 2 }
+                    { 2, new DateTime(2024, 3, 1, 15, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 },
+                    { 3, new DateTime(2024, 3, 2, 18, 0, 0, 0, DateTimeKind.Unspecified), 1, 2 },
+                    { 4, new DateTime(2024, 3, 1, 20, 0, 0, 0, DateTimeKind.Unspecified), 2, 3 },
+                    { 5, new DateTime(2024, 3, 2, 16, 0, 0, 0, DateTimeKind.Unspecified), 2, 4 },
+                    { 6, new DateTime(2024, 3, 1, 19, 0, 0, 0, DateTimeKind.Unspecified), 3, 1 },
+                    { 7, new DateTime(2024, 3, 1, 22, 0, 0, 0, DateTimeKind.Unspecified), 3, 2 },
+                    { 8, new DateTime(2024, 3, 2, 20, 0, 0, 0, DateTimeKind.Unspecified), 3, 3 },
+                    { 9, new DateTime(2024, 3, 3, 17, 0, 0, 0, DateTimeKind.Unspecified), 3, 4 },
+                    { 10, new DateTime(2024, 3, 2, 19, 0, 0, 0, DateTimeKind.Unspecified), 4, 1 },
+                    { 11, new DateTime(2024, 3, 3, 20, 0, 0, 0, DateTimeKind.Unspecified), 4, 2 },
+                    { 12, new DateTime(2024, 3, 2, 21, 0, 0, 0, DateTimeKind.Unspecified), 5, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Sesiones",
+                columns: new[] { "SesionID", "FechaHora", "PeliculaID", "SalaID" },
+                values: new object[,]
+                {
+                    { 13, new DateTime(2024, 3, 3, 18, 0, 0, 0, DateTimeKind.Unspecified), 5, 4 },
+                    { 14, new DateTime(2024, 3, 1, 20, 0, 0, 0, DateTimeKind.Unspecified), 6, 1 },
+                    { 15, new DateTime(2024, 3, 2, 17, 0, 0, 0, DateTimeKind.Unspecified), 6, 2 },
+                    { 16, new DateTime(2024, 3, 1, 17, 0, 0, 0, DateTimeKind.Unspecified), 7, 3 },
+                    { 17, new DateTime(2024, 3, 2, 19, 0, 0, 0, DateTimeKind.Unspecified), 7, 4 },
+                    { 18, new DateTime(2024, 3, 1, 18, 0, 0, 0, DateTimeKind.Unspecified), 8, 1 },
+                    { 19, new DateTime(2024, 3, 2, 19, 0, 0, 0, DateTimeKind.Unspecified), 8, 2 },
+                    { 20, new DateTime(2024, 3, 3, 20, 0, 0, 0, DateTimeKind.Unspecified), 8, 3 },
+                    { 21, new DateTime(2024, 3, 4, 17, 0, 0, 0, DateTimeKind.Unspecified), 8, 4 },
+                    { 22, new DateTime(2024, 3, 2, 18, 0, 0, 0, DateTimeKind.Unspecified), 9, 1 },
+                    { 23, new DateTime(2024, 3, 3, 19, 0, 0, 0, DateTimeKind.Unspecified), 9, 2 },
+                    { 24, new DateTime(2024, 3, 4, 20, 0, 0, 0, DateTimeKind.Unspecified), 9, 3 },
+                    { 25, new DateTime(2024, 3, 5, 17, 0, 0, 0, DateTimeKind.Unspecified), 9, 4 },
+                    { 26, new DateTime(2024, 3, 3, 18, 0, 0, 0, DateTimeKind.Unspecified), 10, 1 },
+                    { 27, new DateTime(2024, 3, 4, 19, 0, 0, 0, DateTimeKind.Unspecified), 10, 2 },
+                    { 28, new DateTime(2024, 3, 5, 20, 0, 0, 0, DateTimeKind.Unspecified), 10, 3 },
+                    { 29, new DateTime(2024, 3, 6, 17, 0, 0, 0, DateTimeKind.Unspecified), 10, 4 }
                 });
 
             migrationBuilder.InsertData(

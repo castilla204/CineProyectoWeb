@@ -4,7 +4,6 @@ using ApiPeliculas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,10 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240301171702_MigracionagregandoDatosDefecto")]
-    partial class MigracionagregandoDatosDefecto
+    partial class ContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1281,7 +1279,7 @@ namespace Data.Migrations
                         {
                             PeliculaID = 1,
                             Actores = "Jason Statham, Li Bingbing",
-                            Descripcion = "Secuela de la película de suspenso y acción submarina enfrentando a un megalodón prehistórico.",
+                            Descripcion = "En esta emocionante secuela, Jason Statham regresa como el experto buceador Jonas Taylor, enfrentándose una vez más al megalodón, el gigantesco tiburón prehistórico. La historia lleva a los personajes a nuevas y aterradoras profundidades en una trinchera inexplorada del océano, donde los secretos oscuros y peligros mortales aguardan en las sombrías aguas.",
                             Director = "John Smith",
                             Imagen = "1.jpg",
                             Titulo = "THE MEG 2: THE TRENCH"
@@ -1290,7 +1288,7 @@ namespace Data.Migrations
                         {
                             PeliculaID = 2,
                             Actores = "Iván Massagué, Antonia San Juan",
-                            Descripcion = "Drama de ciencia ficción en un inquietante futuro distópico con un nuevo sistema carcelario.",
+                            Descripcion = "En un futuro distópico, 'El Hoyo' presenta una sociedad encerrada en una estructura vertical, donde los niveles determinan tu supervivencia. Los residentes luchan por su subsistencia mientras la comida desciende de los niveles superiores, dejando a los de abajo con menos y menos. La película explora temas de clase, sociedad y humanidad en un entorno inquietantemente claustrofóbico.",
                             Director = "Galder Gaztelu-Urrutia",
                             Imagen = "2.png",
                             Titulo = "EL HOYO"
@@ -1299,7 +1297,7 @@ namespace Data.Migrations
                         {
                             PeliculaID = 3,
                             Actores = "Antonio Banderas, Penélope Cruz",
-                            Descripcion = "Aventura de velocidad y superación, inspirada en el famoso videojuego de carreras.",
+                            Descripcion = "Basada en el emblemático videojuego, 'Gran Turismo' narra la historia de un joven y talentoso piloto que pasa de las carreras virtuales a las competiciones reales. Bajo la tutela de un veterano piloto, interpretado por Antonio Banderas, el protagonista enfrentará desafíos tanto en la pista como en su vida personal, en una historia llena de velocidad, pasión y superación.",
                             Director = "Carlos Ruiz",
                             Imagen = "3.png",
                             Titulo = "GRAN TURISMO"
@@ -1308,7 +1306,7 @@ namespace Data.Migrations
                         {
                             PeliculaID = 4,
                             Actores = "George MacKay, Dean-Charles Chapman",
-                            Descripcion = "Impresionante relato de la Primera Guerra Mundial centrado en una misión imposible de dos soldados.",
+                            Descripcion = "Ambientada en el apogeo de la Primera Guerra Mundial, '1917' sigue a dos soldados británicos en una misión aparentemente imposible que podría salvar miles de vidas. Dirigida con un estilo visual impresionante que simula una toma continua, la película sumerge a los espectadores en la intensidad y desesperación del frente de batalla, destacando el heroísmo, la amistad y la humanidad en tiempos de guerra.",
                             Director = "Sam Mendes",
                             Imagen = "4.png",
                             Titulo = "1917"
@@ -1317,7 +1315,7 @@ namespace Data.Migrations
                         {
                             PeliculaID = 5,
                             Actores = "Timothée Chalamet, Zendaya",
-                            Descripcion = "Épica historia de ciencia ficción sobre la lucha por el recurso más valioso del universo.",
+                            Descripcion = "En un futuro lejano donde los planetas son gobernados por casas nobiliarias, 'Dune' sigue a Paul Atreides, cuya familia asume el control del planeta desértico Arrakis, fuente del recurso más valioso del universo. Entre conflictos políticos, religiosos y culturales, Paul debe navegar por un terreno peligroso para asegurar el futuro de su familia y su pueblo.",
                             Director = "Denis Villeneuve",
                             Imagen = "5.jpg",
                             Titulo = "DUNE"
@@ -1326,7 +1324,7 @@ namespace Data.Migrations
                         {
                             PeliculaID = 6,
                             Actores = "Song Kang-ho, Choi Woo-shik",
-                            Descripcion = "Comedia negra que explora las tensiones de clase a través de la historia de dos familias coreanas.",
+                            Descripcion = "'Parásitos' es una incisiva crítica social disfrazada de comedia negra, donde dos familias de distintas clases sociales en Corea del Sur se entrelazan en un complejo juego de engaños y ambición. La película analiza la disparidad económica y las pretensiones sociales con una narrativa ingeniosa y giros inesperados, llevando a los espectadores a cuestionar las verdaderas intenciones de cada personaje.",
                             Director = "Bong Joon Ho",
                             Imagen = "6.png",
                             Titulo = "PARÁSITOS"
@@ -1335,7 +1333,7 @@ namespace Data.Migrations
                         {
                             PeliculaID = 7,
                             Actores = "Chris Pratt, Jack Black",
-                            Descripcion = "Adaptación cinematográfica de la icónica serie de videojuegos, siguiendo las aventuras de Mario y Luigi.",
+                            Descripcion = "La clásica franquicia de videojuegos cobra vida en 'Super Mario Bros', una aventura cinematográfica que sigue a Mario y Luigi en su misión para salvar al Reino Champiñón de la tiranía de Bowser. A través de mundos vibrantes y llenos de desafíos, los hermanos plomeros enfrentarán obstáculos y resolverán acertijos, demostrando el poder de la amistad y el coraje. Un homenaje lleno de acción y humor a la icónica serie de juegos.",
                             Director = "Roberto Gómez",
                             Imagen = "7.png",
                             Titulo = "SUPER MARIO BROS"
@@ -1344,7 +1342,7 @@ namespace Data.Migrations
                         {
                             PeliculaID = 8,
                             Actores = "Robert De Niro, Al Pacino",
-                            Descripcion = "Crónica de la vida del mafioso Frank Sheeran y su posible implicación en el caso Hoffa.",
+                            Descripcion = "Esta épica del crimen organizado, dirigida por el legendario Martin Scorsese, narra la vida de Frank Sheeran, un veterano de guerra que se convierte en sicario de la mafia. 'El Irlandés' explora los oscuros recovecos del crimen organizado en el siglo XX, las conexiones políticas y la desaparición del sindicalista Jimmy Hoffa. Un profundo estudio de personajes y un viaje a través de la historia americana, contado con la maestría narrativa de Scorsese.",
                             Director = "Martin Scorsese",
                             Imagen = "8.png",
                             Titulo = "EL IRLANDÉS"
@@ -1353,7 +1351,7 @@ namespace Data.Migrations
                         {
                             PeliculaID = 9,
                             Actores = "Joaquin Phoenix, Robert De Niro",
-                            Descripcion = "Estudio profundo del icónico villano de Gotham, explorando su compleja psique y origen.",
+                            Descripcion = "'Joker' ofrece una nueva mirada al icónico villano de Gotham, explorando su origen y su transformación de Arthur Fleck, un hombre ignorado por la sociedad, en el maestro del caos. La película se sumerge en la psicología de su personaje, retratando una sociedad fracturada que ignora a los marginados y crea sus propios monstruos. Un poderoso drama psicológico que desafía las convenciones del género de superhéroes.",
                             Director = "Todd Phillips",
                             Imagen = "9.png",
                             Titulo = "JOKER"
@@ -1362,7 +1360,7 @@ namespace Data.Migrations
                         {
                             PeliculaID = 10,
                             Actores = "Daniel Craig, Rami Malek",
-                            Descripcion = "La última misión de Daniel Craig como James Bond lo lleva a la persecución de un villano enigmático.",
+                            Descripcion = "Daniel Craig regresa como James Bond en 'Sin Tiempo Para Morir', donde el espía se enfrenta a uno de sus desafíos más peligrosos. Retirado del servicio activo, Bond es arrastrado de vuelta al mundo del espionaje cuando un científico es secuestrado, llevándolo al rastro de un misterioso villano armado con una nueva y peligrosa tecnología. La película promete ser un emocionante capítulo final para el icónico personaje, lleno de acción, traición y revelaciones.",
                             Director = "Cary Joji Fukunaga",
                             Imagen = "10.png",
                             Titulo = "SIN TIEMPO PARA MORIR"
@@ -1739,15 +1737,15 @@ namespace Data.Migrations
                         new
                         {
                             UsuarioID = 1,
-                            Contrasena = "1234",
-                            CorreoElectronico = "Alonsoalvira@gmail.com",
-                            Nombre = "Juan",
+                            Contrasena = "00e48a815525529ba9d33f8761a167588fe00c47bc82f515cf791c482ed99ecc",
+                            CorreoElectronico = "a26865@svalero.com",
+                            Nombre = "diego",
                             Rol = 1
                         },
                         new
                         {
                             UsuarioID = 2,
-                            Contrasena = "admin",
+                            Contrasena = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
                             CorreoElectronico = "admin@gmail.com",
                             Nombre = "admin",
                             Rol = 1
@@ -1808,7 +1806,7 @@ namespace Data.Migrations
                     b.HasOne("ApiPeliculas.Modelos.Pelicula", "Pelicula")
                         .WithMany("Sesiones")
                         .HasForeignKey("PeliculaID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ApiPeliculas.Modelos.Sala", "Sala")

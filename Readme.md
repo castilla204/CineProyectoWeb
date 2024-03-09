@@ -7,4 +7,4 @@ docker-compose up --build
 
 
 #Actualizar la base de datos con los cambios realizados
-dotnet ef database update -p ./Data/Data.csproj -s ./Api/Api.csproj
+dotnet ef migrations add MigracionNuevosUusariosAdmin -p ./Data/Data.csproj -s ./Api/Api.csproj
