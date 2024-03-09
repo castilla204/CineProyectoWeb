@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class MigracionInicial : Migration
+    public partial class MigracionNuevosUusariosAdmin : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -185,7 +185,7 @@ namespace Data.Migrations
                 values: new object[,]
                 {
                     { 1, "00e48a815525529ba9d33f8761a167588fe00c47bc82f515cf791c482ed99ecc", "a26865@svalero.com", "diego", 1 },
-                    { 2, "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "admin@gmail.com", "admin", 1 }
+                    { 2, "fc8252c8dc55839967c58b9ad755a59b61b67c13227ddae4bd3f78a38bf394f7", "admin@gmail.com", "admin", 1 }
                 });
 
             migrationBuilder.InsertData(

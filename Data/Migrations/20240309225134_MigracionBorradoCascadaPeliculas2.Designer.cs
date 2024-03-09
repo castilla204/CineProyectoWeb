@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240309165523_MigracionInicial")]
-    partial class MigracionInicial
+    [Migration("20240309225134_MigracionBorradoCascadaPeliculas2")]
+    partial class MigracionBorradoCascadaPeliculas2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1808,7 +1808,7 @@ namespace Data.Migrations
                     b.HasOne("ApiPeliculas.Modelos.Pelicula", "Pelicula")
                         .WithMany("Sesiones")
                         .HasForeignKey("PeliculaID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ApiPeliculas.Modelos.Sala", "Sala")
