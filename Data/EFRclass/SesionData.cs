@@ -8,9 +8,9 @@ namespace ApiPeliculas.Data
 {
     public class SesionData : ISesionData
     {
-        private readonly PeliculaContext _context;
+        private readonly Context _context;
 
-        public SesionData(PeliculaContext context)
+        public SesionData(Context context)
         {
             _context = context;
         }

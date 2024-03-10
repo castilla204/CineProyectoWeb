@@ -8,9 +8,9 @@ namespace ApiPeliculas.Business.Services
     public class PeliculaService: IPeliculaService
     {
         private readonly IPeliculaData _PeliculaData;
-        private readonly PeliculaContext _context;
+        private readonly Context _context;
         
-        public PeliculaService(IPeliculaData PeliculaData, PeliculaContext context)
+        public PeliculaService(IPeliculaData PeliculaData, Context context)
         {
             _context=context;
             _PeliculaData = PeliculaData;

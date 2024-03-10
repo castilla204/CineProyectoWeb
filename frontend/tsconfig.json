@@ -22,10 +22,12 @@
   },
   "include": [
     "src/**/*.ts",
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    "src/shims-vue.d.ts"
   ],
   "exclude": [
     "node_modules",
     "dist"
   ]
+  
 }

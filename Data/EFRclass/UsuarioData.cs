@@ -9,9 +9,9 @@ namespace ApiPeliculas.Data
 {
     public class UsuarioData : IUsuarioData
     {
-        private readonly PeliculaContext _context;
+        private readonly Context _context;
 
-        public UsuarioData(PeliculaContext context)
+        public UsuarioData(Context context)
         {
             _context = context;
         }

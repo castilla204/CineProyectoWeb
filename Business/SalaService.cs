@@ -7,9 +7,9 @@ namespace ApiPeliculas.Business.Services
     public class SalaService : ISalaService
     {
         private readonly ISalaData _salaData;
-        private readonly PeliculaContext _context; 
+        private readonly Context _context; 
 
-        public SalaService(ISalaData salaData, PeliculaContext context)
+        public SalaService(ISalaData salaData, Context context)
         {
             _salaData = salaData;
             _context = context;
