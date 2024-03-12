@@ -1,5 +1,5 @@
-using ApiPeliculas.Modelos;
-namespace ApiPeliculas.Business.Services{
+using ApiCine.Modelos;
+namespace ApiCine.Business.Services{
 public interface IPeliculaService{
 List<PeliculaDTO>ObtenerPeliculas();
 PeliculaDTO ObtenerPelicula(int id);

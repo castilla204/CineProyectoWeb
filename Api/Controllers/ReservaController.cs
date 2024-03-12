@@ -1,19 +1,22 @@
-using ApiPeliculas.Business.Services;
-using ApiPeliculas.Modelos;
+using ApiCine.Business.Services;
+using ApiCine.Modelos;
+using ApiCine.Api.LogErrores;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace ApiPeliculas.Api.Controllers
+namespace ApiCine.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class ReservaController : ControllerBase
     {
         private readonly IReservaService _reservaService;
+        private readonly ILogErrores _logErrores; 
 
-        public ReservaController(IReservaService reservaService)
+        public ReservaController(IReservaService reservaService, ILogErrores logErrores) 
         {
             _reservaService = reservaService ?? throw new ArgumentNullException(nameof(reservaService));
+            _logErrores = logErrores ?? throw new ArgumentNullException(nameof(logErrores));
         }
 
         [HttpGet]
@@ -26,7 +29,8 @@ namespace ApiPeliculas.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"error al obtener las reservas {ex.Message}");
+                _logErrores.LogError($"Error obteniendo las reservas: {ex.Message}"); 
+                return BadRequest($"Error obteniendo las reservas: {ex.Message}");
             }
         }
 
@@ -38,13 +42,15 @@ namespace ApiPeliculas.Api.Controllers
                 var reserva = _reservaService.ObtenerReservaPorId(id);
                 if (reserva == null)
                 {
-                    return NotFound($"no hay ninguna reserva con ID '{id}'");
+                    _logErrores.LogError($"No hay ninguna reserva con ID '{id}'"); 
+                    return NotFound($"No hay ninguna reserva con ID '{id}'");
                 }
                 return Ok(reserva);
             }
             catch (Exception ex)
             {
-                return BadRequest($"Error obteniendo la reserva'{id}': {ex.Message}");
+                _logErrores.LogError($"Error obteniendo la reserva '{id}': {ex.Message}");
+                return BadRequest($"Error obteniendo la reserva '{id}': {ex.Message}");
             }
         }
 
@@ -54,11 +60,12 @@ namespace ApiPeliculas.Api.Controllers
             try
             {
                 _reservaService.CrearReserva(reservaCrearDTO);
-                return Ok(new { message = "Reserva creada con exito" });
+                return Ok(new { message = "Reserva creada con éxito" });
             }
             catch (Exception ex)
             {
-                return BadRequest($"error creacion reserva {ex.Message}");
+                _logErrores.LogError($"Error creando reserva: {ex.Message}"); 
+                return BadRequest($"Error creando reserva: {ex.Message}");
             }
         }
 
@@ -68,11 +75,12 @@ namespace ApiPeliculas.Api.Controllers
             try
             {
                 _reservaService.ActualizarReserva(id, reservaActualizarDTO);
-                return Ok("reserva actualizada");
+                return Ok("Reserva actualizada con éxito");
             }
             catch (Exception ex)
             {
-                return BadRequest($"error actualizando reserva con ID '{id}': {ex.Message}");
+                _logErrores.LogError($"Error actualizando reserva con ID '{id}': {ex.Message}"); 
+                return BadRequest($"Error actualizando reserva con ID '{id}': {ex.Message}");
             }
         }
 
@@ -82,11 +90,12 @@ namespace ApiPeliculas.Api.Controllers
             try
             {
                 _reservaService.EliminarReserva(id);
-                return Ok($"La reserva con ID '{id}' se ha eliminado");
+                return Ok($"La reserva con ID '{id}' ha sido eliminada correctamente");
             }
             catch (Exception ex)
             {
-                return BadRequest($"error eliminando la reserva '{id}': {ex.Message}");
+                _logErrores.LogError($"Error eliminando la reserva con ID '{id}': {ex.Message}"); 
+                return BadRequest($"Error eliminando la reserva con ID '{id}': {ex.Message}");
             }
         }
     }

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using ApiPeliculas.Data;
-using ApiPeliculas.Modelos;
+using ApiCine.Data;
+using ApiCine.Modelos;
 
 
-namespace ApiPeliculas.Business.Services
+namespace ApiCine.Business.Services
 {
     public class PeliculaService: IPeliculaService
     {

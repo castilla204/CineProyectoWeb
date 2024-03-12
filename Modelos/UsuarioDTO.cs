@@ -1,4 +1,4 @@
-namespace ApiPeliculas.Modelos{
+namespace ApiCine.Modelos{
 public class UsuarioDTO
 {
     public int UsuarioID { get; set; }//clave primaria

@@ -1,10 +1,10 @@
-using ApiPeliculas.Data;
-using ApiPeliculas.Modelos;
+using ApiCine.Data;
+using ApiCine.Modelos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ApiPeliculas.Data
+namespace ApiCine.Data
 {
     public class SesionData : ISesionData
     {

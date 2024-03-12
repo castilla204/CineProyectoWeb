@@ -1,6 +1,6 @@
-namespace ApiPeliculas.Data
+namespace ApiCine.Data
 {
-    using ApiPeliculas.Modelos;
+    using ApiCine.Modelos;
     using System.Collections.Generic;
 
     public interface IReservaData

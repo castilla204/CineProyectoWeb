@@ -1,4 +1,4 @@
-namespace ApiPeliculas.Modelos{
+namespace ApiCine.Modelos{
 public class Sesion
 {
     public int SesionID { get; set; }

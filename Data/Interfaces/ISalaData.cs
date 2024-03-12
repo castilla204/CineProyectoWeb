@@ -1,4 +1,4 @@
-using ApiPeliculas.Modelos;
+using ApiCine.Modelos;
 public interface ISalaData{
 
 

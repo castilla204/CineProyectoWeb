@@ -1,6 +1,6 @@
-namespace ApiPeliculas.Data
+namespace ApiCine.Data
 {
-    using ApiPeliculas.Modelos;
+    using ApiCine.Modelos;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;

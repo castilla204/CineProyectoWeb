@@ -1,7 +1,7 @@
-namespace ApiPeliculas.Business.Services
+namespace ApiCine.Business.Services
 {
-    using ApiPeliculas.Modelos;
-    using ApiPeliculas.Data;
+    using ApiCine.Modelos;
+    using ApiCine.Data;
     using System.Collections.Generic;
     using System.Linq;
 

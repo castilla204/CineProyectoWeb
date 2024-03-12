@@ -1,5 +1,5 @@
 using System.Security.Cryptography;
-using ApiPeliculas.Modelos;
+using ApiCine.Modelos;
 
 public interface IPeliculaData{
 

@@ -1,19 +1,22 @@
-using ApiPeliculas.Modelos;
-using ApiPeliculas.Business.Services;
+using ApiCine.Modelos;
+using ApiCine.Business.Services;
+using ApiCine.Api.LogErrores;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace ApiPeliculas.Api.Controllers
+namespace ApiCine.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class PeliculaController : ControllerBase
     {
         private readonly IPeliculaService _peliculaService;
+        private readonly ILogErrores _logErrores;
 
-        public PeliculaController(IPeliculaService peliculaService)
+        public PeliculaController(IPeliculaService peliculaService, ILogErrores logErrores)
         {
             _peliculaService = peliculaService ?? throw new ArgumentNullException(nameof(peliculaService));
+            _logErrores = logErrores ?? throw new ArgumentNullException(nameof(logErrores));
         }
 
         [HttpGet]
@@ -26,7 +29,8 @@ namespace ApiPeliculas.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Error obteniedno las peliculas: {ex.Message}");
+                _logErrores.LogError($"Error obteniendo las películas: {ex.Message}");
+                return BadRequest($"Error obteniendo las películas: {ex.Message}");
             }
         }
 
@@ -38,31 +42,35 @@ namespace ApiPeliculas.Api.Controllers
                 var pelicula = _peliculaService.ObtenerPelicula(id);
                 if (pelicula == null)
                 {
-                    return BadRequest($"no hay ninguna pelicula con ID '{id}'");
+                    _logErrores.LogError($"No hay ninguna película con ID '{id}'");
+                    return NotFound($"No hay ninguna película con ID '{id}'");
                 }
                 return Ok(pelicula);
             }
             catch (Exception ex)
             {
-                return BadRequest($"no existe pelicula con ID '{id}': {ex.Message}");
+                _logErrores.LogError($"Error obteniendo la película con ID {id}: {ex.Message}");
+                return BadRequest($"Error obteniendo la película con ID '{id}': {ex.Message}");
             }
         }
 
         [HttpPost]
-        public IActionResult CrearPelicula([FromBody]PeliculaCrearDTO peliculaDTO)
+        public IActionResult CrearPelicula([FromBody] PeliculaCrearDTO peliculaDTO)
         {
             if (peliculaDTO == null)
             {
-                return BadRequest("No se han pasado datos");
+                _logErrores.LogError("Intento de crear una película sin proporcionar datos");
+                return BadRequest("No se han proporcionado datos para la película");
             }
             try
             {
                 _peliculaService.CrearPelicula(peliculaDTO);
-                return Ok("pelicula añadida");
+                return Ok("Película añadida con éxito");
             }
             catch (Exception ex)
             {
-                return BadRequest($"error creando pelicula {ex.Message}");
+                _logErrores.LogError($"Error creando la película: {ex.Message}");
+                return BadRequest($"Error creando la película: {ex.Message}");
             }
         }
 
@@ -71,16 +79,18 @@ namespace ApiPeliculas.Api.Controllers
         {
             if (peliculaDTO == null)
             {
-                return BadRequest("Datos o Id invalidos");
+                _logErrores.LogError($"Intento de actualizar una película sin datos: ID {id}");
+                return BadRequest("Datos o ID inválidos");
             }
             try
             {
                 _peliculaService.ActualizarPelicula(id, peliculaDTO);
-                return Ok("pelicula actualizada");
+                return Ok("Película actualizada con éxito");
             }
             catch (Exception ex)
             {
-                return BadRequest($"error obteniendo la pelicula {ex.Message}");
+                _logErrores.LogError($"Error actualizando la película con ID {id}: {ex.Message}");
+                return BadRequest($"Error actualizando la película con ID {id}: {ex.Message}");
             }
         }
 
@@ -90,11 +100,12 @@ namespace ApiPeliculas.Api.Controllers
             try
             {
                 _peliculaService.EliminarPelicula(id);
-                return Ok($"la pelicula con ID '{id}' ha sido eliminada correctamente");
+                return Ok($"La película con ID '{id}' ha sido eliminada correctamente");
             }
             catch (Exception ex)
             {
-                return BadRequest($"error eliminando la pelicula: {ex.Message}");
+                _logErrores.LogError($"Error eliminando la película con ID {id}: {ex.Message}");
+                return BadRequest($"Error eliminando la película con ID {id}: {ex.Message}");
             }
         }
     }

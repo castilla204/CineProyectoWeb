@@ -1,6 +1,6 @@
-namespace ApiPeliculas.Business.Services
+namespace ApiCine.Business.Services
 {
-    using ApiPeliculas.Modelos;
+    using ApiCine.Modelos;
     using System.Collections.Generic;
 
     public interface IReservaService

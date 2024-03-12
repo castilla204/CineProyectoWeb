@@ -1,7 +1,7 @@
-using ApiPeliculas.Modelos;
+using ApiCine.Modelos;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiPeliculas.Business.Services{
+namespace ApiCine.Business.Services{
 public class SesionService : ISesionService{
 private readonly ISesionData _sesionData;
 

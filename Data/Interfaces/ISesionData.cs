@@ -1,4 +1,4 @@
-using ApiPeliculas.Modelos;
+using ApiCine.Modelos;
 public interface ISesionData{
 public List<SesionDTO> ObtenerSesionesDTO();
 public SesionDTO ObtenerSesion(int id);

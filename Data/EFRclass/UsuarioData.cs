@@ -1,11 +1,11 @@
-using ApiPeliculas.Modelos;
+using ApiCine.Modelos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ApiPeliculas.Data
+namespace ApiCine.Data
 {
     public class UsuarioData : IUsuarioData
     {

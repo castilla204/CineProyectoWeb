@@ -1,9 +1,9 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
-using ApiPeliculas.Modelos;
+using ApiCine.Modelos;
 
-namespace ApiPeliculas.Business.Services
+namespace ApiCine.Business.Services
 {
     public class UsuarioService : IUsuarioService
     {

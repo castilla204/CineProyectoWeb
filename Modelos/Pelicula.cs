@@ -1,8 +1,8 @@
-using ApiPeliculas.Modelos;
+using ApiCine.Modelos;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace ApiPeliculas.Modelos{
+namespace ApiCine.Modelos{
 public class Pelicula
 {
 
