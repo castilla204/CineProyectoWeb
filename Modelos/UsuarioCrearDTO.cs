@@ -1,4 +1,4 @@
-namespace ApiPeliculas.Modelos{
+namespace ApiCine.Modelos{
 public class UsuarioCrearDTO{
     public string Nombre { get; set; }
     public string CorreoElectronico { get; set; }

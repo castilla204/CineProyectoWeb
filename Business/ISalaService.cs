@@ -1,5 +1,5 @@
-namespace ApiPeliculas.Business.Services{
-using ApiPeliculas.Modelos;
+namespace ApiCine.Business.Services{
+using ApiCine.Modelos;
 public interface ISalaService{
 
     public List<SalaDTO> ObtenerSalas();

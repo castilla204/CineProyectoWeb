@@ -1,4 +1,4 @@
-namespace ApiPeliculas.Modelos
+namespace ApiCine.Modelos
 {
     public class ReservaCrearDTO
     {

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using ApiPeliculas.Data;
-using ApiPeliculas.Modelos;
+using ApiCine.Data;
+using ApiCine.Modelos;
 
 
-namespace ApiPeliculas.Business.Services
+namespace ApiCine.Business.Services
 {
     public class PeliculaService: IPeliculaService
     {
@@ -24,6 +24,10 @@ public List<PeliculaDTO> ObtenerPeliculas()
 
 public PeliculaDTO ObtenerPelicula(int id){
    return  _PeliculaData.ObtenerPelicula(id);
+}
+
+public List<PeliculaSesionesDTO> ObtenerPeliculaSesiones(int id){
+    return _PeliculaData.ObtenerPeliculaSesiones(id);
 }
 
 public void EliminarPelicula(int id){

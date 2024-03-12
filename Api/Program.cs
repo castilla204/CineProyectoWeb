@@ -1,9 +1,10 @@
-using ApiPeliculas.Data;
-using ApiPeliculas.Business.Services;
+using ApiCine.Data;
+using ApiCine.Business.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using ApiPeliculas.Modelos;
+using ApiCine.Modelos;
+using ApiCine.Api.LogErrores;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +61,9 @@ builder.Services.AddScoped<IReservaService, ReservaService>();
 
 builder.Services.AddScoped<IPeliculaData, PeliculaData>();
 builder.Services.AddScoped<IPeliculaService, PeliculaService>();
+
+builder.Services.AddScoped<ILogErrores, LogErrores>();
+
 
 
 

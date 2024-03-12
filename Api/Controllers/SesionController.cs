@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using ApiPeliculas.Business.Services;
-using ApiPeliculas.Modelos;
+using ApiCine.Business.Services;
+using ApiCine.Modelos;
 using System;
 
 [ApiController]

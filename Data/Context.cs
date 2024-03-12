@@ -1,9 +1,9 @@
 using System;
-using ApiPeliculas.Modelos;
+using ApiCine.Modelos;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace ApiPeliculas.Data
+namespace ApiCine.Data
 {
     public class Context : DbContext
     {

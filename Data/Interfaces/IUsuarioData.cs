@@ -1,4 +1,4 @@
-using ApiPeliculas.Modelos;
+using ApiCine.Modelos;
 public interface IUsuarioData{
 
 public List<UsuarioDTO> ObtenerUsuarios();

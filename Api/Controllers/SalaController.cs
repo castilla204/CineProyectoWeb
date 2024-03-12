@@ -1,9 +1,9 @@
-using ApiPeliculas.Business.Services;
-using ApiPeliculas.Modelos;
+using ApiCine.Business.Services;
+using ApiCine.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace ApiPeliculas.Api.Controllers
+namespace ApiCine.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

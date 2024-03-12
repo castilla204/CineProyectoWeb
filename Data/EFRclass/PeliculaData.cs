@@ -1,10 +1,10 @@
-using ApiPeliculas.Data;
-using ApiPeliculas.Modelos;
+using ApiCine.Data;
+using ApiCine.Modelos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ApiPeliculas.Data
+namespace ApiCine.Data
 {
     public class PeliculaData : IPeliculaData
     {
@@ -46,6 +46,30 @@ namespace ApiPeliculas.Data
             }).FirstOrDefault();
             return peliculaDTO;
         }
+
+        public List<PeliculaSesionesDTO> ObtenerPeliculaSesiones(int id)
+{
+    var peliculaSesionesDTO = _context.Sesiones
+        .Where(s => s.PeliculaID == id)
+        .Select(s => new PeliculaSesionesDTO
+        {
+            SesionID = s.SesionID,
+            FechaHora = s.FechaHora,
+            TituloPelicula = s.Pelicula.Titulo,
+            NombreSala = s.Sala.NombreSala,
+            ImagenPelicula = s.Pelicula.Imagen,
+            DescripcionPelicula = s.Pelicula.Descripcion,
+            ButacasOcupadasIds = s.Reservas
+                                  .SelectMany(r => r.ReservaButacas)
+                                  .Select(rb => rb.ButacaID)
+                                  .ToList()
+        })
+        .ToList();
+
+    return peliculaSesionesDTO;
+}
+
+
         public void CrearPelicula(Pelicula pelicula)
         {
             _context.Peliculas.Add(pelicula);

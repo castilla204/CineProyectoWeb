@@ -1,4 +1,4 @@
-namespace ApiPeliculas.Modelos {
+namespace ApiCine.Modelos {
     public class UsuarioLoginDTO {
         public string Usuario { get; set; } 
         public string PasswordHasheada { get; set; }

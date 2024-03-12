@@ -1,4 +1,4 @@
-namespace ApiPeliculas.Modelos{
+namespace ApiCine.Modelos{
 public class PeliculaDTO
 {
     public int PeliculaID { get; set; }

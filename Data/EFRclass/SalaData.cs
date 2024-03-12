@@ -1,5 +1,5 @@
-namespace ApiPeliculas.Data{
-    using ApiPeliculas.Modelos;
+namespace ApiCine.Data{
+    using ApiCine.Modelos;
     using Microsoft.EntityFrameworkCore;
 
     public class SalaData: ISalaData{
