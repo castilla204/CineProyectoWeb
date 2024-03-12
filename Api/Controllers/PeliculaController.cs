@@ -54,6 +54,15 @@ namespace ApiCine.Api.Controllers
             }
         }
 
+
+
+        [HttpGet("/Sesiones")]
+        public ActionResult <List<PeliculaSesionesDTO>> ObtenerPeliculaSesiones(int id){
+        var sesiones=_peliculaService.ObtenerPeliculaSesiones(id);
+        return Ok(sesiones);
+
+        }
+
         [HttpPost]
         public IActionResult CrearPelicula([FromBody] PeliculaCrearDTO peliculaDTO)
         {

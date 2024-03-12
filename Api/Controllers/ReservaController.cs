@@ -79,7 +79,7 @@ namespace ApiCine.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logErrores.LogError($"Error actualizando reserva con ID '{id}': {ex.Message}"); 
+                _logErrores.LogError($"Error actualizando reserva con ID '{id}': {ex.Message}"); // Usa la dependencia para registrar errores
                 return BadRequest($"Error actualizando reserva con ID '{id}': {ex.Message}");
             }
         }
@@ -94,7 +94,7 @@ namespace ApiCine.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logErrores.LogError($"Error eliminando la reserva con ID '{id}': {ex.Message}"); 
+                _logErrores.LogError($"Error eliminando la reserva con ID '{id}': {ex.Message}"); // Usa la dependencia para registrar errores
                 return BadRequest($"Error eliminando la reserva con ID '{id}': {ex.Message}");
             }
         }

@@ -6,5 +6,6 @@ PeliculaDTO ObtenerPelicula(int id);
 void EliminarPelicula(int id);
 void CrearPelicula(PeliculaCrearDTO peliculaDTO);
 void ActualizarPelicula(int id, PeliculaCrearDTO peliculaDTO);
+List<PeliculaSesionesDTO> ObtenerPeliculaSesiones(int id);
 
 }}
