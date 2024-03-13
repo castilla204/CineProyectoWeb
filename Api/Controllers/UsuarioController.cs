@@ -46,42 +46,14 @@ public class UsuarioController : ControllerBase
     }
 }
 
-    [HttpPost]
-    public IActionResult CrearUsuario([FromBody] UsuarioCrearDTO usuarioDTO)
-    {
-        if (usuarioDTO == null)
-        {
-            return BadRequest("Datos del usuario no proporcionados");
-        }
-        try
-        {
-            _usuarioService.CrearUsuario(usuarioDTO);
-            return Ok("Usuario creado satisfactoriamente");
-        }
-        catch (Exception ex)
-        {
-            return BadRequest($"error en la creacion {ex.Message}");
-        }
-    }
 
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] UsuarioLoginDTO loginDTO)
-    {
-        try
+        [HttpGet("Reservas/{usuarioId}")]
+      public ActionResult<List<UsuarioReservasDTO>> ObtenerUsuarioReservas(int usuarioId)
         {
-            var user = _usuarioService.Login(loginDTO.Usuario, loginDTO.PasswordHasheada);
-            if (user != null)
-            {
-                return Ok(user);
-            }
-            else
-            {
-                return BadRequest("Credenciales no validas");
-            }
+        var reservasUsuario= _usuarioService.ObtenerUsuarioReservas(usuarioId);
+        return Ok(reservasUsuario);
+        
         }
-        catch (Exception ex)
-        {
-            return BadRequest($"error al iniciar sesion {ex.Message}");
-        }
-    }
+
+ 
 }

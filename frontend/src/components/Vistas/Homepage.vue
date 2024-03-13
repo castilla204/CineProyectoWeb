@@ -7,8 +7,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import Cartelera from './Cartelera.vue';
-import PresentacionCine from './PresentacionCine.vue';
+import Cartelera from '../Cartelera.vue';
+import PresentacionCine from '../PresentacionCine.vue';
 
 const componenteCartelera = ref(null as InstanceType<typeof Cartelera> | null);
 

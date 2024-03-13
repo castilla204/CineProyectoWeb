@@ -14,7 +14,7 @@ export const useSesionesStore = defineStore({
       this.sesiones = []; 
       try {
         if (!movieId) throw new Error('ID de la película inválido');
-        const response = await fetch(`http://localhost:8001/Sesion/Pelicula/${movieId}`);
+        const response = await fetch(`http://localhost:8001/Pelicula/Sesiones/${movieId}`);
         if (!response.ok) throw new Error('La respuesta del servidor no es válida');
         const sesionesData = await response.json();
 

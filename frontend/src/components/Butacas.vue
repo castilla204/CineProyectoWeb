@@ -20,7 +20,7 @@
           <path fill="#f4af42" d="M4 9h3v6H4zM17 9h3v6h-3z"/>
         </svg>
       </div>
-      <div class="pantallaCine"></div>
+      <div class="pantallaCine">PANTALLA</div>
       <button @click="realizarReserva" :disabled="butacaSeleccionada.length === 0" class="botonReserva">Reservar</button>
     </div>
   </div>
@@ -69,15 +69,32 @@ const comprobarButaca = (id: number) => {
 
 const realizarReserva = async () => {
   try {
-    await reservaStore.realizarReserva({
-      sesionID: props.sesionID,
-      usuarioID: 1,
-      butacasIds: butacaSeleccionada.value
-    });
-    router.push({ name: 'PaginaPago', params: { sesionID: props.sesionID.toString() } });
+    const usuarioID = obtenerUsuarioIDLocalStorage();
+
+    if (usuarioID !== null) {
+      await reservaStore.realizarReserva({
+        sesionID: props.sesionID,
+        usuarioID: usuarioID,
+        butacasIds: butacaSeleccionada.value
+      });
+    
+      router.push({ name: 'PaginaPago', params: { sesionID: props.sesionID.toString() } });
+    } else {
+      console.error('No se pudo obtener el usuarioID del Local Storage.');
+    }
   } catch (error) {
     console.error('Error al realizar la reserva:', error);
   }
+};
+
+
+const obtenerUsuarioIDLocalStorage = () => {
+  const usuarioString = localStorage.getItem('currentUser');
+  if (usuarioString) {
+    const usuario = JSON.parse(usuarioString);
+    return usuario.usuarioID;
+  }
+  return null;
 };
 </script>
 
@@ -158,6 +175,4 @@ svg {
     height: 80px;
   }
 }
-
-
 </style>

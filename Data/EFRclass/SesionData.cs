@@ -64,27 +64,6 @@ namespace ApiCine.Data
             return sesionDTO;
         }
 
-        public List<SesionDTO> ObtenerSesionesPeli(int IdPelicula)
-        {
-            var sesionesPeliDTO = _context.Sesiones
-                .Where(s => s.PeliculaID == IdPelicula)
-                .Select(s => new SesionDTO
-                {
-                    SesionID = s.SesionID,
-                    FechaHora = s.FechaHora,
-                    TituloPelicula = s.Pelicula.Titulo,
-                    NombreSala = s.Sala.NombreSala,
-                    ImagenPelicula = s.Pelicula.Imagen,
-                    DescripcionPelicula= s.Pelicula.Descripcion,
-                    ButacasOcupadasIds = s.Reservas
-                                          .SelectMany(r => r.ReservaButacas)
-                                          .Select(rb => rb.ButacaID)
-                                          .ToList()
-                })
-                .ToList();
-
-            return sesionesPeliDTO;
-        }
 
         public void CrearSesion(Sesion sesion)
         {

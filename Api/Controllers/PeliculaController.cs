@@ -56,9 +56,9 @@ namespace ApiCine.Api.Controllers
 
 
 
-        [HttpGet("/Sesiones")]
-        public ActionResult <List<PeliculaSesionesDTO>> ObtenerPeliculaSesiones(int id){
-        var sesiones=_peliculaService.ObtenerPeliculaSesiones(id);
+        [HttpGet("Sesiones/{IdPelicula}")]
+        public ActionResult <List<PeliculaSesionesDTO>> ObtenerPeliculaSesiones(int IdPelicula){
+        var sesiones=_peliculaService.ObtenerPeliculaSesiones(IdPelicula);
         return Ok(sesiones);
 
         }

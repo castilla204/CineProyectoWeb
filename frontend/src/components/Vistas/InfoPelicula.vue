@@ -11,10 +11,10 @@
 <script setup lang="ts">
 import { onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { useSesionesStore } from '../store/SesionStore';
-import TituloDescripcionPelicula from './TituloDescripcionPelicula.vue';
-import ImagenPelicula from './ImagenPelicula.vue';
-import SesionesDisponibles from './SesionesDisponibles.vue';
+import { useSesionesStore } from '../../store/SesionStore';
+import TituloDescripcionPelicula from '../TituloDescripcionPelicula.vue';
+import ImagenPelicula from '../ImagenPelicula.vue';
+import SesionesDisponibles from '../SesionesDisponibles.vue';
 
 const router = useRouter();
 const sesionesStore = useSesionesStore();

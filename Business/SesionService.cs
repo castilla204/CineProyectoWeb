@@ -20,9 +20,7 @@ public SesionDTO ObtenerSesion(int id){
     return _sesionData.ObtenerSesion(id);
 }
 
-public List<SesionDTO> ObtenerSesionesPeli(int IdPelicula){
-    return _sesionData.ObtenerSesionesPeli(IdPelicula);
-}
+
 
 public void CrearSesion(SesionCrearDTO sesionDTO){
 var nuevaSesion = new Sesion{

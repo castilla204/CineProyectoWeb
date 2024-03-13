@@ -73,7 +73,8 @@ const redirigirReserva = (sesionID: number) => {
 
 .sesion p {
   margin: 5px 0; 
-  color: #333; 
+  color: #ffffff; 
+  font-family: 'HelveticaThin';
 }
 @media (max-width: 768px) {
   .sesion {

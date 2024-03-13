@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import PaginaRegistroeInicio from './PaginaRegistroeInicio.vue';
+import PaginaRegistroeInicio from '../PaginaRegistroeInicio.vue';
 </script>
 
 <style scoped>

@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import MetodoDePago from './MetodoDePago.vue';
-import BotonComprar from './BotonComprar.vue';
+import MetodoDePago from '../MetodoDePago.vue';
+import BotonComprar from '../BotonComprar.vue';
 </script>
 
 <style scoped>

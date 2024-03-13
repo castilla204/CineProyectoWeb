@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import AccionesApiAdmin from './AccionesApiAdmin.vue';
+import AccionesApiAdmin from '../AccionesApiAdmin.vue';
 </script>
 
 <style scoped>
