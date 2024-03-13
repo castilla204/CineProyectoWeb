@@ -1,10 +1,13 @@
 <template>
   <div class="sesiones-container">
     <h1 id="titulosesiones">Sesiones Disponibles</h1>
-    <div v-for="(sesion, index) in sesiones" :key="sesion.sesionID" class="sesion" :style="{ backgroundColor: ColoresDivSesiones[index % ColoresDivSesiones.length] }" @click="redirigirReserva(sesion.sesionID)">
-      <div class="sesion-info">
-        <p>{{ sesion.fechaHora }}</p>
-        <p>{{ sesion.nombreSala }}</p>
+    <div v-for="(sesion, index) in sesiones" :key="sesion.sesionID">
+      <div v-if="sesion.butacasOcupadas !== 60" class="sesion" :style="{ backgroundColor: ColoresDivSesiones[index % ColoresDivSesiones.length] }" @click="redirigirReserva(sesion.sesionID)">
+        <div class="sesion-info">
+          <p>{{ sesion.fechaHora }}</p>
+          <p>{{ sesion.nombreSala }}</p>
+          <p>Butacas ocupadas: {{ sesion.butacasOcupadas }}/60</p>
+        </div>
       </div>
     </div>
   </div>
@@ -19,6 +22,7 @@ interface Sesion {
   sesionID: number;
   fechaHora: string;
   nombreSala: string;
+  butacasOcupadas: number;
 }
 
 const almacenSesiones = useSesionesStore();

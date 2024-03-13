@@ -23,6 +23,15 @@
       <div class="pantallaCine">PANTALLA</div>
       <button @click="realizarReserva" :disabled="butacaSeleccionada.length === 0" class="botonReserva">Reservar</button>
     </div>
+    <div class="resumen">
+      <div>Resumen Compra</div>
+      <div>Numero de Butacas Seleccionadas: {{ butacaSeleccionada.length }}</div>
+      <div>Butacas elegidas: {{ butacaSeleccionada.join(", ") }}</div>
+      <div>Total: {{ (butacaSeleccionada.length * 7.5).toFixed(2) }}€</div>
+      
+     
+
+    </div>
   </div>
 </template>
 
@@ -86,7 +95,6 @@ const realizarReserva = async () => {
     console.error('Error al realizar la reserva:', error);
   }
 };
-
 
 const obtenerUsuarioIDLocalStorage = () => {
   const usuarioString = localStorage.getItem('currentUser');
@@ -161,8 +169,8 @@ const obtenerUsuarioIDLocalStorage = () => {
 }
 .seleccionada path {
 opacity: 20%;
-fill: blue;}
-
+fill: blue;
+}
 
 svg {
   width: 80px; 
@@ -174,5 +182,14 @@ svg {
     width: 40px; 
     height: 80px;
   }
+}
+
+.resumen {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 </style>

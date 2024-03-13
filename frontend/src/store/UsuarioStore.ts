@@ -23,7 +23,7 @@ interface Reserva {
 
 interface UsuarioState {
   logueado: boolean;
-  currentUser: any; // Puedes ajustar el tipo según la estructura real de tu usuario
+  currentUser: any; 
   reservas: Reserva[];
 }
 
@@ -108,6 +108,7 @@ export const useUsuariosStore = defineStore({
       localStorage.removeItem('logueado');
       localStorage.removeItem('currentUser');
     },
+     
     async cargarReservas() {
       try {
         const response = await fetch(`http://localhost:8001/Usuario/Reservas/${this.currentUser.usuarioID}`);
@@ -123,6 +124,17 @@ export const useUsuariosStore = defineStore({
         console.error('Error al cargar reservas:', error);
         throw error;
       }
+    },
+    CambiarFormatoFechaHora(stringDeDateTime: string) {
+      const opciones: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      };
+      const dateTime = new Date(stringDeDateTime);
+      return dateTime.toLocaleString('es-ES', opciones);
     },
   },
 });

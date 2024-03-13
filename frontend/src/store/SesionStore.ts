@@ -1,3 +1,4 @@
+
 import { defineStore } from 'pinia';
 
 export const useSesionesStore = defineStore({
@@ -22,9 +23,12 @@ export const useSesionesStore = defineStore({
           const { tituloPelicula, descripcionPelicula, imagenPelicula } = sesionesData[0];
           this.pelicula = { titulo: tituloPelicula, descripcion: descripcionPelicula, imagen: imagenPelicula };
         }
+
         this.sesiones = sesionesData.map((sesion: any) => ({
-          ...sesion,
+          sesionID: sesion.sesionID,
           fechaHora: this.CambiarFormatoFechaHora(sesion.fechaHora),
+          nombreSala: sesion.nombreSala,
+          butacasOcupadas: sesion.butacasOcupadasIds.length,
         }));
       } catch (error) {
         console.error('Error obteniendo las sesiones de la película:', error);
