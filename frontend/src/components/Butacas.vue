@@ -60,11 +60,6 @@ const butacas = computed(() => butacaStore.butacas);
 const butacaSeleccionada = ref<number[]>([]);
 const router = useRouter(); 
 
-const obtenerFechaActual = () => {
-  const fecha = new Date();
-  const opcionesFecha: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-  return fecha.toLocaleDateString(undefined, opcionesFecha);
-};
 
 const filas = computed(() => {
   const resultado = [];
@@ -120,7 +115,12 @@ const realizarReserva = async () => {
     
       router.push({ name: 'PaginaPago' });
     } else {
-      console.error('No se pudo obtener el usuarioID del Local Storage.');
+      await reservaStore.realizarReserva({
+        sesionID: props.sesionID,
+        usuarioID: 1,
+        butacasIds: butacaSeleccionada.value
+      });
+      router.push({ name: 'PaginaPagoNologin' });
     }
   } catch (error) {
     console.error('Error al realizar la reserva:', error);

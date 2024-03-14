@@ -8,7 +8,8 @@ import PaginaPago from './components/Vistas/PaginaPago.vue';
 import PaginaLogin from './components/Vistas/PaginaLogin.vue';
 import InfoPelicula from './components/Vistas/InfoPelicula.vue';
 import AdminPage from './components/Vistas/AdminPage.vue'; 
-import PaginaReservasUsuario from './components/Vistas/PaginaReservasUsuario.vue'
+import PaginaReservasUsuario from './components/Vistas/PaginaReservasUsuario.vue';
+import PaginaPagoNologin from  './components/Vistas/PaginaPagoNologin.vue';
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -19,6 +20,8 @@ const routes: Array<RouteRecordRaw> = [
   { path: '/Auth', name: 'PaginaLogin', component: PaginaLogin },
   { path: '/UsuarioReservas', name: 'UsuarioReservas', component: PaginaReservasUsuario },
   { path: '/admin', name: 'AdminPage', component: AdminPage, meta: { necesarioAdmin: true } },
+  { path: '/PaginaPagoNoLogin', name: 'PaginaPagoNologin', component: PaginaPagoNologin },
+  
 ];
 
 
