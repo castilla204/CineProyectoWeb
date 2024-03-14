@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import Butacas from '../components/Butacas.vue';
-import { useReservaStore } from '../store/ReservaStore';
+import Butacas from '../../components/Butacas.vue';
+import { useReservaStore } from '../../store/ReservaStore';
 </script>
 
 <style scoped>

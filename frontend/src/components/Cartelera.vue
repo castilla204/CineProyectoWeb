@@ -1,7 +1,6 @@
 <template>
   <div id="ticketForm">
     <h1 class="titulocartelera">CARTELERA</h1>
-    <p class="subtitulo1cartelera">CINE PARA TODA LA FAMILIA</p>
     <div class="linearoja"></div>
     <div class="contenedorpeliculas">
       <!-- Cargar las primeras 5 películas -->
@@ -14,7 +13,6 @@
       </div>
       <!-- Mostrar el subtitulo si hay más de 5 películas -->
       <div v-if="CargarSubtitulo" class="subtitulo-group">
-        <p class="subtitulo1cartelera">NUEVAS PELÍCULAS</p>
         <div class="linearoja"></div>
       </div>
       <!-- Cargar la segunda fila -->

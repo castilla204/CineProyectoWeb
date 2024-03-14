@@ -46,19 +46,6 @@ public class SesionController : ControllerBase
         }
     }
 
-    [HttpGet("Pelicula/{IdPelicula}")]
-    public ActionResult<List<SesionDTO>> ObtenerSesionesPeli(int IdPelicula)
-    {
-        try
-        {
-            var sesiones = _sesionService.ObtenerSesionesPeli(IdPelicula);
-            return Ok(sesiones);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest($"error obteniendo sesiones pelicula con ID '{IdPelicula}': {ex.Message}");
-        }
-    }
 
     [HttpPost]
     public IActionResult CrearSesion([FromBody] SesionCrearDTO sesionDTO)

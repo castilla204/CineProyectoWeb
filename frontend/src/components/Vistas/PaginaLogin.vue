@@ -1,19 +1,17 @@
 <template>
   <div class="general">
-    <MetodoDePago />
-    <BotonComprar />
+  <PaginaRegistroeInicio />
   </div>
 </template>
 
 <script setup lang="ts">
-import MetodoDePago from './MetodoDePago.vue';
-import BotonComprar from './BotonComprar.vue';
+import PaginaRegistroeInicio from '../PaginaRegistroeInicio.vue';
 </script>
 
 <style scoped>
 .general{
-  padding: 80px;
   height: 100vh;
   background-color: black;
 }
+
 </style>

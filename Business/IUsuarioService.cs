@@ -9,5 +9,6 @@ public interface IUsuarioService{
 
         public void CrearUsuario(UsuarioCrearDTO usuarioDTO);
         public UsuarioDTO Login(string usuario, string passwordHasheada);
+        public List<UsuarioReservasDTO> ObtenerUsuarioReservas(int usuarioId);
     
 }}

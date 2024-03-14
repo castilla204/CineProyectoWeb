@@ -37,6 +37,12 @@ namespace ApiCine.Business.Services
             _usuarioData.CrearUsuario(nuevoUsuario);
         }
 
+         public List<UsuarioReservasDTO> ObtenerUsuarioReservas(int usuarioId)
+        {
+        return _usuarioData.ObtenerUsuarioReservas(usuarioId);
+        }
+
+
        public UsuarioDTO Login(string usuario, string passwordHasheada)
         {
             return _usuarioData.Login(usuario, passwordHasheada);

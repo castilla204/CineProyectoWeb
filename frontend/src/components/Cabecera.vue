@@ -8,10 +8,10 @@
         <img src="/multimedia/menu.png" alt="Menú" />
       </button>
       <ul :class="{'right': true, 'show': menuAbierto}">
-        <li><router-link to="/" class="promo">Promos</router-link></li>
         <li><router-link to="/" class="pelis">Películas</router-link></li>
-        <li><router-link to="/" class="billetes">Boletos</router-link></li>
         <li v-if="!usuariologueado"><router-link to="/Auth" class="login">Iniciar sesión</router-link></li>
+        <li v-if="usuariologueado"><router-link to="/UsuarioReservas" class="login">Mis Entradas</router-link></li>
+
         <li v-if="usuariologueado"><span class="user">Bienvenido, {{ currentUser.nombre }}</span></li>
         <li v-if="usuariologueado && currentUser.rol === 1"><router-link to="/admin" class="admin">Administración</router-link></li>
         <li v-if="usuariologueado"><button @click.prevent="Logout" class="logout" title="Cerrar sesión"><img src="/multimedia/cerrar-sesion.png" alt="Cerrar sesión" /></button></li>

@@ -1,25 +1,38 @@
 import { defineStore } from 'pinia';
 import sha256 from 'crypto-js/sha256';
 
-
 interface Usuario {
   usuario: string;
   contrasena: string;
 }
 
-
 interface NuevoUsuario {
   nombre: string;
   correoElectronico: string;
   contrasena: string;
-  rol: number; 
+  rol: number;
+}
+
+interface Reserva {
+  reservaID: number;
+  tituloPelicula: string;
+  salaID: number;
+  horaSesion: string;
+  numerosAsiento: number[];
+}
+
+interface UsuarioState {
+  logueado: boolean;
+  currentUser: any; 
+  reservas: Reserva[];
 }
 
 export const useUsuariosStore = defineStore({
   id: 'usuarios',
-  state: () => ({
+  state: (): UsuarioState => ({
     logueado: localStorage.getItem('logueado') === 'true',
     currentUser: JSON.parse(localStorage.getItem('currentUser') || 'null'),
+    reservas: [],
   }),
   actions: {
     async login(usuarioLogueandose: Usuario) {
@@ -27,7 +40,7 @@ export const useUsuariosStore = defineStore({
         const ContraHasheada = sha256(usuarioLogueandose.contrasena).toString();
         const ContraHasheadaBase64 = btoa(ContraHasheada);
 
-        const response = await fetch('http://localhost:8001/Usuario/login', {
+        const response = await fetch('http://localhost:8001/Auth/Login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -65,7 +78,7 @@ export const useUsuariosStore = defineStore({
       try {
         const ContraHasheada = sha256(nuevoUsuario.contrasena).toString();
 
-        const response = await fetch('http://localhost:8001/Usuario', {
+        const response = await fetch('http://localhost:8001/Auth/Register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -74,7 +87,7 @@ export const useUsuariosStore = defineStore({
             nombre: nuevoUsuario.nombre,
             correoElectronico: nuevoUsuario.correoElectronico,
             contrasena: ContraHasheada,
-            rol: nuevoUsuario.rol
+            rol: nuevoUsuario.rol,
           }),
         });
 
@@ -82,18 +95,46 @@ export const useUsuariosStore = defineStore({
           console.log('Usuario registrado exitosamente');
         } else {
           console.error('Error al registrar usuario:', response.statusText);
-          throw new Error('Error al registrar usuario: ' + response.statusText); 
+          throw new Error('Error al registrar usuario: ' + response.statusText);
         }
       } catch (error) {
         console.error('Error al registrar usuario:', error);
-        throw error; 
+        throw error;
       }
     },
-    logout() {
+    async logout() {
       this.logueado = false;
       this.currentUser = null;
       localStorage.removeItem('logueado');
       localStorage.removeItem('currentUser');
+    },
+     
+    async cargarReservas() {
+      try {
+        const response = await fetch(`http://localhost:8001/Usuario/${this.currentUser.usuarioID}/Reservas`);
+
+        if (response.ok) {
+          const reservas = await response.json();
+          this.reservas = reservas;
+        } else {
+          console.error('Error al cargar reservas:', response.statusText);
+          throw new Error('Error al cargar reservas: ' + response.statusText);
+        }
+      } catch (error) {
+        console.error('Error al cargar reservas:', error);
+        throw error;
+      }
+    },
+    CambiarFormatoFechaHora(stringDeDateTime: string) {
+      const opciones: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      };
+      const dateTime = new Date(stringDeDateTime);
+      return dateTime.toLocaleString('es-ES', opciones);
     },
   },
 });

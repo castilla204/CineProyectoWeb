@@ -1,14 +1,25 @@
-namespace ApiCine.Modelos{
-public class PeliculaDTO
+
+using System.ComponentModel.DataAnnotations;
+
+
+namespace ApiCine.Modelos
 {
-    public int PeliculaID { get; set; }
-    public string Imagen { get; set; }
+    public class PeliculaDTO
+    {
 
-    public string Titulo { get; set; }
+        public int PeliculaID { get; set; }
 
-    public string Director { get; set; }
+    
+        public string Imagen { get; set; }
 
-    public string Actores { get; set; }
-    public string Descripcion {get; set;}
+        public string Titulo { get; set; }
 
-}}
+
+        public string Director { get; set; }
+
+
+        public string Actores { get; set; }
+
+        public string Descripcion { get; set; }
+    }
+}

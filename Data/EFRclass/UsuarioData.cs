@@ -53,6 +53,25 @@ namespace ApiCine.Data
             return usuario;
         }
 
+
+         public List<UsuarioReservasDTO> ObtenerUsuarioReservas(int usuarioId)
+        {
+            var reservasDTO = _context.Reservas
+                .Where(r => r.UsuarioID == usuarioId)
+                .Select(r => new UsuarioReservasDTO
+                {
+                    ReservaID = r.ReservaID,
+                    TituloPelicula = r.Sesion.Pelicula.Titulo,
+                    SalaID = r.Sesion.SalaID,
+                    HoraSesion = r.Sesion.FechaHora,
+                    NumerosAsiento = r.ReservaButacas.Select(rb => rb.ButacaID).ToList()
+                })
+                .ToList();
+
+            return reservasDTO;
+        }
+
+
         public void CrearUsuario(Usuario usuario)
         {
             _context.Add(usuario);
