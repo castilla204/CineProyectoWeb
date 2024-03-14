@@ -40,15 +40,6 @@
         </div>
       </div>
     </div>
-    <div class="resumen">
-      <div>Resumen Compra</div>
-      <div>Numero de Butacas Seleccionadas: {{ butacaSeleccionada.length }}</div>
-      <div>Butacas elegidas: {{ butacaSeleccionada.join(", ") }}</div>
-      <div>Total: {{ (butacaSeleccionada.length * 7.5).toFixed(2) }}€</div>
-      
-     
-
-    </div>
   </div>
 </template>
 
