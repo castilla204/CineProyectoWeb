@@ -47,7 +47,7 @@ public class UsuarioController : ControllerBase
 }
 
 
-        [HttpGet("Reservas/{usuarioId}")]
+        [HttpGet("{usuarioId}/Reservas")]
       public ActionResult<List<UsuarioReservasDTO>> ObtenerUsuarioReservas(int usuarioId)
         {
         var reservasUsuario= _usuarioService.ObtenerUsuarioReservas(usuarioId);

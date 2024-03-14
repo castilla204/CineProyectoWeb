@@ -1,27 +1,44 @@
 <template>
   <div class="contenedor">
     <h2 class="titulo">Seleccione sus butacas</h2>
-    <div class="contenedorButacas">
-      <div v-for="(fila, index) in filas" :key="index" class="fila">
-        <svg
-          v-for="butaca in fila"
-          :key="butaca.id"
-          :id="'butaca-' + butaca.id"
-          @click="comprobarButaca(butaca.id)"
-          :class="{'ocupada': butaca.ocupada, 'seleccionada': butacaSeleccionada.includes(butaca.id)}"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="100"
-          height="100"
-        >
-          <path d="M0 0h24v24H0z" fill="none"/>
-          <path fill="#f4c242" d="M7 10h10v4H7z"/>
-          <path fill="#f48f42" d="M7 8h10v2H7z"/>
-          <path fill="#f4af42" d="M4 9h3v6H4zM17 9h3v6h-3z"/>
-        </svg>
+    <div class="contenedorPrincipal">
+      <div class="resumen">
+        <div class="encabezado">
+          <h3 class="detalle-titulo">Resumen de Compra</h3>
+          <div class="detalle">
+            <div class="item">Butacas Seleccionadas: {{ butacaSeleccionada.length }}</div>
+            <div class="item">Butacas Elegidas: {{ butacaSeleccionada.join(", ") }}</div>
+            <div class="item">Total: {{ (butacaSeleccionada.length * 7.5).toFixed(2) }}€</div>
+            <div class="item">Fecha y Hora de la Sesión: {{ formatoFechaHora }}</div>
+            <div class="imagen-container">
+              <img class="imagenpeli" :src="'/multimedia/' + butacaStore.imagenPelicula" />
+            </div>
+          </div>
+        </div>
+        <button @click="realizarReserva" :disabled="butacaSeleccionada.length === 0" class="botonReserva">Reservar</button>
       </div>
-      <div class="pantallaCine">PANTALLA</div>
-      <button @click="realizarReserva" :disabled="butacaSeleccionada.length === 0" class="botonReserva">Reservar</button>
+      <div class="contenedorButacas">
+        <div class="pantallaCine">PANTALLA</div>
+        <div v-for="(fila, index) in filas" :key="index" class="fila">
+          <div v-for="butaca in fila" :key="butaca.id" class="butaca-container">
+            <span class="butaca-id">{{ butaca.id }}</span>
+            <svg
+              :id="'butaca-' + butaca.id"
+              @click="comprobarButaca(butaca.id)"
+              :class="{'ocupada': butaca.ocupada, 'seleccionada': butacaSeleccionada.includes(butaca.id)}"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="100"
+              height="100"
+            >
+              <path d="M0 0h24v24H0z" fill="none"/>
+              <path fill="#f4c242" d="M7 10h10v4H7z"/>
+              <path fill="#f48f42" d="M7 8h10v2H7z"/>
+              <path fill="#f4af42" d="M4 9h3v6H4zM17 9h3v6h-3z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="resumen">
       <div>Resumen Compra</div>
@@ -52,12 +69,35 @@ const butacas = computed(() => butacaStore.butacas);
 const butacaSeleccionada = ref<number[]>([]);
 const router = useRouter(); 
 
+const obtenerFechaActual = () => {
+  const fecha = new Date();
+  const opcionesFecha: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  return fecha.toLocaleDateString(undefined, opcionesFecha);
+};
+
 const filas = computed(() => {
   const resultado = [];
   for (let i = 0; i < butacas.value.length; i += 10) {
     resultado.push(butacas.value.slice(i, i + 10));
   }
   return resultado;
+});
+
+const fechaHoraSesion = computed(() => {
+  return butacaStore.fechaHoraSesion;
+});
+
+const formatoFechaHora = computed(() => {
+  const opcionesFechaHora: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  };
+  const fechaHora = new Date(fechaHoraSesion.value);
+  return fechaHora.toLocaleDateString(undefined, opcionesFechaHora);
 });
 
 onMounted(async () => {
@@ -87,7 +127,7 @@ const realizarReserva = async () => {
         butacasIds: butacaSeleccionada.value
       });
     
-      router.push({ name: 'PaginaPago', params: { sesionID: props.sesionID.toString() } });
+      router.push({ name: 'PaginaPago' });
     } else {
       console.error('No se pudo obtener el usuarioID del Local Storage.');
     }
@@ -113,50 +153,121 @@ const obtenerUsuarioIDLocalStorage = () => {
   align-items: center;
 }
 
+.contenedorPrincipal {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.resumen {
+  flex: 1;
+  margin: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  padding: 20px;
+}
+
+.encabezado {
+  margin-bottom: 20px;
+}
+
+.detalle-titulo {
+  font-family: 'Helvetica';
+}
+
+.detalle {
+  font-family: 'HelveticaThin';
+}
+
+.item {
+  margin-bottom: 10px;
+}
+
+.imagen-container {
+  margin-top: 20px;
+}
+
+.imagenpeli {
+  height: 300px;
+  border-radius: 5px;
+}
+
 .contenedorButacas {
   background-color: #f0f0f0;
-  border-radius: 10px; 
-  padding: px;
-  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.5); 
-  margin-top: 10px; 
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px #0000001a;
+  margin: 10px;
+  width: 80%;
+  max-height: 700px;
 }
 
 .titulo {
   font-size: 1.5rem;
   color: #ffffff;
-  margin-bottom: 5px;
-  font-family: 'Helvetica';
-  margin-top: 4%; 
+  margin-bottom: 10px;
+  font-family: 'Helvetica', sans-serif;
+  margin-top: 4%;
+  margin-right:35%;
+  text-align: center;
 }
 
 .fila {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
+}
+
+.butaca-container {
+  position: relative;
+  text-align: center;
+  margin: 5px;
+  width: 80px; 
+}
+
+.butaca-id {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-family: 'Helvetica';
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  color: #333;
+  pointer-events: none;
 }
 
 .butaca {
-  margin: 0px; 
   cursor: pointer;
-}
-.butaca:hover svg{
-  transform: scale(1.2); 
+  transition: transform 0.3s ease;
 }
 
+.butaca:hover svg {
+  transform: scale(1.2);
+}
 .pantallaCine {
-  width: 80%; 
-  height: 15px;
+  width: 100%;
+  height: 5%;
   background-color: #949494;
-  margin: 10px auto; 
+  margin: 20px auto;
   border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff; /* Color del texto */
+  font-family: 'Helvetica', sans-serif;
 }
 
 .botonReserva {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
-  padding: 10px 20px; 
+  padding: 15px 30px;
   text-align: center;
-  font-size: 14px;
-  margin-top: 10px; 
+  font-size: 18px;
+  margin-top: 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -164,32 +275,49 @@ const obtenerUsuarioIDLocalStorage = () => {
 }
 
 .ocupada path {
-  opacity: 20%; 
+  opacity: 20%;
   fill: rgb(255, 30, 0);
 }
+
 .seleccionada path {
-opacity: 20%;
-fill: blue;
+  opacity: 20%;
+  fill: blue;
 }
 
 svg {
-  width: 80px; 
+  width: 80px;
   height: 80px;
 }
 
 @media screen and (max-width: 768px) {
-  svg {
-    width: 40px; 
-    height: 80px;
+  .contenedorPrincipal{
+    display: block;
   }
-}
 
-.resumen {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  .resumen{
+    width: 90%;
+  }
+  .contenedorButacas {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .titulo{
+    margin-right: 0%;
+  }
+
+  .butaca-container {
+    width: 100%; 
+  }
+
+  svg {
+    width: 22px;
+    height: 53px;
+  }
+
+  .botonReserva {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
 }
 </style>

@@ -77,3 +77,13 @@ C:\Users\S2-PC00\Downloads\CineProyectoWebconpaginareservas\CineProyectoWeb\Mode
 C:\Users\S2-PC00\Downloads\CineProyectoWebconpaginareservas\CineProyectoWeb\Modelos\obj\Debug\net6.0\refint\Modelos.dll
 C:\Users\S2-PC00\Downloads\CineProyectoWebconpaginareservas\CineProyectoWeb\Modelos\obj\Debug\net6.0\Modelos.pdb
 C:\Users\S2-PC00\Downloads\CineProyectoWebconpaginareservas\CineProyectoWeb\Modelos\obj\Debug\net6.0\ref\Modelos.dll
+C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\bin\Debug\net6.0\Modelos.deps.json
+C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\bin\Debug\net6.0\Modelos.dll
+C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\bin\Debug\net6.0\Modelos.pdb
+C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\obj\Debug\net6.0\Modelos.csproj.AssemblyReference.cache
+C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\obj\Debug\net6.0\Modelos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\obj\Debug\net6.0\Modelos.csproj.CoreCompileInputs.cache
+C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\obj\Debug\net6.0\Modelos.dll
+C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\obj\Debug\net6.0\refint\Modelos.dll
+C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\obj\Debug\net6.0\Modelos.pdb
+C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\obj\Debug\net6.0\ref\Modelos.dll

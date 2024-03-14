@@ -111,7 +111,7 @@ export const useUsuariosStore = defineStore({
      
     async cargarReservas() {
       try {
-        const response = await fetch(`http://localhost:8001/Usuario/Reservas/${this.currentUser.usuarioID}`);
+        const response = await fetch(`http://localhost:8001/Usuario/${this.currentUser.usuarioID}/Reservas`);
 
         if (response.ok) {
           const reservas = await response.json();

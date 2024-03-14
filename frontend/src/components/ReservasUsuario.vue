@@ -1,26 +1,30 @@
 <template>
   <div class="general">
-    <h2>Reservas del Usuario</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>ID Reserva</th>
-          <th>Título Película</th>
-          <th>Sala</th>
-          <th>Hora Sesión</th>
-          <th>Asientos Reservados</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="reserva in reservas" :key="reserva.reservaID">
-          <td>{{ reserva.reservaID }}</td>
-          <td>{{ reserva.tituloPelicula }}</td>
-          <td>{{ reserva.salaID }}</td>
-          <td>{{ reserva.horaSesion }}</td>
-          <td>{{ reserva.numerosAsiento.join(', ') }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="contenido">
+      <h2 class="titulo">Reservas del Usuario</h2>
+      <div class="table-container">
+        <table class="reservas-table">
+          <thead>
+            <tr>
+              <th>ID Reserva</th>
+              <th>Título Película</th>
+              <th>Sala</th>
+              <th>Hora Sesión</th>
+              <th>Asientos Reservados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="reserva in reservas" :key="reserva.reservaID">
+              <td>{{ reserva.reservaID }}</td>
+              <td>{{ reserva.tituloPelicula }}</td>
+              <td>{{ reserva.salaID }}</td>
+              <td>{{ formatHora(reserva.horaSesion) }}</td>
+              <td>{{ reserva.numerosAsiento.join(', ') }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -47,8 +51,69 @@ onMounted(() => {
     });
   }
 });
+
+const formatHora = (hora: string): string => {
+  const date = new Date(hora);
+  const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+  return date.toLocaleString('es-ES', options);
+};
 </script>
 
 <style scoped>
-.general{color:white};
+.general {
+  background-color: #000;
+  padding: 20px;
+  font-family: 'Helvetica', sans-serif;
+  color: #000000;
+}
+
+.contenido {
+  max-width: 800px;
+  margin: auto;
+}
+
+.titulo {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: white;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.reservas-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reservas-table th, .reservas-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.reservas-table th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.reservas-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+@media screen and (max-width: 768px) {
+  .contenido {
+    padding: 10px;
+  }
+
+  .reservas-table th, .reservas-table td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
 </style>
