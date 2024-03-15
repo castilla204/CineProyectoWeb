@@ -19,7 +19,7 @@ export const ButacaStore = defineStore({
         const data = await response.json();
 
         this.imagenPelicula = data.imagenPelicula;
-        this.fechaHoraSesion = new Date(data.fechaHora).toLocaleString();
+        this.fechaHoraSesion = new Date(data.fechaHora).toISOString(); // Cambio en el formato de fecha y hora
         
         const idInicial = (data.nombreSala.includes('Sala ') ? parseInt(data.nombreSala.split('Sala ')[1]) - 1 : 0) * 60 + 1;
         const idFinal = idInicial + 59;

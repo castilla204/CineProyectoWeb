@@ -1,16 +1,16 @@
 <template>
   <div class="general">
     <div class="contenido">
-      <h2 class="titulo">Reservas del Usuario</h2>
+      <h2 class="titulo">{{ $t('ReservasUsuario.text1') }}</h2>
       <div class="table-container">
         <table class="reservas-table">
           <thead>
             <tr>
-              <th>ID Reserva</th>
-              <th>Título Película</th>
-              <th>Sala</th>
-              <th>Hora Sesión</th>
-              <th>Asientos Reservados</th>
+              <th>{{ $t('ReservasUsuario.text2') }}</th>
+              <th>{{ $t('ReservasUsuario.text3') }}</th>
+              <th>{{ $t('ReservasUsuario.text4') }}</th>
+              <th>{{ $t('ReservasUsuario.text5') }}</th>
+              <th>{{ $t('ReservasUsuario.text6') }}</th>
             </tr>
           </thead>
           <tbody>

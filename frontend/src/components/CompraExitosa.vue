@@ -1,30 +1,32 @@
 <template>
-    <div class="contenedor-popup" v-if="ultimaReserva">
-      <div class="popup">
-        <div class="contenido-popup">
-          <div class="interior-popup">
-            <div class="izquierda-popup">
-              <img src="/multimedia/pulgarup.png" alt="Imagen de la película" class="imagen-pelicula">
-            </div>
-            <div class="derecha-popup">
-              <h2 class="titulo">¡Compra realizada con éxito!</h2>
-              <p class="campo">Título de la película: {{ ultimaReserva.tituloPelicula }}</p>
-              <p class="campo">Sala: {{ ultimaReserva.salaID }}</p>
-              <p class="campo">Hora de la sesión: {{ formatoFechaHora(ultimaReserva.horaSesion) }}</p>
-              <p class="campo">Números de asiento: {{ ultimaReserva.numerosAsiento.join(', ') }}</p>
-              <p class="campo1">Precio total: {{ calcularPrecioTotal(ultimaReserva.numerosAsiento.length) }} €</p>
-              <button @click="irAInicio" class="boton-inicio">Ir al inicio</button>
-              <p class="terminos">Gracias por confiar en "CinesFlix SL", su reserva ha sido tramitada</p>
-            </div>
+  <div class="contenedor-popup" v-if="ultimaReserva">
+    <div class="popup">
+      <div class="contenido-popup">
+        <div class="interior-popup">
+          <div class="izquierda-popup">
+            <img src="/multimedia/pulgarup.png" alt="Imagen de la película" class="imagen-pelicula">
           </div>
-          <div class="qr-container">
-            <img v-if="qrValue" :src="qrValue" alt="Código QR" class="codigo-qr">
-            <p class="qr-label">Código QR</p>
+          <div class="derecha-popup">
+            <h2 class="titulo">{{ $t('CompraExitosa.text1') }}</h2>
+            <p class="campo">{{ $t('CompraExitosa.text2') }} {{ ultimaReserva.tituloPelicula }}</p>
+            <p class="campo">{{ $t('CompraExitosa.text3') }} {{ ultimaReserva.salaID }}</p>
+            <p class="campo">{{ $t('CompraExitosa.text4') }} {{ formatoFechaHora(ultimaReserva.horaSesion) }}</p>
+            <p class="campo">{{ $t('CompraExitosa.text5') }} {{ ultimaReserva.numerosAsiento.join(', ') }}</p>
+            <p class="campo1">{{ $t('CompraExitosa.text6') }} {{
+    calcularPrecioTotal(ultimaReserva.numerosAsiento.length) }} €</p>
+            <button @click="irAInicio" class="boton-inicio">{{ $t('CompraExitosa.text7') }}</button>
+            <p class="terminos">{{ $t('CompraExitosa.text8') }}</p>
           </div>
+        </div>
+        <div class="qr-container">
+          <img v-if="qrValue" :src="qrValue" alt="Código QR" class="codigo-qr">
+          <p class="qr-label">Código QR</p>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
+
   
   <script setup lang="ts">
   import { ref, onMounted } from 'vue';

@@ -7,13 +7,16 @@
       <button @click="DesplegarMenu" class="menu-button">
         <img src="/multimedia/menu.png" alt="Menú" />
       </button>
-      <ul :class="{'right': true, 'show': menuAbierto}">
-        <li><router-link to="/" class="pelis">Películas</router-link></li>
-        <li v-if="!usuariologueado"><router-link to="/Auth" class="login">Iniciar sesión</router-link></li>
-        <li v-if="usuariologueado"><router-link to="/UsuarioReservas" class="login">Mis Entradas</router-link></li>
 
-        <li v-if="usuariologueado"><span class="user">Bienvenido, {{ currentUser.nombre }}</span></li>
-        <li v-if="usuariologueado && currentUser.rol === 1"><router-link to="/admin" class="admin">Administración</router-link></li>
+      <ul :class="{ 'right': true, 'show': menuAbierto }"> 
+        <li>
+          <button @click="cambiarIdioma" class="nav__link language-button">{{ currentLanguage }}</button>
+        </li>
+        <li><router-link to="/" class="pelis">{{ $t('Cabecera.text1') }}</router-link></li>
+        <li v-if="!usuariologueado"><router-link to="/Auth" class="login">{{ $t('Cabecera.text2') }}</router-link></li>
+        <li v-if="usuariologueado"><router-link to="/UsuarioReservas" class="login">{{ $t('Cabecera.text3') }}</router-link></li>
+        <li v-if="usuariologueado"><span class="user">{{ $t('Cabecera.text4') }}{{ currentUser.nombre }}</span></li>
+        <li v-if="usuariologueado && currentUser.rol === 1"><router-link to="/admin" class="admin">{{ $t('Cabecera.text5') }}</router-link></li>
         <li v-if="usuariologueado"><button @click.prevent="Logout" class="logout" title="Cerrar sesión"><img src="/multimedia/cerrar-sesion.png" alt="Cerrar sesión" /></button></li>
       </ul>
     </nav>
@@ -24,6 +27,14 @@
 import { ref, computed } from 'vue';
 import { useUsuariosStore } from '../store/UsuarioStore';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+
+const { t, locale } = useI18n();
+const currentLanguage = computed(() => locale.value === 'en' ? 'Español' : 'English');
+
+const cambiarIdioma = () => {
+  locale.value = locale.value === 'en' ? 'es' : 'en';
+}
 
 const store = useUsuariosStore();
 const router = useRouter();
@@ -42,7 +53,7 @@ const DesplegarMenu = () => {
 };
 </script>
 
-<style>
+<style scoped>
 .header {
   background-color: rgb(196, 0, 0);
   display: flex;
@@ -74,7 +85,8 @@ const DesplegarMenu = () => {
   border: none;
 }
 
-.right a, .right button {
+.right a,
+.right button {
   color: white;
   text-decoration: none;
   margin: 0 15px;
@@ -83,11 +95,37 @@ const DesplegarMenu = () => {
   cursor: pointer;
 }
 
-.logout img, .menu-button img {
+.logout img,
+.menu-button img {
   height: 25px;
   width: auto;
 }
 
+.language-button {
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.language-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.language-button:focus {
+  outline: none;
+}
+
+.language-button img {
+  width: 24px;
+  height: 24px;
+}
 
 @media (max-width: 768px) {
   .right {
@@ -112,7 +150,8 @@ const DesplegarMenu = () => {
     cursor: pointer;
   }
 
-  .right a, .right button {
+  .right a,
+  .right button {
     text-align: center;
     margin: 10px 0;
   }

@@ -1,40 +1,35 @@
 <template>
   <div class="contenedor">
-    <h2 class="titulo">Seleccione sus butacas</h2>
+    <h2 class="titulo">{{ $t('Butacas.text1') }}</h2>
     <div class="contenedorPrincipal">
       <div class="resumen">
         <div class="encabezado">
-          <h3 class="detalle-titulo">Resumen de Compra</h3>
+          <h3 class="detalle-titulo">{{ $t('Butacas.text2') }}</h3>
           <div class="detalle">
-            <div class="item">Butacas Seleccionadas: {{ butacaSeleccionada.length }}</div>
-            <div class="item">Butacas Elegidas: {{ butacaSeleccionada.join(", ") }}</div>
-            <div class="item">Total: {{ (butacaSeleccionada.length * 7.5).toFixed(2) }}€</div>
-            <div class="item">Fecha y Hora de la Sesión: {{ formatoFechaHora }}</div>
+            <div class="item">{{ $t('Butacas.text8') }}{{ butacaSeleccionada.length }}</div>
+            <div class="item">{{ $t('Butacas.text3') }} {{ butacaSeleccionada.join(", ") }}</div>
+            <div class="item">{{ $t('Butacas.text4') }}{{ (butacaSeleccionada.length * 7.5).toFixed(2) }}€</div>
+            <div class="item">{{ $t('Butacas.text5') }} {{ formatoFechaHora }}</div>
             <div class="imagen-container">
               <img class="imagenpeli" :src="'/multimedia/' + butacaStore.imagenPelicula" />
             </div>
           </div>
         </div>
-        <button @click="realizarReserva" :disabled="butacaSeleccionada.length === 0" class="botonReserva">Reservar</button>
+        <button @click="realizarReserva" :disabled="butacaSeleccionada.length === 0" class="botonReserva">{{
+      $t('Butacas.text6') }}</button>
       </div>
       <div class="contenedorButacas">
-        <div class="pantallaCine">PANTALLA</div>
+        <div class="pantallaCine">{{ $t('Butacas.text7') }}</div>
         <div v-for="(fila, index) in filas" :key="index" class="fila">
           <div v-for="butaca in fila" :key="butaca.id" class="butaca-container">
             <span class="butaca-id">{{ butaca.id }}</span>
-            <svg
-              :id="'butaca-' + butaca.id"
-              @click="comprobarButaca(butaca.id)"
-              :class="{'ocupada': butaca.ocupada, 'seleccionada': butacaSeleccionada.includes(butaca.id)}"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="100"
-              height="100"
-            >
-              <path d="M0 0h24v24H0z" fill="none"/>
-              <path fill="#f4c242" d="M7 10h10v4H7z"/>
-              <path fill="#f48f42" d="M7 8h10v2H7z"/>
-              <path fill="#f4af42" d="M4 9h3v6H4zM17 9h3v6h-3z"/>
+            <svg :id="'butaca-' + butaca.id" @click="comprobarButaca(butaca.id)"
+              :class="{ 'ocupada': butaca.ocupada, 'seleccionada': butacaSeleccionada.includes(butaca.id) }"
+              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path fill="#f4c242" d="M7 10h10v4H7z" />
+              <path fill="#f48f42" d="M7 8h10v2H7z" />
+              <path fill="#f4af42" d="M4 9h3v6H4zM17 9h3v6h-3z" />
             </svg>
           </div>
         </div>
@@ -42,6 +37,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
@@ -59,7 +55,6 @@ const reservaStore = useReservaStore();
 const butacas = computed(() => butacaStore.butacas);
 const butacaSeleccionada = ref<number[]>([]);
 const router = useRouter(); 
-
 
 const filas = computed(() => {
   const resultado = [];

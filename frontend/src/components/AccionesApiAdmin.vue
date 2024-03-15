@@ -2,24 +2,35 @@
   <div class="general">
     <h2 class="tituloeditarocrear">{{ idPeliculaActual ? 'Editar Película' : 'Crear Película' }}</h2>
     <form @submit.prevent="formularioenviardatos">
-      <input v-model="formulario.imagen" type="text" placeholder="nombre imagen con extension" required class="campoformulario" />
-      <input v-model="formulario.titulo" type="text" placeholder="Titulo" required class="campoformulario" />
-      <input v-model="formulario.director" type="text" placeholder="Director" required class="campoformulario" />
-      <input v-model="formulario.actores" type="text" placeholder="Actores" required class="campoformulario" />
-      <textarea v-model="formulario.descripcion" placeholder="Descripción" required class="campodescripcion"></textarea>
-      <button type="submit" class="botoneditarocrear">{{ idPeliculaActual ? 'Editar' : 'Guardar' }} Película</button>
-      <button type="button" @click="cancelarEdicion" class="botoncancelar">Cancelar</button>
+      <input v-model="formulario.imagen" type="text" :placeholder="$t('AccionesAdmin.textPlaceholder1')" required
+        class="campoformulario" />
+      <input v-model="formulario.titulo" type="text" :placeholder="$t('AccionesAdmin.textPlaceholder2')" required
+        class="campoformulario" />
+      <input v-model="formulario.director" type="text" :placeholder="$t('AccionesAdmin.textPlaceholder3')" required
+        class="campoformulario" />
+      <input v-model="formulario.actores" type="text" :placeholder="$t('AccionesAdmin.textPlaceholder4')" required
+        class="campoformulario" />
+      <textarea v-model="formulario.descripcion" :placeholder="$t('AccionesAdmin.textPlaceholder5')" required
+        class="campodescripcion"></textarea>
+      <button type="submit" class="botoneditarocrear">{{ idPeliculaActual ? 'Editar' : 'Guardar' }} {{
+      $t('AccionesAdmin.text1') }}</button>
+      <button type="button" @click="cancelarEdicion" class="botoncancelar">{{
+      $t('AccionesAdmin.text2') }}</button>
     </form>
 
-    <h2 class="tituloeditarocrear">Listado de Películas</h2>
-    <div v-if="isLoading" class="loading">Cargando...</div>
+    <h2 class="tituloeditarocrear">{{
+      $t('AccionesAdmin.text3') }}</h2>
+    <div v-if="isLoading" class="loading">C{{
+      $t('AccionesAdmin.text4') }}</div>
     <div v-else>
       <ul>
         <li v-for="pelicula in peliculas" :key="pelicula.peliculaID" class="peliculalineadatos">
           <span>{{ pelicula.titulo }} - {{ pelicula.director }}</span>
           <div>
-            <button @click="editarPelicula(pelicula)" class="botoneditar">Editar</button>
-            <button @click="eliminarPelicula(pelicula.peliculaID)" class="botonborrar">Eliminar</button>
+            <button @click="editarPelicula(pelicula)" class="botoneditar">{{
+      $t('AccionesAdmin.text5') }}</button>
+            <button @click="eliminarPelicula(pelicula.peliculaID)" class="botonborrar">{{
+      $t('AccionesAdmin.text6') }}</button>
           </div>
         </li>
       </ul>
@@ -28,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { usePeliculasStore, Pelicula } from '../store/PeliculaStore'; 
 
 const formulario = ref<Pelicula>({
@@ -60,8 +71,9 @@ const editarPelicula = (pelicula: Pelicula) => {
   formulario.value = { ...pelicula };
 };
 
-const eliminarPelicula = (id: number) => {
-  store.eliminarPelicula(id);
+const eliminarPelicula = async (id: number) => {
+  await store.eliminarPelicula(id);
+  await obtenerPeliculas();
 };
 
 const limpiarFormulario = () => {
@@ -69,7 +81,22 @@ const limpiarFormulario = () => {
   idPeliculaActual.value = null;
 };
 
-const peliculas = store.peliculas;
+const obtenerPeliculas = async () => {
+  await store.obtenerPeliculas();
+};
+
+const peliculas = ref<Pelicula[]>([]); 
+
+
+watch(() => store.isLoading, async (isLoading) => {
+  if (!isLoading) {
+    peliculas.value = store.peliculas; 
+  }
+});
+
+
+onMounted(obtenerPeliculas);
+
 const isLoading = store.isLoading;
 </script>
 

@@ -87,3 +87,13 @@ C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Mod
 C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\obj\Debug\net6.0\refint\Modelos.dll
 C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\obj\Debug\net6.0\Modelos.pdb
 C:\Users\S2-PC00\Desktop\Cinefuncionandoconidenbuatacsydemas\CineProyectoWeb\Modelos\obj\Debug\net6.0\ref\Modelos.dll
+C:\Users\Diego\Downloads\CineProyectoWebjuevesultima\CineProyectoWeb\Modelos\bin\Debug\net6.0\Modelos.deps.json
+C:\Users\Diego\Downloads\CineProyectoWebjuevesultima\CineProyectoWeb\Modelos\bin\Debug\net6.0\Modelos.dll
+C:\Users\Diego\Downloads\CineProyectoWebjuevesultima\CineProyectoWeb\Modelos\bin\Debug\net6.0\Modelos.pdb
+C:\Users\Diego\Downloads\CineProyectoWebjuevesultima\CineProyectoWeb\Modelos\obj\Debug\net6.0\Modelos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Diego\Downloads\CineProyectoWebjuevesultima\CineProyectoWeb\Modelos\obj\Debug\net6.0\Modelos.csproj.CoreCompileInputs.cache
+C:\Users\Diego\Downloads\CineProyectoWebjuevesultima\CineProyectoWeb\Modelos\obj\Debug\net6.0\Modelos.sourcelink.json
+C:\Users\Diego\Downloads\CineProyectoWebjuevesultima\CineProyectoWeb\Modelos\obj\Debug\net6.0\Modelos.dll
+C:\Users\Diego\Downloads\CineProyectoWebjuevesultima\CineProyectoWeb\Modelos\obj\Debug\net6.0\refint\Modelos.dll
+C:\Users\Diego\Downloads\CineProyectoWebjuevesultima\CineProyectoWeb\Modelos\obj\Debug\net6.0\Modelos.pdb
+C:\Users\Diego\Downloads\CineProyectoWebjuevesultima\CineProyectoWeb\Modelos\obj\Debug\net6.0\ref\Modelos.dll

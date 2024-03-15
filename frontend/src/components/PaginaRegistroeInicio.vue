@@ -1,24 +1,25 @@
 <template>
   <div class="contenedor">
     <div class="formulario-inicio">
-      <h2 class="titulo">Iniciar sesión</h2>
+      <h2 class="titulo"> {{ $t('PaginaRegistro.text1') }}</h2>
       <form @submit.prevent="IniciodeSesion" class="formulario">
-        <input type="text" v-model="datosLogin.usuario" placeholder="Usuario" required>
-        <input type="password" v-model="datosLogin.contrasena" placeholder="Contraseña" required>
-        <button type="submit" class="boton-enviar">Iniciar sesión</button>
+        <input type="text" v-model="datosLogin.usuario" :placeholder="$t('PaginaRegistro.textPlaceholder1')" required>
+        <input type="password" v-model="datosLogin.contrasena" :placeholder="$t('PaginaRegistro.textPlaceholder2')">
+        <button type="submit" class="boton-enviar">{{ $t('PaginaRegistro.text1') }}</button>
       </form>
     </div>
     <div v-if="logueado" class="formulario-bienvenida">
-      <p>Bienvenido, {{ currentUser?.nombre }}</p>
-      <button @click="logout">Cerrar sesión</button>
+      <p>{{ $t('PaginaRegistro.text4') }}{{ currentUser?.nombre }}</p>
+      <button @click="logout">{{ $t('PaginaRegistro.text2') }}</button>
     </div>
     <div class="formulario-registro">
       <h2 class="titulo">Registrarse</h2>
       <form @submit.prevent="Registro" class="formulario">
-        <input type="text" v-model="datosRegistro.nombre" placeholder="Usuario" required>
+        <input type="text" v-model="datosRegistro.nombre" :placeholder="$t('PaginaRegistro.textPlaceholder1')" required>
         <input type="email" v-model="datosRegistro.correoElectronico" placeholder="Correo electrónico" required>
         <input type="password" v-model="datosRegistro.contrasena" placeholder="Contraseña" required>
         <button type="submit" class="boton-enviar">Registrarse</button>
+        <p v-if="registroExitoso" class="exito-mensaje">Cuenta creada con exito!</p>
       </form>
     </div>
   </div>
@@ -52,6 +53,8 @@ const datosRegistro = ref<NuevoUsuario>({
   rol: 0 
 });
 
+const registroExitoso = ref(false);
+
 const IniciodeSesion = async () => {
   try {
     await login(datosLogin.value);
@@ -64,6 +67,7 @@ const IniciodeSesion = async () => {
 const Registro = async () => {
   try {
     await register(datosRegistro.value); 
+    registroExitoso.value = true;
   } catch (error) {
     alert('Error al registrar');
   }
@@ -124,6 +128,12 @@ const Registro = async () => {
 
 .boton-enviar:hover {
   background-color: #57a045;
+}
+
+.exito-mensaje{
+  font-family: 'Helvetica';
+  color: #0f4b00;
+  margin-top: 5px;
 }
 
 

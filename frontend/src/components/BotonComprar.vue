@@ -1,10 +1,10 @@
 <template>
-    <div class="contenedor-boton">
-      <a href="index.html">
-        <router-link to="/" ><button class="boton">Comprar</button></router-link>
-      </a>
-    </div>
-  </template>
+  <div class="contenedor-boton">
+    <a href="index.html">
+      <router-link to="/"><button class="boton">{{ $t('BotonComprar.text1') }}</button></router-link>
+    </a>
+  </div>
+</template>
   
   <style scoped>
   .contenedor-boton {

@@ -1,29 +1,30 @@
 <template>
-    <div class="contenedor-pago">
-      <h2 class="titulo">Método de pago</h2>
-      <div class="opcion">
-        <input type="radio" id="tarjeta" name="pago" class="radio-custom">
-        <label for="tarjeta" class="label-custom">
-          <span class="metodo-texto">Tarjeta de crédito</span>
-          <img src="/multimedia/visa.png" alt="Visa" class="icono-pago">
-        </label>
-      </div>
-      <div class="opcion">
-        <input type="radio" id="efectivo" name="pago" class="radio-custom">
-        <label for="efectivo" class="label-custom">
-          <span class="metodo-texto">Efectivo en el lugar</span>
-          <img src="/multimedia/dinero.png" alt="Efectivo" class="icono-pago">
-        </label>
-      </div>
-      <div class="opcion">
-        <input type="radio" id="paypal" name="pago" class="radio-custom">
-        <label for="paypal" class="label-custom">
-          <span class="metodo-texto">PayPal</span>
-          <img src="/multimedia/paypal.png" alt="PayPal" class="icono-pago">
-        </label>
-      </div>
+  <div class="contenedor-pago">
+    <h2 class="titulo">{{ $t('MetodoDePago.text1') }}</h2>
+    <div class="opcion">
+      <input type="radio" id="tarjeta" name="pago" class="radio-custom">
+      <label for="tarjeta" class="label-custom">
+        <span class="metodo-texto">{{ $t('MetodoDePago.text2') }}</span>
+        <img src="/multimedia/visa.png" alt="Visa" class="icono-pago">
+      </label>
     </div>
-  </template>
+    <div class="opcion">
+      <input type="radio" id="efectivo" name="pago" class="radio-custom">
+      <label for="efectivo" class="label-custom">
+        <span class="metodo-texto">{{ $t('MetodoDePago.text3') }}</span>
+        <img src="/multimedia/dinero.png" alt="Efectivo" class="icono-pago">
+      </label>
+    </div>
+    <div class="opcion">
+      <input type="radio" id="paypal" name="pago" class="radio-custom">
+      <label for="paypal" class="label-custom">
+        <span class="metodo-texto">PayPal</span>
+        <img src="/multimedia/paypal.png" alt="PayPal" class="icono-pago">
+      </label>
+    </div>
+  </div>
+</template>
+
   
   <style scoped>
   .contenedor-pago {

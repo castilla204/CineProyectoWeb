@@ -6,9 +6,9 @@
     <div class="derecha">
       <div class="textopresentacion">
         <p class="f1">ZARAGOZA</p>
-        <p class="f2">CINES FLIX</p>
-        <p class="f3">Cines Flex, la mejor opción de disfrute audiovisual en toda la ciudad de Zaragoza. Ven a conocernos.</p>
-        <button class="botonhome" @click="AccionScrollDown">COMPRAR</button>
+        <p class="f2">{{ $t('PresentacionCine.text1') }}</p>
+        <p class="f3">{{ $t('PresentacionCine.text2') }}</p>
+        <button class="botonhome" @click="AccionScrollDown">{{ $t('PresentacionCine.text3') }}</button>
       </div>
     </div>
     <canvas ref="animacionCanvas" class="animacion-canvas"></canvas>
