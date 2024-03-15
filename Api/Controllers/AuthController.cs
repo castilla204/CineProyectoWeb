@@ -1,60 +1,69 @@
-    
-    using Microsoft.AspNetCore.Mvc;
-    using ApiCine.Business.Services;
-    using ApiCine.Modelos;
-    using System;
+using Microsoft.AspNetCore.Mvc;
+using ApiCine.Business.Services;
+using ApiCine.Api.LogErrores;
+using ApiCine.Modelos;
+using System;
 
-
-
-    namespace ApiCine.Api.Controllers{
-
+namespace ApiCine.Api.Controllers
+{
     [ApiController]
     [Route("[Controller]")]
-
-    public class AuthController : ControllerBase {
-    private readonly IUsuarioService _usuarioService;
-
-    public AuthController(IUsuarioService usuarioService)
+    public class AuthController : ControllerBase
     {
-        _usuarioService = usuarioService ?? throw new ArgumentNullException(nameof(usuarioService));
-    }
-   [HttpPost("Register")]
-    public IActionResult CrearUsuario([FromBody] UsuarioCrearDTO usuarioDTO)
-    {
-        if (usuarioDTO == null)
-        {
-            return BadRequest("Datos del usuario no proporcionados");
-        }
-        try
-        {
-            _usuarioService.CrearUsuario(usuarioDTO);
-            return Ok("Usuario creado satisfactoriamente");
-        }
-        catch (Exception ex)
-        {
-            return BadRequest($"error en la creacion {ex.Message}");
-        }
-    }
+        private readonly IUsuarioService _usuarioService;
+        private readonly ILogErrores _logErrores;
 
-    [HttpPost("Login")]
-    public IActionResult Login([FromBody] UsuarioLoginDTO loginDTO)
-    {
-        try
+        public AuthController(IUsuarioService usuarioService, ILogErrores logErrores)
         {
-            var user = _usuarioService.Login(loginDTO.Usuario, loginDTO.PasswordHasheada);
-            if (user != null)
+            _usuarioService = usuarioService ?? throw new ArgumentNullException(nameof(usuarioService));
+            _logErrores = logErrores ?? throw new ArgumentNullException(nameof(logErrores));
+        }
+
+        [HttpPost("Register")]
+        public IActionResult CrearUsuario([FromBody] UsuarioCrearDTO usuarioDTO)
+        {
+            if (!ModelState.IsValid)
             {
-                return Ok(user);
+                return BadRequest(ModelState);
             }
-            else
+
+            try
             {
-                return BadRequest("Credenciales no validas");
+                _usuarioService.CrearUsuario(usuarioDTO);
+                return Ok("Usuario creado correctamente");
+            }
+            catch (Exception ex)
+            {
+                _logErrores.LogError($"Error ecreando usuario: {ex.Message}");
+                return BadRequest($"Errorcreando usuario {ex.Message}");
             }
         }
-        catch (Exception ex)
+
+        [HttpPost("Login")]
+        public IActionResult Login([FromBody] UsuarioLoginDTO loginDTO)
         {
-            return BadRequest($"error al iniciar sesion {ex.Message}");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var user = _usuarioService.Login(loginDTO.Usuario, loginDTO.PasswordHasheada);
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+                else
+                {
+                    return BadRequest("Contraseña o usuario Incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logErrores.LogError($"Error iniciando sesion: {ex.Message}");
+                return BadRequest($"Error iniciando sesion: {ex.Message}");
+            }
         }
     }
-    }}
-    
+}

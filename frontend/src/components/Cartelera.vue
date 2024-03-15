@@ -1,27 +1,17 @@
 <template>
   <div id="ticketForm">
     <h1 class="titulocartelera">CARTELERA</h1>
-    <div class="linearoja"></div>
-    <div class="contenedorpeliculas">
-      <!-- Cargar las primeras 5 películas -->
-      <div class="pelicula-group">
-        <Pelicula
-          v-for="(pelicula, index) in primeraFila"
-          :key="pelicula.peliculaID"
-          :pelicula="pelicula"
-        />
-      </div>
-      <!-- Mostrar el subtitulo si hay más de 5 películas -->
-      <div v-if="CargarSubtitulo" class="subtitulo-group">
-        <div class="linearoja"></div>
-      </div>
-      <!-- Cargar la segunda fila -->
-      <div class="pelicula-group">
-        <Pelicula
-          v-for="(pelicula, index) in segundaFila"
-          :key="pelicula.peliculaID"
-          :pelicula="pelicula"
-        />
+    <div v-for="(fila, index) in filas" :key="index">
+      <div class="espacio"></div> <!-- Espacio entre las líneas rojas y la fila de películas -->
+      <div class="linearoja"></div> <!-- Línea roja entre grupos de películas -->
+      <div class="contenedorpeliculas">
+        <div class="pelicula-group">
+          <Pelicula
+            v-for="pelicula in fila"
+            :key="pelicula.peliculaID"
+            :pelicula="pelicula"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -45,12 +35,13 @@ onMounted(async () => {
   peliculas.value = almacenPeliculas.peliculas; 
 });
 
-const CargarSubtitulo = computed(() => {
-  return peliculas.value.length > 5;
+const filas = computed(() => {
+  const peliculasChunked = [];
+  for (let i = 0; i < peliculas.value.length; i += 5) {
+    peliculasChunked.push(peliculas.value.slice(i, i + 5));
+  }
+  return peliculasChunked;
 });
-
-const primeraFila = computed(() => peliculas.value.slice(0, 5));
-const segundaFila = computed(() => peliculas.value.slice(5));
 </script>
 
 <style scoped>
@@ -67,11 +58,6 @@ const segundaFila = computed(() => peliculas.value.slice(5));
   align-items: center;
 }
 
-.subtitulo-group {
-  width: 100%; 
-  margin-top: 40px; 
-}
-
 .linearoja {
   width: 80%; 
   margin-left: auto;
@@ -84,6 +70,10 @@ const segundaFila = computed(() => peliculas.value.slice(5));
   font-family: 'HelveticaThin';
 
   margin-bottom: 20px; 
+}
+
+.espacio {
+  height: 20px; /* Altura del espacio entre las líneas rojas y la fila de películas */
 }
 
 .linearoja {

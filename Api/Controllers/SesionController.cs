@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ApiCine.Business.Services;
 using ApiCine.Modelos;
+using ApiCine.Api.LogErrores;
 using System;
 
 [ApiController]
@@ -8,10 +9,12 @@ using System;
 public class SesionController : ControllerBase
 {
     private readonly ISesionService _sesionService;
+    private readonly ILogErrores _logErrores;
 
-    public SesionController(ISesionService sesionService)
+    public SesionController(ISesionService sesionService, ILogErrores logErrores)
     {
         _sesionService = sesionService ?? throw new ArgumentNullException(nameof(sesionService));
+        _logErrores = logErrores ?? throw new ArgumentNullException(nameof(logErrores));
     }
 
     [HttpGet]
@@ -24,7 +27,8 @@ public class SesionController : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest($"error obteniendo sesiones {ex.Message}");
+            _logErrores.LogError($"Error obteniendo sesiones: {ex.Message}");
+            return BadRequest($"Error obteniendo sesiones: {ex.Message}");
         }
     }
 
@@ -42,26 +46,28 @@ public class SesionController : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest($"Error la sesion no existe con '{id}': {ex.Message}");
+            _logErrores.LogError($"Error obteniendo la sesión con ID '{id}': {ex.Message}");
+            return BadRequest($"Error obteniendo la sesión con ID '{id}': {ex.Message}");
         }
     }
-
 
     [HttpPost]
     public IActionResult CrearSesion([FromBody] SesionCrearDTO sesionDTO)
     {
-        if (sesionDTO == null)
+        if (!ModelState.IsValid)
         {
-            return BadRequest("No se han proporcionado datos");
+            return BadRequest(ModelState);
         }
+
         try
         {
             _sesionService.CrearSesion(sesionDTO);
-            return Ok("Sesion creada");
+            return Ok("Sesión creada con éxito");
         }
         catch (Exception ex)
         {
-            return BadRequest($"error creando sesion {ex.Message}");
+            _logErrores.LogError($"Error creando sesión: {ex.Message}");
+            return BadRequest($"Error creando sesión: {ex.Message}");
         }
     }
 }

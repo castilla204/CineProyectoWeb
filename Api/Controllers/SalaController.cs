@@ -1,5 +1,6 @@
 using ApiCine.Business.Services;
 using ApiCine.Modelos;
+using ApiCine.Api.LogErrores;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -10,10 +11,12 @@ namespace ApiCine.Api.Controllers
     public class SalaController : ControllerBase
     {
         private readonly ISalaService _salaService;
+        private readonly ILogErrores _logErrores;
 
-        public SalaController(ISalaService salaService)
+        public SalaController(ISalaService salaService, ILogErrores logErrores)
         {
             _salaService = salaService ?? throw new ArgumentNullException(nameof(salaService));
+            _logErrores = logErrores ?? throw new ArgumentNullException(nameof(logErrores));
         }
 
         [HttpGet]
@@ -26,7 +29,8 @@ namespace ApiCine.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"error obteniendo las salas {ex.Message}");
+                _logErrores.LogError($"Error obteniendo las salas: {ex.Message}");
+                return BadRequest($"Error obteniendo las salas: {ex.Message}");
             }
         }
 
@@ -44,25 +48,28 @@ namespace ApiCine.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"error al obtener sala con id'{id}': {ex.Message}");
+                _logErrores.LogError($"Error al obtener sala con ID '{id}': {ex.Message}");
+                return BadRequest($"Error al obtener sala con ID '{id}': {ex.Message}");
             }
         }
 
         [HttpPost]
         public IActionResult CrearSala([FromBody] SalaCrearDTO salaCrearDTO)
         {
-            if (salaCrearDTO == null)
+            if (!ModelState.IsValid)
             {
-                return BadRequest("no se han mandado datos");
+                return BadRequest(ModelState);
             }
+
             try
             {
                 _salaService.CrearSala(salaCrearDTO);
-                return Ok("sala creada ");
+                return Ok("Sala creada con éxito");
             }
             catch (Exception ex)
             {
-                return BadRequest($"error en la creacion {ex.Message}");
+                _logErrores.LogError($"Error en la creación de sala: {ex.Message}");
+                return BadRequest($"Error en la creación de sala: {ex.Message}");
             }
         }
     }

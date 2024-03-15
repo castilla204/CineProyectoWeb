@@ -11,9 +11,9 @@ namespace ApiCine.Api.Controllers
     public class ReservaController : ControllerBase
     {
         private readonly IReservaService _reservaService;
-        private readonly ILogErrores _logErrores; 
+        private readonly ILogErrores _logErrores;
 
-        public ReservaController(IReservaService reservaService, ILogErrores logErrores) 
+        public ReservaController(IReservaService reservaService, ILogErrores logErrores)
         {
             _reservaService = reservaService ?? throw new ArgumentNullException(nameof(reservaService));
             _logErrores = logErrores ?? throw new ArgumentNullException(nameof(logErrores));
@@ -29,7 +29,7 @@ namespace ApiCine.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logErrores.LogError($"Error obteniendo las reservas: {ex.Message}"); 
+                _logErrores.LogError($"Error obteniendo las reservas: {ex.Message}");
                 return BadRequest($"Error obteniendo las reservas: {ex.Message}");
             }
         }
@@ -42,7 +42,7 @@ namespace ApiCine.Api.Controllers
                 var reserva = _reservaService.ObtenerReservaPorId(id);
                 if (reserva == null)
                 {
-                    _logErrores.LogError($"No hay ninguna reserva con ID '{id}'"); 
+                    _logErrores.LogError($"No hay ninguna reserva con ID '{id}'");
                     return NotFound($"No hay ninguna reserva con ID '{id}'");
                 }
                 return Ok(reserva);
@@ -57,6 +57,11 @@ namespace ApiCine.Api.Controllers
         [HttpPost]
         public IActionResult CrearReserva([FromBody] ReservaCrearDTO reservaCrearDTO)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             try
             {
                 _reservaService.CrearReserva(reservaCrearDTO);
@@ -64,7 +69,7 @@ namespace ApiCine.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logErrores.LogError($"Error creando reserva: {ex.Message}"); 
+                _logErrores.LogError($"Error creando reserva: {ex.Message}");
                 return BadRequest($"Error creando reserva: {ex.Message}");
             }
         }
@@ -72,6 +77,11 @@ namespace ApiCine.Api.Controllers
         [HttpPut("{id}")]
         public IActionResult ActualizarReserva(int id, [FromBody] ReservaActualizarDTO reservaActualizarDTO)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             try
             {
                 _reservaService.ActualizarReserva(id, reservaActualizarDTO);
@@ -79,7 +89,7 @@ namespace ApiCine.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logErrores.LogError($"Error actualizando reserva con ID '{id}': {ex.Message}"); // Usa la dependencia para registrar errores
+                _logErrores.LogError($"Error actualizando reserva con ID '{id}': {ex.Message}");
                 return BadRequest($"Error actualizando reserva con ID '{id}': {ex.Message}");
             }
         }
@@ -94,7 +104,7 @@ namespace ApiCine.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logErrores.LogError($"Error eliminando la reserva con ID '{id}': {ex.Message}"); // Usa la dependencia para registrar errores
+                _logErrores.LogError($"Error eliminando la reserva con ID '{id}': {ex.Message}");
                 return BadRequest($"Error eliminando la reserva con ID '{id}': {ex.Message}");
             }
         }
