@@ -108,6 +108,7 @@ const Registro = async () => {
 
 .titulo {
   margin-bottom: 20px;
+  font-family: 'Helvetica';
 }
 
 .formulario input[type="text"],
