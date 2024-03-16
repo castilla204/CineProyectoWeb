@@ -8,7 +8,7 @@
         <p class="f1">ZARAGOZA</p>
         <p class="f2">{{ $t('PresentacionCine.text1') }}</p>
         <p class="f3">{{ $t('PresentacionCine.text2') }}</p>
-        <button class="botonhome" @click="AccionScrollDown">{{ $t('PresentacionCine.text3') }}</button>
+        <button class="botonhome" @click="accionScrollDown">{{ $t('PresentacionCine.text3') }}</button>
       </div>
     </div>
     <canvas ref="animacionCanvas" class="animacion-canvas"></canvas>
@@ -18,59 +18,112 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 
-const AccionScrollDown = () => {
+// funcion para desplazar la pagina hacia abajo
+const accionScrollDown = () => {
   window.scrollBy({ top: 1000, behavior: 'smooth' });
 };
 
-const animacionCanvas = ref<HTMLCanvasElement | null>(null);
-let idFrameAnimacion: number;
 
-// lo que dibuja la animaciomn
-const dibujarAnimacion = (ctx: CanvasRenderingContext2D, contadorFrames: number, desplazamientoX: number) => {
-  const canvas = ctx.canvas;
+let animationFrameId: number | null = null;
 
-  // la resolucion del canvas
-  const dpr = window.devicePixelRatio || 1;
-  canvas.width = canvas.clientWidth * dpr;
-  canvas.height = canvas.clientHeight * dpr;
-
-  // limpiar el canvas
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // dibjuar la animacion con degradado
-  const gradiente = ctx.createLinearGradient(0, 0, canvas.width, 0);
-  gradiente.addColorStop(0, '#FF1461');
-  gradiente.addColorStop(0.5, '#18FF92');
-  gradiente.addColorStop(1, '#5A87FF');
-  ctx.strokeStyle = gradiente;
-  ctx.lineWidth = Math.abs(Math.sin(contadorFrames * 0.05) * 3) + 1; // Cambio de grosor
-  ctx.beginPath();
-  for (let i = 0; i < canvas.width; i++) {
-    const y = 20 * Math.sin(0.01 * (i + desplazamientoX) + contadorFrames * 0.05);
-    ctx.lineTo(i, canvas.height / 2 + y);
-  }
-  ctx.stroke();
-};
-
-onMounted(() => {
-  if (!animacionCanvas.value) return;
-
-  const canvas = animacionCanvas.value;
+// funcion para iniciar la animacion
+const startAnimation = () => {
+  const canvas = document.querySelector('.animacion-canvas') as HTMLCanvasElement;
   const ctx = canvas.getContext('2d');
-  if (!ctx) return;
 
-  let contadorFrames = 0;
-  const bucle = () => {
-    contadorFrames++;
-    dibujarAnimacion(ctx, contadorFrames, 0);
-    idFrameAnimacion = requestAnimationFrame(bucle);
+  if (!ctx) {
+    console.error('No se pudo obtener el contexto del canvas');
+    return;
+  }
+
+  // ajustar el tamano del canvas
+  canvas.width = 200;
+  canvas.height = 200;
+
+  // parametros de la animacion
+  let posXtriangulo = 100; // restablecer la posicion inicial del triangulo
+  let anguloRotacion = 0;
+  let velocidadRotacion = Math.PI / 45;
+  let velocidadMovimiento = 4;
+  let colorHover = "red";
+  let colorNormal = "white";
+  let ratonEncima = false;
+  let animacionActiva = true;
+
+  // funcion para dibujar la animacion en el canvas
+  const dibujar = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // dibujar los elementos de la animacion
+    ctx.beginPath();
+    ctx.arc(60, 65, 30, 0, Math.PI * 2);
+    ctx.fillStyle = "white";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(140, 55, 40, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = 'white';
+    ctx.fillRect(50, 100, 100, 100);
+
+    ctx.save();
+    ctx.translate(posXtriangulo + 25, 150);
+    ctx.rotate(anguloRotacion);
+    ctx.beginPath();
+    ctx.moveTo(-25, -50);
+    ctx.lineTo(-25, 50);
+    ctx.lineTo(25, 0);
+    ctx.closePath();
+    ctx.fillStyle = ratonEncima ? colorHover : colorNormal;
+    ctx.fill();
+    ctx.restore();
+
+    // actualizar parametros de la animacion
+    if (animacionActiva) {
+      anguloRotacion += velocidadRotacion;
+    }
+
+    if (posXtriangulo < 150 && animacionActiva) {
+      posXtriangulo += velocidadMovimiento;
+    }
+
+    if (anguloRotacion >= Math.PI && posXtriangulo >= 150 && animacionActiva) {
+      setTimeout(() => {
+        posXtriangulo = 100; // restablecer la posicion inicial del triangulo
+        anguloRotacion = 0;
+        animacionActiva = true;
+      }, 1000);
+      animacionActiva = false;
+    }
+
+    // solicitar el siguiente cuadro de animacion
+    animationFrameId = requestAnimationFrame(dibujar);
   };
 
-  bucle();
+  // manejar eventos del raton
+  canvas.addEventListener('mouseover', () => {
+    ratonEncima = true;
+  });
+
+  canvas.addEventListener('mouseout', () => {
+    ratonEncima = false;
+  });
+
+  // iniciar la animacion
+  dibujar();
+};
+
+// ejecutar la funcion de inicio de la animacion cuando se monta el componente
+onMounted(() => {
+  startAnimation();
 });
 
+// cancelar la animacion cuando se desmonta el componente
 onUnmounted(() => {
-  cancelAnimationFrame(idFrameAnimacion);
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+  }
 });
 </script>
 
@@ -79,9 +132,7 @@ onUnmounted(() => {
 .animacion-canvas {
   position: absolute;
   bottom: 120px; 
-  left: 0;
-  width: 100%;
-  height: 20px; 
+  left: 75%;
 }
 
 
@@ -96,10 +147,12 @@ onUnmounted(() => {
   margin-left: 12%;
 }
 
+
 .textopresentacion {
   margin-top: 7%;
   margin-left: 20%;
 }
+
 
 .f1 {
   color: white;
@@ -108,6 +161,7 @@ onUnmounted(() => {
   margin-bottom: -28px;
   margin-left: 1%;
 }
+
 
 .botonhome {
   margin-left: 1%;
@@ -123,6 +177,7 @@ onUnmounted(() => {
   cursor: pointer;
 }
 
+
 .f2 {
   color: white;
   font-family: 'HelveticaBold';
@@ -130,12 +185,14 @@ onUnmounted(() => {
   margin: 0;
 }
 
+
 body {
   padding: 0;
   margin: 0;
   background: black;
   font-family: 'Helvetica';
 }
+
 
 .f3 {
   color: white;
@@ -146,9 +203,11 @@ body {
   max-width: 70%;
 }
 
+
 .izquierda img {
   height: 600px;
 }
+
 
 @media screen and (max-width: 768px) {
   .home {
@@ -168,6 +227,7 @@ body {
   .fotopalomitas {
     display: none;
   }
+
 
   .textopresentacion {
     margin-top: 10%;
@@ -195,5 +255,4 @@ body {
   display: none;
 }
 }
-
 </style>

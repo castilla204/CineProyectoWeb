@@ -74,7 +74,13 @@ const Registro = async () => {
 };
 </script>
 
+
 <style scoped>
+.exito-mensaje{
+  font-family: 'Helvetica';
+  color: #0f4b00;
+  margin-top: 5px;
+}
 .contenedor {
   display: flex;
   justify-content: center;
@@ -130,12 +136,6 @@ const Registro = async () => {
   background-color: #57a045;
 }
 
-.exito-mensaje{
-  font-family: 'Helvetica';
-  color: #0f4b00;
-  margin-top: 5px;
-}
-
 
 @media (max-width: 768px) {
   .contenedor {
@@ -166,4 +166,5 @@ const Registro = async () => {
     font-size: 18px;
   }
 }
+
 </style>

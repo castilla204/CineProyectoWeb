@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "j9aogvzpAmoMUqY45Gi81dXjHe7/JGMOyRD2aTQjUhIBAo1v2HMPeKpbEXAC0ISEt6Wpq7+jt6h+6k4nKCcqbA==",
+  "dgSpecHash": "os4HvkjZy83SgiW5h8ywkn96jV4hc3MddD+gOSP12ur8iiO/TH4UPv2KsYmvUcD6uS3B9rh+e8pEZcaHgOc0NQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Diego\\Downloads\\CineProyectoWebjuevesultima\\CineProyectoWeb\\Api\\Api.csproj",
+  "projectFilePath": "C:\\Users\\Diego\\OneDrive - Educacyl\\Escritorio\\CineProyectoWeb\\Api\\Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Diego\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\Diego\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

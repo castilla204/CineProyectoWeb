@@ -1,9 +1,8 @@
 <template>
   <div id="ticketForm">
-    <h1 class="titulocartelera">CARTELERA</h1>
     <div v-for="(fila, index) in filas" :key="index">
-      <div class="espacio"></div> <!-- Espacio entre las líneas rojas y la fila de películas -->
-      <div class="linearoja"></div> <!-- Línea roja entre grupos de películas -->
+      <div class="espacio"></div> 
+      <div class="linearoja"></div> 
       <div class="contenedorpeliculas">
         <div class="pelicula-group">
           <Pelicula
