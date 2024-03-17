@@ -59,6 +59,8 @@ namespace ApiCine.Data
             NombreSala = s.Sala.NombreSala,
             ImagenPelicula = s.Pelicula.Imagen,
             DescripcionPelicula = s.Pelicula.Descripcion,
+            DirectorPelicula=s.Pelicula.Director,
+            ActoresPelicula=s.Pelicula.Actores,
             ButacasOcupadasIds = s.Reservas
                                   .SelectMany(r => r.ReservaButacas)
                                   .Select(rb => rb.ButacaID)

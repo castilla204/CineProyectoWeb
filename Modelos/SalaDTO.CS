@@ -12,6 +12,8 @@ namespace ApiCine.Modelos
         [StringLength(30, MinimumLength = 1, ErrorMessage = "Largo inválido")]
         public string NombreSala { get; set; }
 
+        public string DirectorPelicula {get;set;}
+
         public List<int> SesionesIds { get; set; } = new List<int>();
     }
 }

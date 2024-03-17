@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch } from 'vue';
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSesionesStore } from '../../store/SesionStore';
 import TituloDescripcionPelicula from '../TituloDescripcionPelicula.vue';
@@ -23,18 +23,13 @@ onMounted(() => {
   cargarPelicula();
 });
 
-watch(router.currentRoute, () => {
-  cargarPelicula();
-}, { immediate: true });
-
 function cargarPelicula() {
   const movieId = Number(router.currentRoute.value.params.movieId);
   if (!isNaN(movieId)) {
-    sesionesStore.ObtenerSesionesPelicula(movieId);
+    sesionesStore.obtenerSesionesPelicula(movieId);
   }
 }
 </script>
-
 
 <style scoped>
 .general {

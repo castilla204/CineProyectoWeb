@@ -32,7 +32,7 @@
 import { ref, onMounted } from 'vue';
 import { useUsuariosStore } from '../store/UsuarioStore';
 
-const store = useUsuariosStore();
+const usuarioStore = useUsuariosStore();
 
 interface Reserva {
   reservaID: number;
@@ -45,9 +45,9 @@ interface Reserva {
 const reservas = ref<Reserva[]>([]);
 
 onMounted(() => {
-  if (store.logueado) {
-    store.cargarReservas().then(() => {
-      reservas.value = store.reservas;
+  if (usuarioStore.logueado) {
+    usuarioStore.cargarReservas().then(() => {
+      reservas.value = usuarioStore.reservas;  
     });
   }
 });

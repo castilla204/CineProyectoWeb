@@ -1,7 +1,9 @@
 <template>
   <div class="pelicula-info" v-if="pelicula">
     <h1 id="tituloPelicula">{{ pelicula.titulo }}</h1>
-    <p id="descripcionPelicula">{{ pelicula.descripcion }}</p>
+    <p id="datosPelicula">{{ pelicula.descripcion }}</p>
+    <p id="datosPelicula">Director: {{ pelicula.director }}</p>
+    <p id="datosPelicula">Actores: {{ pelicula.actores }}</p>
   </div>
 </template>
 
@@ -12,6 +14,8 @@ import { useSesionesStore } from '../store/SesionStore';
 interface Pelicula {
   titulo: string;
   descripcion: string;
+  director: string;
+  actores: string;
 }
 
 const sesionesStore = useSesionesStore();
@@ -31,14 +35,14 @@ const pelicula = computed<Pelicula | null>(() => sesionesStore.pelicula);
   margin-bottom: 2%;
 }
 
-#descripcionPelicula {
+#datosPelicula {
   font-size: 20px;
   font-family: 'HelveticaThin';
-  margin-bottom: 0;
+  margin-top:2%;
 }
 
 @media (max-width: 768px) {
-  #descripcionPelicula {
+  #datosPelicula {
     font-size: 18px;
     font-family: 'HelveticaThin';
     margin-bottom: 0;
@@ -59,13 +63,13 @@ const pelicula = computed<Pelicula | null>(() => sesionesStore.pelicula);
   font-family: 'Helvetica';
   margin-bottom: 2%;
 }
-#descripcionPelicula{
+#datosPelicula{
   font-size: 20px;
   font-family: 'HelveticaThin';
   margin-bottom: 0;
 }
 @media (max-width: 768px) {
-  #descripcionPelicula{
+  #datosPelicula{
     font-size: 18px;
     font-family: 'HelveticaThin';
     margin-bottom: 0;

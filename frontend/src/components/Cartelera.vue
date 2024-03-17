@@ -1,15 +1,20 @@
 <template>
   <div id="ticketForm">
-    <div v-for="(fila, index) in filas" :key="index">
+    <div v-for="(fila) in filas" >
       <div class="espacio"></div> 
       <div class="linearoja"></div> 
       <div class="contenedorpeliculas">
         <div class="pelicula-group">
           <Pelicula
-            v-for="pelicula in fila"
-            :key="pelicula.peliculaID"
-            :pelicula="pelicula"
+            v-for="pelicula in fila"   
+            :key="pelicula.peliculaID" 
+            :pelicula="pelicula" 
           />
+          <!-- el :key usado para que se asigne un valor unico a cada pelicula-->
+          <!-- el :pelicula="pelicula"  el :pelicula indica que se manda la informacion de la paleicula al prop pelicula del componente hijo-->
+          <!-- en este caso la clase Pelicula y se le manda la variable pelicula-->
+        
+          
         </div>
       </div>
     </div>
@@ -27,19 +32,19 @@ interface Pelicula {
 
 const almacenPeliculas = usePeliculasStore();
 
-const peliculas = ref<Pelicula[]>([]);
+const peliculas = ref<Pelicula[]>([]);//Inixiamos la variable peliculas con in array vacio
 
 onMounted(async () => {
   await almacenPeliculas.obtenerPeliculas();
   peliculas.value = almacenPeliculas.peliculas; 
 });
 
-const filas = computed(() => {
-  const peliculasChunked = [];
+const filas = computed(() => {//dividimos las peliculas en filas de 5 (filascontiene un array de arrays cada fila el array de peliculas con )
+  const peliculasDivididasen5 = [];
   for (let i = 0; i < peliculas.value.length; i += 5) {
-    peliculasChunked.push(peliculas.value.slice(i, i + 5));
+    peliculasDivididasen5.push(peliculas.value.slice(i, i + 5));
   }
-  return peliculasChunked;
+  return peliculasDivididasen5;
 });
 </script>
 
@@ -72,7 +77,7 @@ const filas = computed(() => {
 }
 
 .espacio {
-  height: 20px; /* Altura del espacio entre las líneas rojas y la fila de películas */
+  height: 20px; 
 }
 
 .linearoja {

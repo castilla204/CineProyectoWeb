@@ -103,7 +103,7 @@ const isLoading = store.isLoading;
 <style scoped>
 .general {
   background-color: #111;
-  padding: 20px;
+  padding: 100px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   font-family: 'HelveticaThin';
@@ -131,12 +131,12 @@ const isLoading = store.isLoading;
 .botoneditarocrear,
 .botoncancelar {
   padding: 8px 15px;
-  background-color: #007bff;
+  background-color: #af4c4c;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 10px;
+  margin: 4px;
 }
 
 .botoneditarocrear:hover,
@@ -164,5 +164,50 @@ const isLoading = store.isLoading;
 .botoneditar:hover,
 .botonborrar:hover {
   background-color: #0056b3;
+}
+
+.lista-peliculas {
+  list-style: none;
+  padding: 0;
+}
+
+.pelicula-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #222;
+  border-radius: 4px;
+}
+
+.pelicula-info {
+  flex: 1;
+}
+
+.botones {
+  display: flex;
+  gap: 10px; /* Espacio entre botones */
+}
+
+/* Estilos para los botones */
+.botoneditar,
+.botonborrar {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.botoneditar:hover,
+.botonborrar:hover {
+  background-color: #0056b3;
+}
+@media (max-width: 768px) {
+  .general{
+    padding: 0px;
+  }
 }
 </style>

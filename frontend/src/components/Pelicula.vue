@@ -1,6 +1,7 @@
 <template>
   <div class="pelicula pelicula-hover" @click="redirigirInfopeli(pelicula.peliculaID)">
     <img :src="'multimedia/' + pelicula.imagen" :alt="pelicula.titulo" class="pelicula-image rounded-image">
+    <p class="pelicula-titulo">{{pelicula.titulo}}</p>
   </div>
 </template>
 
@@ -23,11 +24,17 @@ function redirigirInfopeli(peliculaID: number) {
 </script>
 
 <style scoped>
+
 .pelicula img {
   width: 100%; 
   display: block; 
   border-radius: 10px;
   transition: filter 0.3s; 
+}
+.pelicula-titulo{
+  color: white;
+  font-family: 'HelveticaThin';
+  margin-top:8%;
 }
 
 .pelicula-hover:hover img {

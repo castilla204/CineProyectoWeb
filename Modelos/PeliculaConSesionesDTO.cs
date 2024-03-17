@@ -24,6 +24,10 @@ namespace ApiCine.Modelos
         [Required(ErrorMessage = "La descripción de la película es requerida")]
         public string DescripcionPelicula { get; set; }
 
+        public string DirectorPelicula { get; set; }
+
+        public string ActoresPelicula { get; set; }
+
         public List<int> ButacasOcupadasIds { get; set; } = new List<int>();
     }
 }

@@ -1,14 +1,16 @@
 import { defineStore } from 'pinia';
 
 export interface Pelicula {
-    id?: number; 
-    peliculaID: number; 
+    id?: number;
+    peliculaID: number;
     imagen: string;
     titulo: string;
     director: string;
     actores: string;
     descripcion: string;
 }
+
+
 
 export const usePeliculasStore = defineStore({
     id: 'movies',
@@ -42,7 +44,7 @@ export const usePeliculasStore = defineStore({
                 if (!response.ok) {
                     throw new Error('Error al agregar película');
                 }
-                await this.obtenerPeliculas(); 
+                // No es necesario llamar a obtenerPeliculas() aquí
             } catch (error) {
                 console.error("Error al agregar película:", error);
             }
@@ -53,7 +55,7 @@ export const usePeliculasStore = defineStore({
                 if (!response.ok) {
                     throw new Error('Error al eliminar película');
                 }
-                await this.obtenerPeliculas(); 
+                // No es necesario llamar a obtenerPeliculas() aquí
             } catch (error) {
                 console.error("Error al eliminar película:", error);
             }
