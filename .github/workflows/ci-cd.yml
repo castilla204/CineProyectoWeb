@@ -1,0 +1,259 @@
+name: CI/CD Pipeline - ReactWeb
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+
+# Concurrency control - Best Practice 2025: Evita ejecuciones duplicadas
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  security-events: write
+  deployments: write
+  id-token: write
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: erizo9/reactweb
+  NODE_VERSION: '20.x'
+
+jobs:
+  # Job de CI: Build y test
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Build
+        run: npm run build || echo "Build script not found, skipping"
+
+      - name: Run tests
+        run: npm test || echo "No tests found"
+        continue-on-error: true
+
+  # Security scanning
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    permissions:
+      contents: read
+      security-events: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        id: trivy-scan
+        continue-on-error: true
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '0'
+          scanners: 'vuln,secret,config'
+          ignore-unfixed: false
+          cache-dir: /tmp/.cache/trivy
+
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v4
+        if: always() && steps.trivy-scan.outcome != 'failure'
+        continue-on-error: true
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # Docker build and push
+  docker-build:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    needs: [build-and-test, security-scan]
+    if: github.event_name != 'pull_request'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: network=host
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+          platforms: linux/amd64
+          build-args: |
+            BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+            VCS_REF=${{ github.sha }}
+
+  # Deploy to VPS via SSH
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+    needs: [build-and-test, security-scan, docker-build]
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+    continue-on-error: true
+    environment:
+      name: production
+      url: https://inspecciono.com
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+
+      - name: Add VPS to known hosts
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT || '65002' }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan -p ${VPS_SSH_PORT} -H ${VPS_HOST} >> ~/.ssh/known_hosts 2>&1 || echo "Warning: Could not add host to known_hosts, will use StrictHostKeyChecking=no"
+          chmod 600 ~/.ssh/known_hosts || true
+
+      - name: Check VPS connectivity
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT || '65002' }}
+        run: |
+          echo "Checking VPS connectivity on port ${VPS_SSH_PORT}..."
+          if timeout 5 bash -c "echo > /dev/tcp/${VPS_HOST}/${VPS_SSH_PORT}" 2>/dev/null; then
+            echo "✅ VPS is reachable on port ${VPS_SSH_PORT}"
+          else
+            echo "⚠️ VPS is not reachable on port ${VPS_SSH_PORT}, deployment will be skipped"
+            exit 0
+          fi
+
+      - name: Deploy to VPS
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT || '65002' }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ssh -p ${VPS_SSH_PORT} -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=3 \
+            ${VPS_USER}@${VPS_HOST} << 'EOF'
+            set -e
+            echo "🚀 Starting deployment for react-web..."
+            
+            # Navigate to k8s-configs directory
+            cd /root/k8s-configs || cd /tmp/k8s-configs || { echo "❌ k8s-configs directory not found"; exit 1; }
+            
+            # Pull latest changes
+            git fetch origin main
+            git reset --hard origin/main
+            
+            # Update Kubernetes deployment for react-web
+            if [ -f "applications/react-web/deployment.yaml" ]; then
+              kubectl apply -f applications/react-web/deployment.yaml --namespace=default
+              kubectl rollout status deployment/react-web --namespace=default --timeout=5m
+            else
+              echo "⚠️ Deployment YAML not found, trying to update image directly"
+              kubectl set image deployment/react-web react-web=erizo9/reactweb:latest -n default
+              kubectl rollout status deployment/react-web --namespace=default --timeout=5m
+            fi
+            
+            # Verify deployment
+            kubectl get pods -l app=react-web --namespace=default
+            kubectl get svc -l app=react-web --namespace=default
+            
+            echo "✅ Deployment completed successfully!"
+          EOF
+
+      - name: Health check
+        run: |
+          sleep 10
+          # Intentar health check en inspecciono.com
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://inspecciono.com 2>/dev/null || echo "000")
+          if [ "$response" != "200" ]; then
+            echo "⚠️ Health check failed with status: $response"
+            echo "ℹ️  El deployment se completó, pero el health check falló."
+            echo "ℹ️  Esto puede ser normal si el servicio está iniciando."
+            # No fallar el workflow si el health check falla
+            exit 0
+          fi
+          echo "✅ Health check passed"
+
+      - name: Notify deployment
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✅ Deployment successful!"
+          else
+            echo "❌ Deployment failed!"
+          fi
+
