@@ -1,0 +1,3 @@
+# Test CI/CD - 2025-12-27 20:23:57
+Este archivo se creó para probar el workflow CI/CD
+Workflow configurado: 2025-12-27 20:23:57
